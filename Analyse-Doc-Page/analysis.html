@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a1628">
+  <title>Company Analysis | Lochana Karunarathna</title>
+  <meta name="description" content="Independent data-driven analysis and research reports on Colombo Stock Exchange listed companies by Lochana Karunarathna (@LochanaKa).">
+
+  <link rel="shortcut icon" href="../Assets/CE-2.png" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="analysis-style.css">
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l7-7M5 12l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        All Companies
+      </a>
+      <span class="nav-brand-mark">@LochanaKa</span>
+    </div>
+  </header>
+
+  <main class="analysis-main">
+    <div class="company-header" id="companyHeader"></div>
+
+    <div class="reports-head">
+      <span class="reports-title" id="reportsTitle">Analysis Reports</span>
+      <span class="reports-count" id="reportsCount"></span>
+    </div>
+
+    <div id="reportsArea"></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-brand">@LochanaKa</p>
+      <p class="footer-tagline">Data Science • Economics • Markets</p>
+      <p class="footer-disclaimer">
+        This page is for educational purposes only and does not constitute financial advice.
+        Verdicts reflect the author's independent view at time of publication and may change.
+      </p>
+      <p class="footer-copy">&copy; <span id="year"></span> Lochana Karunarathna. All research and analysis linked are original work.</p>
+    </div>
+  </footer>
+
+<script src="../companies.js"></script>
+<script src="reports-main.js"></script>
+<script src="analysis-main.js"></script>
+</body>
+</html>

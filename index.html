@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a1628">
+  <title>CSE Company Explorer | Lochana Karunarathna</title>
+  <meta name="description" content="Browse Colombo Stock Exchange listed PLCs by sector and access independent research and analysis by Lochana Karunarathna (@LochanaKa).">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="CSE Company Explorer | @LochanaKa">
+  <meta property="og:description" content="Data Science • Economics • Markets — Browse every CSE-listed company and read independent analysis.">
+  <meta property="og:type" content="website">
+
+  <link rel="shortcut icon" href="assets/CE.png" type="image/x-icon">
+
+  <!-- Only Inter is webfont-loaded. The heading font is an intentional
+       system stack (see --font-heading in style.css) — don't add Unbounded
+       back here, it'll change the look of the hero/headings. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="components.css">
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-brand">
+        <span class="nav-brand-mark">@LochanaKa</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="https://lochanaka.github.io/portfolio-website/" target="_blank" rel="noopener">My Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="badge">🇱🇰 Built for Sri Lanka. Open to the world.</span>
+        <h1>CSE Company <span class="gradient-text">Explorer</span></h1>
+        <p class="hero-subtitle">
+          Every PLC listed on the Colombo Stock Exchange, in one place.
+          Browse by sector, search by name or ticker, and dive into independent
+          data-driven analysis on each company.
+        </p>
+        <span class="hero-updated"><span class="dot"></span><span id="heroUpdated"></span></span>
+      </div>
+    </section>
+
+    <!-- ===== STICKY TABS ===== -->
+    <div class="tabs-sticky" id="stickyStack">
+      <section class="tabs-section">
+        <div class="tabs-inner">
+          <div class="tabs" role="tablist" aria-label="Company status category">
+
+            <button class="tab tab--listed is-active" role="tab" aria-selected="true"
+              data-status="listed" type="button">
+              <span class="tab-dot"></span>
+              <span class="tab-label">Currently Listed</span>
+              <span class="tab-count" id="count-listed">—</span>
+            </button>
+
+            <button class="tab tab--merged" role="tab" aria-selected="false"
+              data-status="merged" type="button">
+              <span class="tab-dot"></span>
+              <span class="tab-label">Merged</span>
+              <span class="tab-count" id="count-merged">—</span>
+            </button>
+
+            <button class="tab tab--delisted" role="tab" aria-selected="false"
+              data-status="delisted" type="button">
+              <span class="tab-dot"></span>
+              <span class="tab-label">Delisted</span>
+              <span class="tab-count" id="count-delisted">—</span>
+            </button>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== SECTOR BREAKDOWN ===== -->
+    <section class="viz-section">
+      <div class="viz-inner">
+        <div class="viz-card">
+          <div class="viz-head">
+            <span class="viz-title" id="vizTitle">Sector Breakdown — Listed</span>
+            <button class="viz-clear" id="vizClear" type="button">Clear sector</button>
+          </div>
+          <div class="viz-scroll-wrap" id="vizScrollWrap">
+            <button class="viz-arrow viz-arrow--left" id="vizArrowLeft" type="button" aria-label="Scroll sectors left">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="viz-chips" id="vizBars"></div>
+            <button class="viz-arrow viz-arrow--right" id="vizArrowRight" type="button" aria-label="Scroll sectors right">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTROLS ===== -->
+    <section class="controls-section">
+      <div class="controls-inner">
+
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search by company name or ticker (e.g. JKH, Commercial Bank)..."
+            aria-label="Search companies"
+          >
+          <span class="kbd-hint">/ to focus</span>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group">
+            <label for="sectorFilter">Sector</label>
+            <select id="sectorFilter" class="filter-select">
+              <option value="all">All Sectors</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="yearFilter">Listed Year</label>
+            <select id="yearFilter" class="filter-select">
+              <option value="all">All Years</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="sortFilter">Sort By</label>
+            <select id="sortFilter" class="filter-select">
+              <option value="name-asc">Name (A–Z)</option>
+              <option value="name-desc">Name (Z–A)</option>
+              <option value="ticker-asc">Ticker (A–Z)</option>
+            </select>
+          </div>
+
+          <button id="resetFilters" class="btn-reset" type="button">Reset</button>
+        </div>
+
+        <p class="results-count" id="resultsCount" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ===== COMPANY GRID ===== -->
+    <section class="grid-section">
+      <div class="grid-inner">
+        <div id="companyGrid" class="company-grid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <p>No companies match your filters.</p>
+          <button id="emptyReset" class="btn-reset" type="button">Clear filters</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== BACK TO TOP ===== -->
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-brand">@Lochana_Karunarathna</p>
+      <p class="footer-tagline">Data Science • Economics • Markets</p>
+      <p class="footer-disclaimer">
+        This page is for educational purposes only and does not constitute financial advice.
+        Company data compiled from public CSE listings and may not reflect real-time changes.
+      </p>
+      <span class="footer-updated"><span class="dot"></span><span id="footerUpdated"></span></span>
+      <p class="footer-copy">&copy; <span id="year"></span> Lochana Karunarathna. All research and analysis linked are original work.</p>
+    </div>
+  </footer>
+
+  <script src="companies.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
