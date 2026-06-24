@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exterminators PLC (EXT.N0000): CSE Research Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0a1019; --bg2:#0d1117; --card:#121a25; --card2:#161f2c; --border:#243042;
+  --text:#e6edf3; --muted:#8b9bb0; --muted2:#6b7a8f;
+  --green:#3fb950; --green-dim:rgba(63,185,80,.12);
+  --red:#f85149; --red-dim:rgba(248,81,73,.12);
+  --yellow:#d29922; --yellow-dim:rgba(210,153,34,.12);
+  --blue:#58a6ff; --purple:#bc8cff; --teal:#1db99a;
+  --accent:#1db99a; --accent2:#58a6ff;
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent2);text-decoration:none;}
+h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif; font-weight:700; letter-spacing:.2px; margin:0 0 .4em;}
+h2{font-size:1.55rem; color:#fff;}
+h3{font-size:1.15rem; color:var(--accent2);}
+p{color:var(--text); margin:.5em 0;}
+.muted{color:var(--muted);}
+.container{max-width:1180px; margin:0 auto; padding:0 18px;}
+.section{padding:54px 0; border-bottom:1px solid var(--border);}
+.section:last-of-type{border-bottom:none;}
+.eyebrow{font-size:.72rem; text-transform:uppercase; letter-spacing:2px; color:var(--accent); font-weight:700; margin-bottom:8px; font-family:'Segoe UI',sans-serif;}
+.card{background:linear-gradient(180deg,var(--card),var(--card2)); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; margin:18px 0;}
+.grid{display:grid; gap:16px;}
+.grid-2{grid-template-columns:1fr 1fr;}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+.grid-6{grid-template-columns:repeat(6,1fr);}
+@media(max-width:900px){.grid-2,.grid-3,.grid-4,.grid-6{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.grid-2,.grid-3,.grid-4,.grid-6{grid-template-columns:1fr;}}
+
+/* NAV */
+nav{position:sticky; top:0; z-index:50; background:rgba(10,16,25,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border);}
+.navwrap{display:flex; align-items:center; gap:6px; overflow-x:auto; padding:10px 18px; max-width:1180px; margin:0 auto; scrollbar-width:thin;}
+.navwrap a{flex:none; font-size:.78rem; color:var(--muted); padding:7px 12px; border-radius:20px; white-space:nowrap; font-weight:600;}
+.navwrap a:hover{background:var(--card2); color:var(--text);}
+.navbrand{font-weight:800; color:var(--accent); margin-right:10px; font-size:.85rem; flex:none;}
+
+/* HERO */
+.hero{padding:50px 0 30px; text-align:left;}
+.hero-top{display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:10px;}
+.ticker-badge{background:var(--card2); border:1px solid var(--border); padding:5px 14px; border-radius:20px; font-family:monospace; font-size:.85rem; color:var(--accent2);}
+.verdict-badge{padding:6px 16px; border-radius:20px; font-weight:800; font-size:.85rem; letter-spacing:1px;}
+.v-watch{background:var(--yellow-dim); color:var(--yellow); border:1px solid var(--yellow);}
+.v-buy{background:var(--green-dim); color:var(--green); border:1px solid var(--green);}
+.v-avoid{background:var(--red-dim); color:var(--red); border:1px solid var(--red);}
+.hero h1{font-size:2.1rem; margin-bottom:6px;}
+.hero .sub{color:var(--muted); font-size:1rem; max-width:760px;}
+.price-row{display:flex; gap:28px; align-items:baseline; margin-top:18px; flex-wrap:wrap;}
+.price-big{font-size:2.4rem; font-weight:800; color:#fff; font-family:Georgia,serif;}
+.price-meta{color:var(--muted); font-size:.85rem;}
+.price-change-down{color:var(--red); font-weight:700;}
+
+/* SCORECARD ROW */
+.scorerow{display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-top:24px;}
+@media(max-width:900px){.scorerow{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:560px){.scorerow{grid-template-columns:repeat(2,1fr);}}
+.scorebox{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:12px 10px; text-align:center;}
+.scorebox .lbl{font-size:.65rem; text-transform:uppercase; color:var(--muted); letter-spacing:.5px;}
+.scorebox .val{font-size:1.15rem; font-weight:800; color:#fff; margin-top:4px;}
+
+/* TABLES */
+table{width:100%; border-collapse:collapse; font-size:.86rem; margin:12px 0;}
+th,td{padding:9px 10px; text-align:left; border-bottom:1px solid var(--border);}
+th{background:var(--card2); color:var(--muted); font-size:.72rem; text-transform:uppercase; letter-spacing:.5px; font-weight:700;}
+tr:hover td{background:rgba(255,255,255,.02);}
+td.num{text-align:right; font-family:monospace;}
+.tbl-wrap{overflow-x:auto;}
+.pos{color:var(--green); font-weight:700;}
+.neg{color:var(--red); font-weight:700;}
+
+/* CHIPS */
+.chip{display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:14px; font-size:.78rem; font-weight:700;}
+.chip-g{background:var(--green-dim); color:var(--green);}
+.chip-y{background:var(--yellow-dim); color:var(--yellow);}
+.chip-r{background:var(--red-dim); color:var(--red);}
+
+/* CHART CONTAINERS */
+.chart-box{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin:18px 0;}
+.chart-box canvas{max-height:340px;}
+.chart-cap{font-size:.78rem; color:var(--muted2); margin-top:8px;}
+.chart-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+@media(max-width:900px){.chart-grid{grid-template-columns:1fr;}}
+
+/* CALLOUTS */
+.callout{border-left:4px solid var(--accent); background:var(--card); padding:14px 18px; border-radius:0 10px 10px 0; margin:16px 0;}
+.callout.warn{border-left-color:var(--red);}
+.callout.good{border-left-color:var(--green);}
+.callout.info{border-left-color:var(--blue);}
+
+/* TIMELINE */
+.timeline{border-left:2px solid var(--border); padding-left:22px; margin-left:6px;}
+.tl-item{position:relative; margin-bottom:20px;}
+.tl-item::before{content:''; position:absolute; left:-28px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--accent);}
+.tl-year{color:var(--accent2); font-weight:800; font-size:.85rem;}
+
+/* RISK METER */
+.riskmeter{background:#000; border:1px solid var(--border); border-radius:10px; padding:18px; font-family:monospace; font-size:.85rem; line-height:1.9; overflow-x:auto;}
+.riskmeter .line{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+
+/* SUMMARY CARD */
+.summary-card{background:linear-gradient(135deg,#0d1f1a,#101a26); border:1px solid var(--teal); border-radius:var(--radius); padding:0; overflow:hidden;}
+.summary-card .row{display:flex; justify-content:space-between; padding:14px 22px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:6px;}
+.summary-card .row:last-child{border-bottom:none;}
+.summary-card .row b{color:#fff;}
+.summary-head{background:var(--accent); color:#06231c; padding:16px 22px; font-weight:800; font-size:1.1rem;}
+
+/* SVG support/resistance */
+.ladder{width:100%;}
+.ladder text{fill:var(--text); font-size:12px; font-family:monospace;}
+.ladder .lbl{fill:var(--muted); font-size:11px;}
+
+footer{padding:40px 0 70px; text-align:center; color:var(--muted2); font-size:.82rem;}
+footer .disclaim{max-width:700px; margin:0 auto 14px; line-height:1.7;}
+.backtop{display:inline-block; margin-top:10px; color:var(--accent2); font-size:.8rem;}
+.sourcenote{font-size:.74rem; color:var(--muted2); margin-top:6px; font-style:italic;}
+ul.clean{padding-left:20px;}
+ul.clean li{margin-bottom:6px;}
+.flagrow{display:flex; align-items:flex-start; gap:10px; margin-bottom:10px;}
+.flagrow .dot{flex:none; margin-top:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navwrap">
+    <span class="navbrand">EXT.N0000</span>
+    <a href="#overview">Overview</a>
+    <a href="#history">History</a>
+    <a href="#governance">Governance</a>
+    <a href="#financials">Financials</a>
+    <a href="#crisis">Crisis</a>
+    <a href="#technical">Technical</a>
+    <a href="#global">Global &amp; Macro</a>
+    <a href="#verdict">Verdict</a>
+    <a href="#geopolitics">World Risk</a>
+    <a href="#summary">Summary</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero" id="overview">
+  <div class="hero-top">
+    <span class="ticker-badge">CSE: EXT.N0000 · Empower Board</span>
+    <span class="verdict-badge v-watch">WATCH</span>
+  </div>
+  <h1>Exterminators PLC</h1>
+  <p class="sub">Asia's first publicly-listed pest management &amp; environmental enhancement technology company. Sector: Commercial &amp; Professional Services (Pest Control / Pest-Tech). Founded 1998 · Listed on CSE 30 March 2022.</p>
+  <div class="price-row">
+    <div>
+      <div class="price-big">LKR 13.90</div>
+      <div class="price-meta">Current price · Market cap ≈ LKR 734.7M (≈ USD 2.2M)</div>
+    </div>
+    <div>
+      <div class="price-meta">52-week range</div>
+      <div style="font-weight:700;color:#fff;">LKR 3.90 – 17.80</div>
+    </div>
+    <div>
+      <div class="price-meta">Recent momentum</div>
+      <div class="price-change-down">−3.0% (1d) · −4.4% (1wk) · −11.0% (1mo)</div>
+    </div>
+  </div>
+  <p class="sourcenote">Prices &amp; market data: stockanalysis.com / S&amp;P Global Market Intelligence and TradingView, as of mid/late-June 2026. Last close figures vary slightly by data provider snapshot timing.</p>
+
+  <div class="scorerow">
+    <div class="scorebox"><div class="lbl">P/E (TTM)</div><div class="val">35.5x</div></div>
+    <div class="scorebox"><div class="lbl">P/B</div><div class="val">5.1x</div></div>
+    <div class="scorebox"><div class="lbl">ROE</div><div class="val">16.2%</div></div>
+    <div class="scorebox"><div class="lbl">Debt/Equity</div><div class="val">0.08x</div></div>
+    <div class="scorebox"><div class="lbl">F-Score</div><div class="val">7/9</div></div>
+    <div class="scorebox"><div class="lbl">Dividend</div><div class="val">None now</div></div>
+  </div>
+</div>
+
+<!-- INTRO / HOW TO READ -->
+<div class="card">
+  <p><b>New to investing? Quick orientation:</b> think of this report like a full medical check-up for a company. We'll look at its <i>life story</i> (history), its <i>leadership</i> (governance), its <i>vital signs</i> (financials), how it survived past "illnesses" (crises), its current <i>mood swings</i> (technical/price action), and the <i>weather outside</i> (macro &amp; world events) — before giving you a final, honest opinion. Every technical term is explained the first time it's used.</p>
+</div>
+
+<!-- PHASE 0/1: HISTORY -->
+<div class="section" id="history">
+  <div class="eyebrow">Phase 0 – 1 · Company Identity &amp; Background</div>
+  <h2>The Story: From One Spray Gun to the CSE</h2>
+  <p>In <b>1998</b>, a young entrepreneur named <b>Denham Marlon Ferreira</b> started a pest-control business in Colombo with an initial investment of just <b>LKR 75,000</b> (about USD 1,000 at the time) — one person, one spray gun, and a motorbike. That one-man operation is today <b>Exterminators PLC</b>, a company employing roughly 33 people across five branches (Colombo, Kandy, Galle, Malabe, and Dambulla), and — since 30 March 2022 — the first pest-management company in Asia to list on a public stock exchange.</p>
+
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-year">1998</span> — Marlon Ferreira founds the business as a sole proprietorship.</div>
+    <div class="tl-item"><span class="tl-year">2004</span> — Formally incorporated in Sri Lanka as a private limited liability company.</div>
+    <div class="tl-item"><span class="tl-year">2009</span> — Invents the "Smart Missile" termite-bait station, South Asia's first locally manufactured device of its kind (carbon-neutral certified in 2015; relaunched as an AI-powered "3G" version in 2026).</div>
+    <div class="tl-item"><span class="tl-year">2014</span> — Launches South Asia's first mobile app for the pest-management industry, starting a decade-long digitalisation push (e-Scheduler in 2018, the "eConnect" customer portal in 2019).</div>
+    <div class="tl-item"><span class="tl-year">2020</span> — COVID-19 hits. Exterminators converts its chemical-spraying fleet to disinfection services, becomes the first in the region with COVID-19 SLS hygiene certification, and disinfects 1.2M+ sq. ft. of public space (including 77 elders'/children's homes) free of charge — a genuine crisis pivot that also generated new revenue.</div>
+    <div class="tl-item"><span class="tl-year">Nov 2021</span> — Converts to a Public Limited Company ahead of listing.</div>
+    <div class="tl-item"><span class="tl-year">14–30 Mar 2022</span> — IPO on the CSE's <b>Empower Board</b> (the board for small &amp; medium enterprises): 10,000,000 new shares at LKR 6.00, raising LKR 60 million for a 20% stake. Manager to the issue: Atarah Capital Partners.</div>
+    <div class="tl-item"><span class="tl-year">2022–23</span> — Sri Lanka's economic crisis hits import costs hard. Management responds with "Made in Sri Lanka" — shifting from imported chemical formulations to local synthesis — plus AI-driven route optimisation to cut fuel costs, and pays down nearly all bank debt using IPO proceeds.</div>
+    <div class="tl-item"><span class="tl-year">Feb 2024</span> — Veteran corporate leader <b>Dr. Kishu Gomes</b> (former 18-year MD/CEO of Chevron Lubricants Lanka, former Chairman of Sri Lanka Tourism) becomes Independent Non-Executive Chairman, succeeding founding Chairman Chaaminda Ratnayake.</div>
+    <div class="tl-item"><span class="tl-year">Jul 2024</span> — Acquires Exterminator International (Private) Limited to pursue franchising/licensing in South Asia and beyond.</div>
+    <div class="tl-item"><span class="tl-year">2025–26</span> — Deploys AI-powered pest-prediction and route-optimisation tools; exports proprietary systems like the "Smart Missile" to Seychelles and "Smart Guard" to Velana International Airport (Maldives); reports a 275% net-profit rebound in FY2025/26.</div>
+  </div>
+
+  <h3>How does the company actually make money?</h3>
+  <p>Think of Exterminators as a <b>subscription business wearing overalls</b>. Most revenue comes from <b>recurring service contracts</b> — monthly or quarterly visits to spray, inspect, and maintain bait stations at hotels, factories, food plants, condominiums, schools, and even aircraft/ships (much like a gym membership, but for keeping pests out). On top of that, it sells <b>pest-control hardware</b> (electric fly killers, rodent stations, termite systems) and, since 2020, <b>disinfection &amp; sanitation services</b>. The newest growth lever is <b>franchising/licensing its brand and technology abroad</b> (Maldives, Seychelles, with ambitions in the UAE and Botswana) — a low-capital way to earn royalty-style income outside Sri Lanka.</p>
+
+  <h3>Ownership &amp; market position</h3>
+  <p>Founder Marlon Ferreira remains the controlling shareholder (reportedly ~68.6% of shares — see governance caveats below), so this is very much a founder-led company. Exterminators describes itself as Sri Lanka's largest formal/branded pest-management operator and the only one listed on any stock exchange; the rest of the local market is fragmented among smaller, unlisted operators, so direct apples-to-apples local competitor data is not readily available. Internationally, Exterminators is a small minnow next to global giants like Rentokil Initial and Rollins (which together dominate a global pest-control market now worth roughly USD 26–28 billion and growing 5–8% a year) — but its tiny size also means even modest regional wins (e.g., a Maldives or Seychelles franchise) can meaningfully move its numbers.</p>
+</div>
+
+<!-- PHASE 2: GOVERNANCE -->
+<div class="section" id="governance">
+  <div class="eyebrow">Phase 2 · Management &amp; Governance Deep Dive</div>
+  <h2>Who's Running the Company — and How Well?</h2>
+  <p>Governance is basically asking: <i>"Do the people in charge treat shareholders' money like it's their own — or like it's someone else's?"</i> Here's an honest, item-by-item look, rated 🟢 Good / 🟡 Caution / 🔴 Red Flag.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="flagrow"><span class="chip chip-g">🟢</span><div><b>Independent Chairman upgrade.</b> Dr. Kishu Gomes — an 18-year multinational CEO (Chevron Lubricants Lanka) and former Chairman of Sri Lanka Tourism — took over as Independent Non-Executive Chairman in Feb 2024, replacing the founding chairman. This is a genuine credibility upgrade for a small-cap.</div></div>
+      <div class="flagrow"><span class="chip chip-g">🟢</span><div><b>Board diversification.</b> The board includes operational, family, and independent directors, including Jacob Laubscher (international pest-tech/digitalisation expert) appointed Jan 2024 — adding real technical oversight, not just rubber-stamping.</div></div>
+      <div class="flagrow"><span class="chip chip-y">🟡</span><div><b>Founder concentration.</b> Marlon Ferreira is reported to hold roughly 68.6% of shares. High founder ownership can align incentives well, but it also means minority shareholders have very little say, and free-float liquidity is naturally thin.</div></div>
+    </div>
+    <div class="card">
+      <div class="flagrow"><span class="chip chip-y">🟡</span><div><b>Thin public float.</b> Secondary-source data (not independently confirmed by us against a primary CSE disclosure) suggests the public float may be around 17–18% of shares — below the CSE's continuing-listing minimum of 20%. If accurate, this is worth the investor confirming directly via CSE/company disclosures, as low float drives the stock's outsized weekly price swings (≈9–10% vs a CSE average under 4.5%).</div></div>
+      <div class="flagrow"><span class="chip chip-y">🟡</span><div><b>Reported insider selling.</b> Some secondary sources report the Managing Director reduced his personal holdings meaningfully over the past year, including a multi-million-share on-market sale in early 2026. We could not independently verify the exact figures via a primary CSE filing in the time available — treat this as a flag to verify yourself before acting on it, not a confirmed fact.</div></div>
+      <div class="flagrow"><span class="chip chip-y">🟡</span><div><b>Reported audit-qualification flag (2024).</b> Some research sources reference a CSE notice that the company's FY ended March 2024 financial statements drew a qualified audit opinion, triggering a "Watch List" disclosure process under CSE rules. We were not able to independently verify this against the primary CSE announcement within this research session — please verify directly on the CSE website before treating it as confirmed. We did independently confirm that FY2023/24 reporting includes unusual one-off items (a large loss on sale of assets) that would plausibly attract auditor scrutiny.</div></div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <b>What this means in plain English:</b> the leadership upgrade (Dr. Gomes, an outside tech-savvy director) is a real positive — it suggests the board is trying to professionalise. But this remains a tightly-controlled, thinly-traded micro-cap where a handful of unverified-but-plausible flags (low float, reported insider sales, a reported audit qualification) mean you should do your own confirmation via CSE filings before investing meaningfully, and size any position accordingly.
+  </div>
+</div>
+
+<!-- PHASE 3: FINANCIALS -->
+<div class="section" id="financials">
+  <div class="eyebrow">Phase 3 · Financial Analysis</div>
+  <h2>The Vital Signs: Revenue, Profit &amp; Cash</h2>
+  <p class="callout info" style="display:block;"><b>A note on "10 years":</b> Exterminators was a private company until its March 2022 IPO. Audited, publicly-verifiable financial statements only exist from <b>FY2020 onward</b> (fiscal year = April–March). FY2020–FY2021 revenue/profit figures below come from the company's own 2022 IPO prospectus disclosures (a regulated document); full balance-sheet and cash-flow detail for those pre-listing years is not publicly available. Everything from FY2022 onward is independently verified against stockanalysis.com (S&amp;P Global Market Intelligence data).</p>
+
+  <h3>3A. Income Statement Trends</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Metric (LKR M)</th><th class="num">FY20</th><th class="num">FY21</th><th class="num">FY22</th><th class="num">FY23</th><th class="num">FY24</th><th class="num">FY25</th><th class="num">FY26</th></tr>
+    <tr><td>Revenue</td><td class="num">98.76</td><td class="num">115.61</td><td class="num">129.82</td><td class="num">154.50</td><td class="num">143.01</td><td class="num">153.62</td><td class="num">157.97</td></tr>
+    <tr><td>Revenue growth YoY</td><td class="num">—</td><td class="num pos">+17.1%</td><td class="num pos">+12.3%</td><td class="num pos">+19.0%</td><td class="num neg">−7.4%</td><td class="num pos">+7.4%</td><td class="num pos">+2.8%</td></tr>
+    <tr><td>Gross Profit</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">97.79</td><td class="num">106.22</td><td class="num">102.90</td><td class="num">99.63</td><td class="num">120.43</td></tr>
+    <tr><td>Gross Margin %</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">75.3%</td><td class="num">68.8%</td><td class="num">72.0%</td><td class="num">64.9%</td><td class="num">76.2%</td></tr>
+    <tr><td>Operating Profit (EBIT)</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">33.02</td><td class="num">6.21</td><td class="num">8.07</td><td class="num">−11.10</td><td class="num">21.18</td></tr>
+    <tr><td>Net Profit (PAT)</td><td class="num">6.37</td><td class="num">14.86</td><td class="num">27.01</td><td class="num neg">−13.37</td><td class="num">8.99</td><td class="num neg">−11.83</td><td class="num">20.67</td></tr>
+    <tr><td>Net Margin %</td><td class="num">6.5%</td><td class="num">12.9%</td><td class="num">20.8%</td><td class="num neg">−8.7%</td><td class="num">6.3%</td><td class="num neg">−7.7%</td><td class="num">13.1%</td></tr>
+    <tr><td>EPS (LKR)</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">0.64</td><td class="num neg">−0.25</td><td class="num">0.17</td><td class="num neg">−0.22</td><td class="num">0.39</td></tr>
+  </table>
+  </div>
+  <p class="sourcenote">Source: stockanalysis.com / S&amp;P Global Market Intelligence (FY22–FY26, verified directly); 2022 IPO prospectus &amp; contemporaneous press coverage (FY20–FY21).</p>
+
+  <div class="chart-box">
+    <h3 style="margin-bottom:4px;">Chart 1 — 10-Year Revenue &amp; Net Profit Trend</h3>
+    <canvas id="revenueChart"></canvas>
+    <p class="chart-cap">🔴 Shaded columns mark Exterminators' two real stress years in this dataset: <b>FY21</b> (COVID-19 disruption period) and <b>FY23</b> (Sri Lanka's economic crisis, plus a one-off LKR 16.4M loss on asset sales). Notice profit has swung between profit and loss three times in five years — this is not a smooth compounder.</p>
+  </div>
+
+  <h3>3B. Balance Sheet Health</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Metric (LKR M)</th><th class="num">FY22</th><th class="num">FY23</th><th class="num">FY24</th><th class="num">FY25</th><th class="num">FY26</th></tr>
+    <tr><td>Total Assets</td><td class="num">167.48</td><td class="num">175.80</td><td class="num">145.94</td><td class="num">146.12</td><td class="num">171.29</td></tr>
+    <tr><td>Total Debt</td><td class="num">10.91</td><td class="num">8.05</td><td class="num">8.37</td><td class="num">15.11</td><td class="num">11.18</td></tr>
+    <tr><td>Debt-to-Equity</td><td class="num">8%</td><td class="num">6%</td><td class="num">7%</td><td class="num">14%</td><td class="num">8%</td></tr>
+    <tr><td>Current Ratio</td><td class="num">5.05x</td><td class="num">5.12x</td><td class="num">7.93x</td><td class="num">4.35x</td><td class="num">7.69x</td></tr>
+    <tr><td>Cash &amp; Equivalents</td><td class="num">66.21</td><td class="num">24.76</td><td class="num">7.46</td><td class="num">3.64</td><td class="num">7.15</td></tr>
+    <tr><td>Book Value / Share (LKR)</td><td class="num">2.51</td><td class="num">2.58</td><td class="num">2.39</td><td class="num">2.11</td><td class="num">2.72</td></tr>
+  </table>
+  </div>
+  <p><b>Plain-English read:</b> a <b>Current Ratio</b> (current assets ÷ current bills due within a year) above 1.0 means a company can pay its near-term bills; Exterminators' ratio of 4–8x is very comfortable — like having Rs. 8 in the bank for every Rs. 1 of bills due this month. Debt-to-equity below 10% means the company barely borrows at all. The balance sheet is genuinely one of this company's strongest features: almost no debt, ever since IPO proceeds were used to pay down bank loans.</p>
+
+  <h3>3C. Cash Flow Statement</h3>
+  <div class="chart-box">
+    <h3 style="margin-bottom:4px;">Chart 2 — Debt-to-Equity Ratio, FY21–FY26</h3>
+    <canvas id="deChart"></canvas>
+    <p class="chart-cap">FY21's 31% figure is from the 2022 IPO prospectus (pre-listing). The IPO cash injection in FY22 cut leverage sharply, and the company has stayed essentially debt-free since.</p>
+  </div>
+  <div class="chart-box">
+    <h3 style="margin-bottom:4px;">Chart 3 — Operating Cash Flow vs. Net Profit</h3>
+    <canvas id="cashflowChart"></canvas>
+    <p class="chart-cap">🔴 Watch FY26: net profit (the accounting number) jumped to LKR 20.67M, but cash actually collected from operations (Operating Cash Flow) was only LKR 6.31M — a big gap. This is the single most important "quality of earnings" warning in this report (see 3E below).</p>
+  </div>
+
+  <h3>3D. Key Ratios Explained Simply</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Ratio</th><th>What it means (in plain English)</th><th class="num">Current Value</th><th>Good or bad?</th></tr>
+    <tr><td>P/E Ratio</td><td>How many rupees you pay today for Rs. 1 of last year's profit. Like paying for a fruit tree based on last season's harvest.</td><td class="num">35.5x</td><td><span class="chip chip-r">🔴 Rich</span> — well above the CSE small-cap norm.</td></tr>
+    <tr><td>P/B Ratio</td><td>Price vs. what the company actually owns on paper (its "book value"). At 5.1x, you're paying Rs. 5.10 for every Rs. 1 of net assets.</td><td class="num">5.1x</td><td><span class="chip chip-r">🔴 Rich</span> for a company with volatile earnings.</td></tr>
+    <tr><td>ROE (Return on Equity)</td><td>How efficiently the company turns shareholders' money into profit.</td><td class="num">16.2%</td><td><span class="chip chip-g">🟢 Healthy</span> — but swung negative twice in 5 years.</td></tr>
+    <tr><td>ROA (Return on Assets)</td><td>How efficiently it uses everything it owns (cash, vans, equipment) to make profit.</td><td class="num">8.3%</td><td><span class="chip chip-y">🟡 Decent</span></td></tr>
+    <tr><td>Dividend Yield</td><td>Passive cash income just for holding the shares.</td><td class="num">0%</td><td><span class="chip chip-y">🟡 None currently</span> — last dividend was LKR 0.60/share, declared for FY23; nothing declared since.</td></tr>
+    <tr><td>Interest Coverage</td><td>How many times over operating profit could pay the year's interest bill.</td><td class="num">~12.5x (gross) / ~41x (net of interest income)</td><td><span class="chip chip-g">🟢 Very safe</span> — practically debt-free.</td></tr>
+  </table>
+  </div>
+
+  <h3>3E. Quality-of-Earnings Diagnostics (inwestout-style screen)</h3>
+  <p>This is the "lie detector test" for profit. A company can report a big profit on paper while barely collecting any real cash — that's the single most common way small-cap investors get fooled. Here's how Exterminators' <b>latest reported year (FY26)</b> scores:</p>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Diagnostic</th><th>Formula</th><th class="num">FY26 Value</th><th>Flag</th></tr>
+    <tr><td>Quality-of-Earnings Ratio</td><td>Net Profit ÷ Operating Cash Flow</td><td class="num">20.67 ÷ 6.31 = <b>3.28x</b></td><td><span class="chip chip-r">🔴 Red flag</span> — anything above 1.5x means profit isn't well backed by real cash.</td></tr>
+    <tr><td>Cash Conversion (FCF/Net Profit)</td><td>Free Cash Flow ÷ Net Profit</td><td class="num">6.00 ÷ 20.67 = <b>29%</b></td><td><span class="chip chip-r">🔴 Weak</span> — only 29 cents of free cash for every rupee of reported profit.</td></tr>
+    <tr><td>Gain-on-PBT Ratio</td><td>(Fair-value + bargain-purchase gains) ÷ Pre-tax profit</td><td class="num">Not applicable</td><td><span class="chip chip-g">🟢 Clean</span> — no fair-value/bargain-purchase accounting gains found in the income statement. If anything, FY23–24 included real <i>losses</i> on asset sales (−16.4M, −3.8M), which is the opposite problem (profit understated by real cash losses, not inflated by accounting tricks).</td></tr>
+    <tr><td>EPS Divergence (Annual vs TTM)</td><td>Reported annual EPS vs. trailing-12-month EPS</td><td class="num">Minimal gap currently</td><td><span class="chip chip-g">🟢 OK for now</span> — FY26 just closed (Mar 2026), so TTM ≈ FY26 annual; re-check this each quarter.</td></tr>
+    <tr><td>Piotroski F-Score</td><td>9-point profitability/leverage/efficiency checklist</td><td class="num"><b>7 / 9</b></td><td><span class="chip chip-g">🟢 Quality signal</span> — passes on profitability, cash flow positivity, falling leverage, improving liquidity &amp; gross margin, no share dilution. Fails only on accrual quality (point 4, mirroring the QoE flag above) and asset turnover.</td></tr>
+    <tr><td>Altman Z-Score</td><td>1.2(WC/TA)+1.4(RE/TA)+3.3(EBIT/TA)+0.6(MktCap/TL)+1.0(Rev/TA)</td><td class="num"><b>≈ 15–18</b></td><td><span class="chip chip-g">🟢 Very safe</span> from bankruptcy risk — but this score is mechanically inflated by Exterminators' near-zero liabilities relative to its market cap, so treat it as "low distress risk," not as a precision growth signal.</td></tr>
+    <tr><td>Working Capital Trap</td><td>Receivables growth vs. Revenue growth</td><td class="num">Receivables +27.5% vs Revenue +2.8%</td><td><span class="chip chip-r">🔴 Red flag</span> — receivables are growing ~10x faster than sales. Cash is increasingly tied up in money owed by customers rather than sitting in the bank — this is exactly what drained FY26's operating cash flow.</td></tr>
+  </table>
+  </div>
+  <div class="callout warn">
+    <b>The single most important finding in this report:</b> FY26's headline "275% profit rebound" looks fantastic on the income statement, but the cash flow statement tells a more cautious story — operating cash flow badly lagged profit, and customer receivables ballooned nearly 10x faster than revenue. This doesn't mean the turnaround is fake, but it does mean it isn't fully proven in cash yet. A genuinely durable recovery should show next year's operating cash flow catching up to net profit, and receivable growth slowing back toward revenue growth.
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-box">
+      <h3 style="margin-bottom:4px;">Radar 1 — Company Health Scorecard</h3>
+      <canvas id="healthRadar"></canvas>
+      <p class="chart-cap">Scores (0–10) from Phase 7's verdict scorecard, vs. an illustrative CSE small-cap services peer benchmark (approximate, since granular peer scoring data isn't publicly available for direct comparison).</p>
+    </div>
+    <div class="chart-box">
+      <h3 style="margin-bottom:4px;">Radar 2 — Quality-of-Earnings Profile</h3>
+      <canvas id="qoeRadar"></canvas>
+      <p class="chart-cap">Low scores on Earnings Quality, Cash Conversion &amp; Sustainability mirror the red flags above; high Balance-Sheet-Safety and F-Score reflect the debt-free balance sheet and solid checklist pass-rate.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4: CRISIS -->
+<div class="section" id="crisis">
+  <div class="eyebrow">Phase 4 · Crisis &amp; Tough Period Analysis</div>
+  <h2>How Has It Handled Past Storms?</h2>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Period</th><th>What happened</th><th>How Exterminators reacted</th><th>Resilience</th></tr>
+    <tr><td>2019<br><span class="muted">Easter Sunday attacks</span></td><td>Tourism &amp; hospitality demand shock across Sri Lanka.</td><td>Limited public disclosure for this pre-IPO year; broader hospitality-sector client base would have been affected, but the company continued its digitalisation push (e-Scheduler era).</td><td><span class="chip chip-y">🟡 Moderately affected</span> (inferred, not directly disclosed)</td></tr>
+    <tr><td>2020–21<br><span class="muted">COVID-19 pandemic</span></td><td>Lockdowns halted routine commercial pest-control visits.</td><td>Pivoted its spraying fleet to disinfection services, became first regionally COVID-19 SLS-certified, disinfected 1.2M+ sq.ft. of public space free of charge. Revenue actually grew +17% and profit +133% in FY20/21 per IPO disclosures.</td><td><span class="chip chip-g">🟢 Resilient</span> — turned crisis into a growth &amp; brand-building opportunity.</td></tr>
+    <tr><td>2022–23<br><span class="muted">Sri Lanka economic crisis, LKR collapse, IMF bailout</span></td><td>FX shortages, import restrictions on chemical actives, inflation above 50%, interest rates above 25%.</td><td>Used fresh IPO capital to pay off nearly all bank debt; shifted from imported chemicals to local "Made in Sri Lanka" synthesis; deployed AI-driven route optimisation to cut fuel use. Gross margin still compressed from ~79% to ~69-72%, and FY23 swung to a net loss.</td><td><span class="chip chip-y">🟡 Moderately affected</span> — margins hit, but balance sheet protected.</td></tr>
+    <tr><td>2024–25<br><span class="muted">Post-crisis normalisation, audit scrutiny</span></td><td>Demand from construction &amp; hospitality clients only partially recovered; cost base (SG&amp;A) stayed elevated.</td><td>New independent Chairman (Dr. Gomes) installed; international director added; FY25 still posted a net loss (−LKR 11.8M) despite a modest revenue recovery.</td><td><span class="chip chip-r">🔴 Severely hit on profitability</span> even as the top line stabilised.</td></tr>
+    <tr><td>2025–26<br><span class="muted">Cyclone Ditwah recovery + AI-driven turnaround</span></td><td>Nov 2025's Cyclone Ditwah caused ~USD 4.1bn in nationwide damage (≈4% of GDP); recovery still ongoing into mid-2026.</td><td>Accelerated AI/digital investment; reported a 275% net-profit rebound in FY26 — though, as Phase 3E shows, not yet fully cash-backed.</td><td><span class="chip chip-y">🟡 Recovering, with caveats</span></td></tr>
+  </table>
+  </div>
+  <p class="callout good">The clearest pattern: Exterminators is genuinely good at <b>operational</b> crisis response (pivoting services, cutting costs, protecting the balance sheet) but its <b>profit volatility</b> through crises has been real — two loss-making years in the last five.</p>
+</div>
+
+<!-- PHASE 5: TECHNICAL -->
+<div class="section" id="technical">
+  <div class="eyebrow">Phase 5 · Technical Analysis</div>
+  <h2>What Is the Price Actually Doing?</h2>
+  <p>Technical analysis studies the price chart itself — think of it as reading a patient's pulse and blood pressure rather than their full medical history. With a thinly-traded micro-cap like this (average weekly price swings of ~9–10%, vs under 4.5% for the typical CSE stock), treat every technical signal with extra caution.</p>
+
+  <div class="chart-box">
+    <h3 style="margin-bottom:10px;">Visual: Support, Resistance &amp; Current Price</h3>
+    <svg viewBox="0 0 760 230" class="ladder" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="20" x2="60" y2="210" stroke="#243042" stroke-width="2"/>
+      <!-- ATH -->
+      <line x1="60" y1="30" x2="740" y2="30" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="65" y="24" class="lbl">All-Time High</text>
+      <text x="650" y="24">LKR 17.80</text>
+      <!-- Current -->
+      <line x1="60" y1="92" x2="740" y2="92" stroke="#58a6ff" stroke-width="2.5"/>
+      <text x="65" y="86" class="lbl">Current Price</text>
+      <text x="650" y="86" style="fill:#58a6ff;font-weight:700;">LKR 13.90</text>
+      <!-- stop loss -->
+      <line x1="60" y1="130" x2="740" y2="130" stroke="#f85149" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <text x="65" y="124" class="lbl">Suggested Stop-Loss</text>
+      <text x="650" y="124">LKR 11.00</text>
+      <!-- fair value -->
+      <line x1="60" y1="150" x2="740" y2="150" stroke="#d29922" stroke-width="2"/>
+      <text x="65" y="144" class="lbl">Fair Value (our estimate)</text>
+      <text x="650" y="144" style="fill:#d29922;">LKR 9.50</text>
+      <!-- ATL -->
+      <line x1="60" y1="200" x2="740" y2="200" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="65" y="194" class="lbl">52-Week Low</text>
+      <text x="650" y="194">LKR 3.90</text>
+    </svg>
+    <p class="chart-cap">A picture of where today's price (blue) sits relative to its 52-week extremes, our calculated fair-value zone, and a sensible stop-loss line for existing holders. Not to scale by exact LKR increments — illustrative ordering only.</p>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Trend</h3>
+      <p>Over the past 12 months the stock is up <b>+179.6%</b> (from its 52-week low of LKR 3.90 to today). But the most recent move is <b>down</b>: −3.0% today, −4.4% this week, −11.0% this month, and −22% off its 24 April 2026 all-time high of LKR 17.80. Read this as: <i>a powerful long-term uptrend that is currently correcting.</i></p>
+    </div>
+    <div class="card">
+      <h3>Moving Averages, RSI &amp; MACD</h3>
+      <p>We don't have a live, continuously-updating feed of daily OHLC data in this report, so we won't fabricate precise 50/200-day average or RSI/MACD numbers. Given the price is down for three consecutive timeframes (day/week/month) after a parabolic 4.5x run, it is reasonable to expect the stock is moving from "overbought" toward more neutral territory. <b>Action: check a live chart (e.g., TradingView's EXT.N0000 page) for the current RSI/MACD reading before trading</b> — don't rely on a static report for split-second timing.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Volume &amp; liquidity</h3>
+    <p>This is an illiquid stock — public float is reportedly thin (see governance caveats) and trading can see "no-trade" days. That means large buy or sell orders can move the price a lot, and you may not always be able to exit quickly at the price you want. Treat any position here as a <b>small, deliberate allocation</b>, never a core holding sized like a blue-chip bank stock.</p>
+  </div>
+</div>
+
+<!-- PHASE 6: GLOBAL CONTEXT -->
+<div class="section" id="global">
+  <div class="eyebrow">Phase 6 · Global Sector Context &amp; Macro</div>
+  <h2>What's Happening in the World That Matters Here</h2>
+  <p>Globally, the pest-control industry is a <b>steady, defensive growth business</b> — worth roughly USD 26–28 billion in 2026 and growing 5–8% a year, driven by urbanisation, climate-driven pest proliferation, rising hygiene awareness, and a wave of consolidation (Rentokil's 2025 acquisition of Terminix being the largest recent example) plus AI-powered pest-prediction tools — exactly the trend Exterminators is trying to ride locally with its own AI push. The structural tailwind is real, but Exterminators is a tiny, single-country player competing for relevance against giants with vastly more capital.</p>
+
+  <h3>🌍 Global &amp; Sri Lanka Macro Snapshot (as of June 2026)</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Indicator</th><th>Current value</th><th>Impact on Exterminators</th></tr>
+    <tr><td>USD/LKR exchange rate</td><td>≈ LKR 333.7 per USD (up ~11% over the past year — the Rupee is weakening)</td><td>Raises the cost of any imported chemicals/equipment, though the company's "Made in Sri Lanka" shift since 2022 has reduced this exposure.</td></tr>
+    <tr><td>Sri Lanka CBSL policy rate</td><td>Held at 7.75% in recent reviews</td><td>Low/stable rates are a non-issue for Exterminators itself (debt-free), but support borrowing conditions for its hospitality/construction clients.</td></tr>
+    <tr><td>Sri Lanka inflation (CCPI, y/y)</td><td>5.5% in May 2026 — highest since Feb 2024, driven by transport/fuel costs</td><td>Pushes up fuel and operating costs for a field-service business with a vehicle fleet.</td></tr>
+    <tr><td>IMF programme status</td><td>Combined 5th &amp; 6th EFF reviews completed late May 2026; ~USD 695M disbursed (cumulative ~USD 2.4bn of a USD 3bn programme); two continuous performance criteria (on external arrears / import restrictions) were flagged as "not observed"</td><td>Broadly stabilising for the economy, but the flagged breaches and a 2026 GDP growth downgrade (~3%, from ~4.5%) signal a softer client-spending backdrop near-term.</td></tr>
+    <tr><td>Global oil (Brent)</td><td>~USD 78/barrel — down sharply from a 60%+ war-driven spike in April 2026, but still ~7% above pre-war levels</td><td>Directly affects fleet fuel costs and petroleum-based chemical solvent costs.</td></tr>
+  </table>
+  </div>
+
+  <h3>🌦️ Climate &amp; Weather Risk</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Climate factor</th><th>Current status</th><th>Likely impact on Exterminators</th><th>Severity</th></tr>
+    <tr><td>Cyclone Ditwah recovery</td><td>Nov 2025 cyclone caused ~USD 4.1bn damage (≈4% of GDP), 640+ deaths, 2.3M people affected across all 25 districts; reconstruction still underway mid-2026.</td><td>Mixed: near-term disruption to operations/collections in affected districts, but flood/landslide aftermath classically increases termite, mosquito and rodent activity — a potential medium-term demand tailwind for pest-control services, especially in reconstruction zones.</td><td><span class="chip chip-y">🟡 Medium</span></td></tr>
+    <tr><td>Southwest (Yala) Monsoon</td><td>Active May–September 2026 across Colombo, Galle and the hill country — exactly where most branches operate. One source flags a modest El Niño-linked risk of below-normal rainfall this season.</td><td>Routine seasonal disruption to field schedules; humidity generally supports (rather than hurts) demand for mosquito/pest services.</td><td><span class="chip chip-g">🟢 Low-Medium</span></td></tr>
+    <tr><td>Heatwave (through mid-May 2026)</td><td>A prolonged heat event affected several provinces, complicating Cyclone Ditwah recovery logistics (water, power).</td><td>Indirect — mainly affects recovery-zone operations and staff working conditions.</td><td><span class="chip chip-y">🟡 Medium</span></td></tr>
+    <tr><td>Shipping / Suez-Red Sea / Hormuz routes</td><td>Strait of Hormuz disruption (see Phase 8) has eased materially in June 2026 as a US-Iran deal takes effect.</td><td>De-escalating; reduces near-term freight/insurance cost pressure on imported inputs.</td><td><span class="chip chip-g">🟢 Improving</span></td></tr>
+  </table>
+  </div>
+  <p class="callout info">Net read: <b>climate risk to Exterminators is genuinely two-sided</b> — Cyclone Ditwah and monsoon variability create near-term operational friction, but Sri Lanka's increasing frequency of floods, heatwaves, and humidity events is, if anything, a long-run demand driver for professional pest management. We've reflected a modest, not severe, net drag in our price targets below.</p>
+</div>
+
+<!-- PHASE 7: VERDICT -->
+<div class="section" id="verdict">
+  <div class="eyebrow">Phase 7 · Investment Verdict &amp; Price Targets</div>
+  <h2>So... Buy, Hold, or Avoid?</h2>
+
+  <h3>Overall Scorecard</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Category</th><th class="num">Score (1–10)</th><th>Notes</th></tr>
+    <tr><td>Business Quality</td><td class="num">6</td><td>Defensible niche brand, first-mover CSE listing, real recurring-revenue model — but tiny scale and a fragmented local market with no clean public peer comparison.</td></tr>
+    <tr><td>Financial Health</td><td class="num">6</td><td>Excellent balance sheet (almost debt-free, strong liquidity), but earnings have been a roller-coaster — two loss years in five.</td></tr>
+    <tr><td>Management Quality</td><td class="num">6</td><td>Credible independent Chairman upgrade and added technical director — offset by founder concentration, a thin float, and unverified-but-plausible red flags around insider selling and a reported audit qualification.</td></tr>
+    <tr><td>Growth Potential</td><td class="num">7</td><td>Genuine regional franchise pipeline (Maldives, Seychelles, ambitions in UAE/Botswana) riding a real global industry tailwind (5–8% CAGR), plus an AI/digitalisation push that's actually shipping product (Smart Missile 3G, route optimisation).</td></tr>
+    <tr><td>Crisis Resilience</td><td class="num">7</td><td>Proven operational adaptability through COVID and the 2022 crisis; balance sheet protected; but margins remain sensitive to FX/fuel and profitability has not been smooth.</td></tr>
+    <tr><td>Current Valuation</td><td class="num">3</td><td>P/E 35.5x and P/B 5.1x are rich for a volatile-earnings micro-cap whose latest profit jump isn't yet fully cash-backed (Phase 3E); the stock has already fallen 22% from its April 2026 high with continuing downward momentum.</td></tr>
+    <tr style="background:rgba(255,255,255,.03);"><td><b>TOTAL SCORE</b></td><td class="num"><b>35 / 60</b></td><td>A mid-range, fundamentally-mixed profile: genuine strengths, genuine flags, and a price that has already run ahead of the cash-backed fundamentals.</td></tr>
+  </table>
+  </div>
+
+  <div class="callout warn" style="font-size:1.05rem;">
+    <b>Recommendation: WATCH (existing small holders: HOLD with a hard stop-loss; new buyers: wait for a better price).</b><br><br>
+    Exterminators is a genuinely interesting, well-run small story — debt-free balance sheet, a credible new Chairman, and a real AI/franchise growth narrative riding a structurally growing global industry. But at LKR 13.90, the market is paying a P/E of 35.5x and P/B of 5.1x for a company whose latest profit "turnaround" isn't yet backed by cash, and whose five-year earnings track record includes two loss-making years. The stock has already corrected 22% from its April 2026 peak with momentum still pointing down. This is a "great story, expensive ticket" situation right now.
+  </div>
+
+  <h3>Price Targets (LKR)</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Action</th><th>Price (LKR)</th><th>Reasoning</th></tr>
+    <tr><td>🟢 Strong Buy Zone</td><td><b>8.50 – 10.00</b></td><td>Roughly where a more conservative ~20–25x multiple on FY26 EPS (LKR 0.39), and a ~3.5x multiple on book value (LKR 2.72/share), both land — i.e., where valuation would reasonably reflect the company's volatile earnings history rather than its single best year.</td></tr>
+    <tr><td>🟡 Fair Value (today)</td><td><b>9.50</b></td><td>Blend of the P/E- and P/B-based estimates above.</td></tr>
+    <tr><td>🔴 Stop-Loss (existing holders)</td><td><b>11.00</b></td><td>A clean break below this level — especially given the already-confirmed −11% one-month, −4.4% one-week trend — would signal the post-FY26-results rally has fully reversed.</td></tr>
+    <tr><td>🎯 Short-Term Target (3–6 months)</td><td><b>11.50 – 12.50</b></td><td>A realistic near-term mean-reversion zone if the current correction stabilises before fully closing the valuation gap.</td></tr>
+    <tr><td>🚀 Long-Term Target (2–3 years)</td><td><b>16.00 – 18.00</b></td><td>A retest of the current all-time high — achievable <i>if</i> the Maldives/Seychelles franchise pipeline converts into real, cash-backed earnings growth and the receivables/cash-conversion issue gets resolved over the next 1–2 reporting cycles.</td></tr>
+  </table>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card"><h3>Short-term trading</h3><p>Not an attractive setup right now: you'd be buying into a confirmed downtrend (day/week/month all negative) on a stock that's already up ~180% over 12 months and trading at a rich multiple. Wait for either a clear base/reversal signal on a live chart, or a pullback toward the fair-value zone.</p></div>
+    <div class="card"><h3>Long-term investing (2–5 yrs)</h3><p>There's a real long-term thesis here — debt-free balance sheet, credible new leadership, an actual export/franchise pipeline, and a growing global industry. Worth a small position <i>sized for a thinly-traded micro-cap</i>, ideally added on weakness rather than chasing strength, with patience for the cash-flow story to catch up to the profit story.</p></div>
+    <div class="card"><h3>Student investor advice</h3><p>With limited capital, this is a "watch-list, not first-pick" stock. If you're learning to invest, it's a great real-world case study in <i>why checking the cash-flow statement matters</i> — but it's not the safest place to put money you can't afford to see swing 10% in a week.</p></div>
+  </div>
+</div>
+
+<!-- PHASE 8: GEOPOLITICS -->
+<div class="section" id="geopolitics">
+  <div class="eyebrow">Phase 8 · World Crisis, War &amp; Political Risk</div>
+  <h2>The Big Picture Risks Beyond the Company Itself</h2>
+
+  <h3>⚔️ Active Conflicts</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Conflict / Region</th><th>Current status (June 2026)</th><th>How it affects Exterminators</th></tr>
+    <tr><td>Middle East war (Israel/US–Iran, began 28 Feb 2026)</td><td>De-escalating: a US-brokered deal was signed mid-June 2026; Strait of Hormuz traffic (≈20% of world oil, ≈20% of global LNG) is reopening; Brent crude has fallen from a +60% war-peak in April back to ~$78/barrel, still ~7% above pre-war levels.</td><td>Was a meaningful driver of Sri Lanka's May 2026 inflation spike via fuel/transport costs; easing now, but residual cost pressure on fleet fuel and chemical-solvent inputs remains versus pre-war baseline.</td></tr>
+    <tr><td>Russia–Ukraine War</td><td>Ongoing, lower immediate market impact than the Middle East conflict at this time.</td><td>Minimal direct effect on a domestic Sri Lankan services business; mainly a secondary influence via global energy/grain price baselines.</td></tr>
+    <tr><td>South China Sea tensions</td><td>Persistent but not escalating sharply.</td><td>Negligible direct effect; Exterminators' supply chains are not meaningfully exposed to this route.</td></tr>
+  </table>
+  </div>
+
+  <h3>🏛️ Political Risk</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Factor</th><th>Situation</th><th>Impact level</th></tr>
+    <tr><td>Sri Lanka government stability</td><td>NPP government under President Anura Kumara Dissanayake; IMF programme "generally strong" per the Fund's own May 2026 review, though two continuous performance criteria were flagged as breached.</td><td><span class="chip chip-y">🟡 Medium</span></td></tr>
+    <tr><td>IMF programme conditionality</td><td>Cost-recovery fuel/electricity pricing reforms now required — these raise near-term living/operating costs even as they support long-run stability.</td><td><span class="chip chip-y">🟡 Medium</span></td></tr>
+    <tr><td>Global trade/tariff policy</td><td>General background risk for any export-oriented diversification (Maldives/Seychelles franchise plans); no specific Exterminators-targeted measures identified.</td><td><span class="chip chip-g">🟢 Low (for this company specifically)</span></td></tr>
+  </table>
+  </div>
+
+  <div class="riskmeter">
+    <div style="text-align:center;font-weight:700;color:#fff;margin-bottom:8px;">🌐 GLOBAL RISK OVERLAY</div>
+    <div>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+    <div class="line"><span>War / Geopolitical Risk:</span><span style="color:#d29922;">🟡 Medium (de-escalating)</span></div>
+    <div class="line"><span>Climate / Weather Risk:</span><span style="color:#d29922;">🟡 Medium</span></div>
+    <div class="line"><span>Political Risk (Sri Lanka):</span><span style="color:#d29922;">🟡 Medium</span></div>
+    <div class="line"><span>Global Macro Risk:</span><span style="color:#d29922;">🟡 Medium</span></div>
+    <div>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+    <div class="line"><span><b>OVERALL EXTERNAL RISK:</b></span><span style="color:#d29922;font-weight:800;">MEDIUM</span></div>
+    <div class="line"><span><b>Price Target Adjustment:</b></span><span>Already reflected — fair value held at the conservative end of the range above</span></div>
+    <div>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+  </div>
+
+  <p><b>Bottom line on external risk:</b> nothing here is an emergency-level red alert for this specific company. The Middle East war was the most market-moving event of H1 2026 and is now de-escalating; Cyclone Ditwah's recovery is a slow-burn domestic drag with a silver lining for pest-control demand; Sri Lanka's IMF-anchored recovery remains broadly on track, if slower than hoped. None of this changes the long-term thesis — but it does mean near-term margins stay exposed to fuel/FX swings, reinforcing the case for patience on entry price.</p>
+</div>
+
+<!-- PHASE 9: SUMMARY -->
+<div class="section" id="summary">
+  <div class="eyebrow">Phase 9 · Final Summary Card</div>
+  <h2>One-Page Cheat Sheet</h2>
+  <div class="summary-card">
+    <div class="summary-head">📊 CSE RESEARCH SUMMARY — Exterminators PLC (EXT.N0000)</div>
+    <div class="row"><span>Sector</span><b>Commercial &amp; Professional Services — Pest Management (Empower Board)</b></div>
+    <div class="row"><span>Current Price</span><b>LKR 13.90</b></div>
+    <div class="row"><span>Business</span><b>Sri Lanka's only listed pest-control &amp; environmental services company, expanding regionally via AI &amp; franchising</b></div>
+    <div class="row"><span>Revenue (FY26) / Net Profit (FY26)</span><b>LKR 157.97M / LKR 20.67M</b></div>
+    <div class="row"><span>EPS / P/E / Dividend Yield</span><b>LKR 0.39 / 35.5x / 0%</b></div>
+    <div class="row"><span>Debt-to-Equity / ROE</span><b>0.08x / 16.2%</b></div>
+    <div class="row"><span>Piotroski F-Score / Altman Z</span><b>7 / 9 · ≈15–18 (mechanically high — low debt)</b></div>
+    <div class="row"><span>Earnings Quality (PAT ÷ OCF)</span><b style="color:#f85149;">3.28x — 🔴 profit not yet cash-backed</b></div>
+    <div class="row"><span>🟢 Buy Zone / 🔴 Stop-Loss</span><b>LKR 8.50–10.00 / LKR 11.00</b></div>
+    <div class="row"><span>🎯 Short Target / 🚀 Long Target</span><b>LKR 11.50–12.50 / LKR 16.00–18.00</b></div>
+    <div class="row"><span>🌍 Global Macro</span><b>Neutral-to-Unfavourable (LKR weakness, post-war fuel costs)</b></div>
+    <div class="row"><span>🌦️ Climate Risk</span><b>Medium — Cyclone Ditwah recovery + monsoon variability</b></div>
+    <div class="row"><span>⚔️ Geopolitical Risk</span><b>Medium, de-escalating — Middle East war winding down</b></div>
+    <div class="row"><span>🌐 Overall External Risk</span><b>MEDIUM</b></div>
+    <div class="row"><span>⚡ VERDICT</span><b style="color:#d29922;">WATCH — good company, currently expensive vs. cash-backed earnings</b></div>
+    <div class="row"><span>⏱ Best for</span><b>Patient long-term investors who size positions small; not a short-term trade right now</b></div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="disclaim">
+    <b>Disclaimer:</b> This report was prepared as an educational research exercise combining verified financial data (stockanalysis.com / S&amp;P Global Market Intelligence, CSE-related news coverage, IMF/World Bank/CBSL/OCHA sources) with analytical judgement. A handful of governance-related claims (exact float %, a specific reported audit-qualification notice, and reported insider-sale figures) could not be independently verified against primary CSE filings within this research session and are explicitly flagged as such above — please confirm these directly via cse.lk before acting on them. This is research to help you think, not financial advice. Always invest only what you can afford to lose, and do your own additional research (DYOR).
+  </div>
+  <div>Prepared for @LochanaKa · Data Science · Economics · Markets — Learning in Public 🇱🇰</div>
+  <a class="backtop" href="#overview">↑ Back to top</a>
+</footer>
+
+<script>
+const CARD_BG = '#121a25';
+Chart.defaults.color = '#8b9bb0';
+Chart.defaults.font.family = "'Segoe UI', sans-serif";
+Chart.defaults.borderColor = '#243042';
+
+const crisisBandPlugin = {
+  id: 'crisisBand',
+  beforeDatasetsDraw(chart, args, opts) {
+    if(!opts || !opts.indices) return;
+    const {ctx, chartArea: {top, bottom}, scales} = chart;
+    const x = scales.x;
+    ctx.save();
+    opts.indices.forEach(idx => {
+      const center = x.getPixelForValue(idx);
+      const bw = (x.width / (x.ticks.length)) ;
+      ctx.fillStyle = 'rgba(248,81,73,0.10)';
+      ctx.fillRect(center - bw/2, top, bw, bottom-top);
+    });
+    ctx.restore();
+  }
+};
+Chart.register(crisisBandPlugin);
+
+const years = ['FY20','FY21','FY22','FY23','FY24','FY25','FY26'];
+
+// Chart 1: Revenue & Net Profit
+new Chart(document.getElementById('revenueChart'), {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [
+      {label:'Revenue (LKR M)', data:[98.76,115.61,129.82,154.50,143.01,153.62,157.97], borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.12)', fill:true, tension:.3, yAxisID:'y'},
+      {label:'Net Profit (LKR M)', data:[6.37,14.86,27.01,-13.37,8.99,-11.83,20.67], borderColor:'#3fb950', backgroundColor:'rgba(63,185,80,.15)', fill:true, tension:.3, yAxisID:'y'}
+    ]
+  },
+  options: {
+    responsive:true,
+    plugins:{
+      legend:{labels:{color:'#e6edf3'}},
+      crisisBand:{indices:[1,3]},
+      tooltip:{callbacks:{footer:(items)=>{
+        const i = items[0].dataIndex;
+        if(i===1) return 'COVID-19 disruption year';
+        if(i===3) return "Sri Lanka's economic crisis + one-off asset-sale loss";
+        return '';
+      }}}
+    },
+    scales:{ y:{ title:{display:true,text:'LKR Millions',color:'#8b9bb0'}, grid:{color:'#1c2733'} }, x:{grid:{display:false}} }
+  }
+});
+
+// Chart 2: Debt to Equity
+new Chart(document.getElementById('deChart'), {
+  type:'bar',
+  data:{
+    labels:['FY21 (pre-IPO, prospectus)','FY22','FY23','FY24','FY25','FY26'],
+    datasets:[{label:'Debt-to-Equity %', data:[31,8,6,7,14,8], backgroundColor:['#d29922','#1db99a','#1db99a','#1db99a','#f85149','#1db99a']}]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:(c)=> c.raw+'% — lower is safer (less borrowed money relative to shareholder capital)'}}},
+    scales:{ y:{title:{display:true,text:'% of Equity',color:'#8b9bb0'},grid:{color:'#1c2733'}}, x:{grid:{display:false}} }
+  }
+});
+
+// Chart 3: OCF vs Net Profit combo
+new Chart(document.getElementById('cashflowChart'), {
+  type:'bar',
+  data:{
+    labels:['FY22','FY23','FY24','FY25','FY26'],
+    datasets:[
+      {type:'bar', label:'Operating Cash Flow (LKR M)', data:[23.63,-17.88,8.82,16.99,6.31], backgroundColor:'#58a6ff'},
+      {type:'line', label:'Net Profit (LKR M)', data:[27.01,-13.37,8.99,-11.83,20.67], borderColor:'#f85149', backgroundColor:'#f85149', tension:.25}
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{labels:{color:'#e6edf3'}}, crisisBand:{indices:[1]}},
+    scales:{ y:{title:{display:true,text:'LKR Millions',color:'#8b9bb0'},grid:{color:'#1c2733'}}, x:{grid:{display:false}} }
+  }
+});
+
+// Radar 1: Health Scorecard
+new Chart(document.getElementById('healthRadar'), {
+  type:'radar',
+  data:{
+    labels:['Financial Health','Business Quality','Management Quality','Growth Potential','Crisis Resilience','Current Valuation'],
+    datasets:[
+      {label:'Exterminators PLC', data:[6,6,6,7,7,3], borderColor:'#1db99a', backgroundColor:'rgba(29,185,154,.25)', pointBackgroundColor:'#1db99a'},
+      {label:'Illustrative CSE small-cap peer avg', data:[6.5,6,6.5,5.5,6,5.5], borderColor:'#8b9bb0', backgroundColor:'rgba(139,155,176,.12)', pointBackgroundColor:'#8b9bb0'}
+    ]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{labels:{color:'#e6edf3'}}},
+    scales:{ r:{ min:0, max:10, ticks:{color:'#8b9bb0', backdropColor:'transparent'}, grid:{color:'#243042'}, angleLines:{color:'#243042'}, pointLabels:{color:'#e6edf3', font:{size:11}} } }
+  }
+});
+
+// Radar 2: Quality of Earnings
+new Chart(document.getElementById('qoeRadar'), {
+  type:'radar',
+  data:{
+    labels:['Earnings Quality','Cash Conversion','Earnings Sustainability','Governance Score','Balance Sheet Safety','Piotroski F-Score'],
+    datasets:[{label:'Exterminators PLC (FY26)', data:[3,3,3,6,10,7.8], borderColor:'#bc8cff', backgroundColor:'rgba(188,140,255,.25)', pointBackgroundColor:'#bc8cff'}]
+  },
+  options:{
+    responsive:true,
+    plugins:{legend:{labels:{color:'#e6edf3'}}},
+    scales:{ r:{ min:0, max:10, ticks:{color:'#8b9bb0', backdropColor:'transparent'}, grid:{color:'#243042'}, angleLines:{color:'#243042'}, pointLabels:{color:'#e6edf3', font:{size:11}} } }
+  }
+});
+</script>
+</body>
+</html>

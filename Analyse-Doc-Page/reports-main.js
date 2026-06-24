@@ -70,11 +70,20 @@ const REPORTS = {
       date: "2026-06-18",
       verdict: "buy",
       title: "OSEA Full Company Analysis 01",
-      summary: "OSEA is a classic <strong>asset play.</strong> you're essentially buying a stake in Colombo's skyline at a discount. If your investment horizon is 3+ years, this is the kind of stock that rewards patience. With limited capital, consider investing in tranches  buy a starter position now, add more if it dips to Rs. 44 or below. Don't put all your money in at once after a 117% rally. And always remember: low free float means sharp swings are possible don't panic sell on volatility.",
+      summary: "OSEA is a classic asset play. you're essentially buying a stake in Colombo's skyline at a discount. If your investment horizon is 3+ years, this is the kind of stock that rewards patience. With limited capital, consider investing in tranches  buy a starter position now, add more if it dips to Rs. 44 or below. Don't put all your money in at once after a 117% rally. And always remember: low free float means sharp swings are possible don't panic sell on volatility.",
       url: "../Analysed-Companies/OSEA/OSEA-r01.html"
     }
   ],
 
+        "EXT.N0000": [
+    {
+      date: "2026-06-25",
+      verdict: "hold",
+      title: "EXT Full Company Analysis 01",
+      summary: "Exterminators is a genuinely interesting, well-run small story — debt-free balance sheet, a credible new Chairman, and a real AI/franchise growth narrative riding a structurally growing global industry. But at LKR 13.90, the market is paying a P/E of 35.5x and P/B of 5.1x for a company whose latest profit turnaround isn't yet backed by cash, and whose five-year earnings track record includes two loss-making years. The stock has already corrected 22% from its April 2026 peak with momentum still pointing down. This is a great story, expensive ticket situation right now.",
+      url: "../Analysed-Companies/EXT/EXT-r01.html"
+    }
+  ],
 
 
 

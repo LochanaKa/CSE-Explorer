@@ -143,7 +143,7 @@ const COMPANIES = [
   { ticker: "ELPL.N0000", name: "Elpitiya Plantations PLC", sector: "Plantations", listedYear: null, analysisUrl: "#", status: "listed" },
   { ticker: "ETWO.N0000", name: "Equity Two PLC", sector: "Real Estate & Property", listedYear: null, analysisUrl: "#", status: "listed" },
   { ticker: "PACK.N0000", name: "Ex-pack Corrugated Cartons PLC", sector: "Manufacturing", listedYear: null, analysisUrl: "#", status: "listed" },
-  { ticker: "EXT.N0000", name: "Exterminators PLC", sector: "Other", listedYear: null, analysisUrl: "#", status: "listed" },
+  { ticker: "EXT.N0000", name: "Exterminators PLC", sector: "Other", listedYear: null, analysisUrl: "Analyse-Doc-Page/analysis.html?ticker=EXT.N0000", status: "listed" },
   { ticker: "CFVF.N0000", name: "First Capital Holdings PLC", sector: "Banking & Finance", listedYear: null, analysisUrl: "#", status: "listed" },
   { ticker: "FCT.N0000", name: "First Capital Treasuries PLC", sector: "Banking & Finance", listedYear: null, analysisUrl: "#", status: "listed" },
   { ticker: "GHLL.N0000", name: "Galadari Hotels (Lanka) PLC", sector: "Hotels & Travel", listedYear: null, analysisUrl: "#", status: "listed" },
