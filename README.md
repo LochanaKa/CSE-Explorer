@@ -7,7 +7,7 @@ Every company listed on the Colombo Stock Exchange, in one place. Browse by sect
 Built and maintained by Lochana Karunarathna ([@LochanaKa](https://github.com/LochanaKa)).
 
 **Live site:** https://lochanaka.github.io/cse-company-explorer/
-**Portfolio:** https://lochanaka.github.io/
+  **Portfolio:** https://lochanaka.github.io/portfolio-website/
 
 ---
 
