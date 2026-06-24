@@ -85,7 +85,25 @@ const REPORTS = {
     }
   ],
 
+          "HNBF.N0000": [
+    {
+      date: "2026-06-18",
+      verdict: "hold",
+      title: "HNBF Full Company Analysis 01",
+      summary: "HNB Finance is a real turnaround story — it went from a sovereign-crisis loss and a capital-ratio breach in 2023 to a credit-rating upgrade and near-doubled profit in 2026, backed throughout by Sri Lanka's largest private bank. That is genuinely impressive execution. But the share price has already nearly doubled in the past year and now trades at a fair-to-full valuation for a small, thinly-traded, inherently leveraged NBFI that still has fresh climate and inflation headwinds sitting directly on its core borrower base. For existing holders, the turnaround thesis is intact — hold. For new capital, chasing the stock here offers a worse risk/reward than waiting for it to retest the Rs 7.50--8.80 support zone (right around where the May 2026 Prime Lands block actually traded).",
+      url: "../Analysed-Companies/HNBF/HNBF-r01.html"
+    }
+  ],
 
+          "SEMB.N0000": [
+    {
+      date: "2026-06-18",
+      verdict: "hold",
+      title: "SEMB Full Company Analysis 01",
+      summary: "SMB Finance is showing genuine top-line and accounting-profit growth, helped by a favorable Sri Lankan rate-cutting and growth environment. But the stock is priced richly (42x earnings) for a company that is not generating cash from its core operations, has a single shareholder controlling 43.7%, pays no dividend, and carries a checkered governance history under its earlier corporate identity. This combination — rising paper profit + negative cash flow + ownership concentration + no dividend + thin liquidity — is a classic profile that deserves caution, not blind optimism. Hold if you already own it, but don't buy at these levels.",
+      url: "../Analysed-Companies/SEMB/SEMB-r01.html"
+    }
+  ],
 
 
 
