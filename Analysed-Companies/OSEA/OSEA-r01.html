@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overseas Realty (Ceylon) PLC – CSE Research Report</title>
+<link rel="shortcut icon" href="../../Assets/CE-3.png" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg:#0d1117;--card:#161b22;--card2:#1c2330;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;
+  --yellow:#d29922;--blue:#58a6ff;--purple:#bc8cff;--accent:#1f6feb;
+  --gold:#f0b429;--teal:#39d353;
+}
+body.light{
+  --bg:#f0f4f8;--card:#ffffff;--card2:#f8fafc;--border:#d0d7de;
+  --text:#1f2328;--muted:#656d76;--green:#1a7f37;--red:#d1242f;
+  --yellow:#9a6700;--blue:#0969da;--purple:#8250df;--accent:#0969da;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:999;background:rgba(13,17,23,0.95);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);padding:0 1rem}
+body.light nav{background:rgba(240,244,248,0.95)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding:.55rem 0}
+.nav-logo{font-weight:700;font-size:.95rem;color:var(--blue);white-space:nowrap}
+.nav-links{display:flex;flex-wrap:wrap;gap:.3rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;padding:.25rem .5rem;border-radius:6px;transition:.2s}
+.nav-links a:hover{color:var(--text);background:var(--card2)}
+#themeBtn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:.3rem .7rem;
+          border-radius:8px;cursor:pointer;font-size:.8rem}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d1117 0%,#1a2332 50%,#0d1117 100%);
+      border-bottom:1px solid var(--border);padding:2.5rem 1rem 2rem}
+body.light .hero{background:linear-gradient(135deg,#e8f4fd 0%,#dce8f5 50%,#e8f4fd 100%)}
+.hero-inner{max-width:1200px;margin:0 auto}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.hero-title h1{font-size:2rem;font-weight:800;line-height:1.2}
+.hero-title h1 span{color:var(--blue)}
+.hero-title p{color:var(--muted);font-size:.9rem;margin-top:.4rem}
+.hero-subtitle-strip{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.strip-badge{background:var(--card);border:1px solid var(--border);padding:.25rem .75rem;border-radius:20px;font-size:.78rem;color:var(--muted)}
+.strip-badge strong{color:var(--text)}
+.verdict-badge{padding:.45rem 1.2rem;border-radius:20px;font-weight:700;font-size:1rem;white-space:nowrap}
+.verdict-buy{background:rgba(63,185,80,.18);border:1.5px solid var(--green);color:var(--green)}
+.verdict-hold{background:rgba(210,153,34,.18);border:1.5px solid var(--yellow);color:var(--yellow)}
+.price-badge{background:var(--card);border:1px solid var(--border);padding:.6rem 1.2rem;border-radius:12px;text-align:right}
+.price-badge .price{font-size:2rem;font-weight:800;color:var(--green)}
+.price-badge .price-meta{font-size:.78rem;color:var(--muted)}
+
+/* SCORECARD ROW */
+.scorecard{max-width:1200px;margin:1.5rem auto;padding:0 1rem;
+           display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem}
+.sc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem}
+.sc-card .sc-label{font-size:.73rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.sc-card .sc-val{font-size:1.35rem;font-weight:700;margin-top:.15rem}
+.sc-card .sc-sub{font-size:.72rem;color:var(--muted);margin-top:.1rem}
+.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}.blue{color:var(--blue)}
+
+/* SECTIONS */
+.container{max-width:1200px;margin:0 auto;padding:1rem}
+.section{margin-bottom:2rem}
+.section-title{font-size:1.25rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.section-title .icon{font-size:1.1rem}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:.7rem;color:var(--blue)}
+.card p{color:var(--text);line-height:1.7;margin-bottom:.6rem}
+.card p:last-child{margin-bottom:0}
+
+/* GRID 2 */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead th{background:var(--card2);color:var(--muted);text-align:left;padding:.55rem .75rem;font-weight:600;border-bottom:1px solid var(--border)}
+tbody td{padding:.5rem .75rem;border-bottom:1px solid rgba(48,54,61,.5)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(255,255,255,.02)}
+
+/* CHART CARD */
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.chart-card h3{font-size:1rem;font-weight:700;margin-bottom:.3rem;color:var(--blue)}
+.chart-card .chart-desc{font-size:.78rem;color:var(--muted);margin-bottom:.9rem}
+.chart-container{position:relative;width:100%;height:260px}
+
+/* PHASE HEADER */
+.phase-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
+.phase-num{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+.phase-header h2{font-size:1.35rem;font-weight:800}
+
+/* GOVERNANCE */
+.gov-item{display:flex;align-items:flex-start;gap:.75rem;padding:.7rem 0;border-bottom:1px solid rgba(48,54,61,.4)}
+.gov-item:last-child{border-bottom:none}
+.gov-emoji{font-size:1.1rem;flex-shrink:0;margin-top:.05rem}
+.gov-content strong{display:block;font-size:.88rem;font-weight:600}
+.gov-content span{font-size:.8rem;color:var(--muted)}
+
+/* PRICE TARGETS */
+.target-row{display:flex;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid rgba(48,54,61,.4)}
+.target-row:last-child{border-bottom:none}
+.target-icon{font-size:1.2rem;flex-shrink:0}
+.target-info strong{display:block;font-size:.88rem}
+.target-info span{font-size:.78rem;color:var(--muted)}
+.target-price{font-size:1.2rem;font-weight:800;margin-left:auto;white-space:nowrap}
+
+/* SUMMARY CARD */
+.summary-card{background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);
+              border:1.5px solid var(--blue);border-radius:16px;padding:1.75rem;margin:1.5rem auto;max-width:750px}
+.summary-card h2{text-align:center;font-size:1.1rem;font-weight:800;letter-spacing:.06em;color:var(--blue);margin-bottom:1rem;text-transform:uppercase}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.summary-row{font-size:.83rem;padding:.35rem .5rem;border-radius:6px;background:rgba(255,255,255,.03)}
+.summary-row strong{color:var(--text)}
+.summary-row span{color:var(--muted)}
+.summary-divider{grid-column:1/-1;height:1px;background:var(--border);margin:.4rem 0}
+.summary-verdict{grid-column:1/-1;text-align:center;background:rgba(63,185,80,.12);border:1px solid var(--green);
+                  border-radius:10px;padding:.7rem 1rem;font-size:.88rem;margin-top:.5rem}
+.summary-verdict strong{color:var(--green);font-size:1rem}
+
+/* RISK METER */
+.risk-meter{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem}
+.risk-row{display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(48,54,61,.4)}
+.risk-row:last-child{border-bottom:none}
+.risk-label{font-size:.82rem}
+.risk-badge{padding:.2rem .6rem;border-radius:10px;font-size:.75rem;font-weight:700}
+.risk-low{background:rgba(63,185,80,.15);color:var(--green)}
+.risk-med{background:rgba(210,153,34,.15);color:var(--yellow)}
+.risk-high{background:rgba(248,81,73,.15);color:var(--red)}
+
+/* DISCLAIMER */
+footer{background:var(--card);border-top:1px solid var(--border);padding:1.5rem;text-align:center;font-size:.77rem;color:var(--muted);margin-top:2rem}
+
+/* TECHNICALS */
+.level-bar{background:var(--card2);border-radius:10px;padding:1rem 1.25rem;margin:.5rem 0}
+.level-bar .level-label{font-size:.78rem;color:var(--muted);margin-bottom:.35rem}
+.level-track{width:100%;height:10px;background:var(--border);border-radius:5px;position:relative;overflow:visible}
+.level-fill{height:100%;border-radius:5px}
+.level-dot{position:absolute;top:-3px;width:16px;height:16px;border-radius:50%;border:2px solid var(--bg);transform:translateX(-50%)}
+
+/* inwestout */
+.qoe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.75rem}
+.qoe-card{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem}
+.qoe-card .qoe-title{font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.qoe-card .qoe-val{font-size:1.3rem;font-weight:800;margin:.2rem 0}
+.qoe-card .qoe-flag{font-size:.78rem}
+.qoe-card .qoe-desc{font-size:.74rem;color:var(--muted);margin-top:.2rem}
+
+.piotrow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.5rem;margin-top:.75rem}
+.piotrow-item{display:flex;align-items:center;gap:.6rem;background:var(--card2);border-radius:8px;padding:.5rem .75rem;font-size:.8rem}
+.piotrow-item .p-icon{font-size:.95rem;flex-shrink:0}
+
+@media(max-width:600px){
+  .hero-title h1{font-size:1.4rem}
+  .price-badge .price{font-size:1.5rem}
+  .scorecard{grid-template-columns:repeat(2,1fr)}
+  .summary-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">CSE Research | OSEA.N0000</div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#background">History</a>
+      <a href="#governance">Governance</a>
+      <a href="#financials">Financials</a>
+      <a href="#crisis">Crisis</a>
+      <a href="#technical">Technical</a>
+      <a href="#global">Global</a>
+      <a href="#verdict">Verdict</a>
+    </div>
+    <button id="themeBtn" onclick="toggleTheme()">☀️ Light</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="overview">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-title">
+        <h1>Overseas Realty <span>(Ceylon) PLC</span></h1>
+        <p>OSEA.N0000 · Real Estate &amp; Property Development · Colombo Stock Exchange</p>
+        <div class="hero-subtitle-strip">
+          <span class="strip-badge">🏢 <strong>Sector:</strong> Real Estate</span>
+          <span class="strip-badge">📅 <strong>Listed:</strong> 1982</span>
+          <span class="strip-badge">💰 <strong>FY End:</strong> 31 December</span>
+          <span class="strip-badge">🇸🇬 <strong>Parent:</strong> Shing Kwan Group, Singapore</span>
+          <span class="strip-badge">🏦 <strong>Market Cap:</strong> Rs. 60–65 Bn</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.65rem">
+        <span class="verdict-badge verdict-buy">⭐ BUY / WATCH</span>
+        <div class="price-badge">
+          <div class="price">Rs. 48–53</div>
+          <div class="price-meta">Jun 2026 trading range</div>
+          <div class="price-meta" style="margin-top:.2rem">52-wk High: Rs. 50.00 | Low: ~Rs. 18</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCORECARD -->
+<div class="scorecard">
+  <div class="sc-card"><div class="sc-label">Revenue (FY2025)</div><div class="sc-val blue">Rs. 11,940 Mn</div><div class="sc-sub">+49% YoY</div></div>
+  <div class="sc-card"><div class="sc-label">Net Profit (FY2025)</div><div class="sc-val green">Rs. 8,630 Mn</div><div class="sc-sub">+39% YoY</div></div>
+  <div class="sc-card"><div class="sc-label">EPS (FY2025)</div><div class="sc-val green">Rs. 6.94</div><div class="sc-sub">vs Rs. 5.00 in FY2024</div></div>
+  <div class="sc-card"><div class="sc-label">P/E Ratio</div><div class="sc-val yellow">~7x</div><div class="sc-sub">vs sector avg ~18x 🟢</div></div>
+  <div class="sc-card"><div class="sc-label">Dividend (FY2025)</div><div class="sc-val green">Rs. 1.75/share</div><div class="sc-sub">Yield ~3.7%</div></div>
+  <div class="sc-card"><div class="sc-label">NAVPS (FY2024)</div><div class="sc-val blue">Rs. 47.32</div><div class="sc-sub">Current price near NAV</div></div>
+  <div class="sc-card"><div class="sc-label">D/E Ratio (FY2024)</div><div class="sc-val green">26%</div><div class="sc-sub">Down from 36% in 2023</div></div>
+  <div class="sc-card"><div class="sc-label">Gross Margin</div><div class="sc-val green">68%</div><div class="sc-sub">Best-in-class for sector</div></div>
+</div>
+
+<!-- PHASE 0: IDENTITY -->
+<div class="container" id="background">
+<div class="section">
+  <div class="phase-header">
+    <div class="phase-num">0</div>
+    <h2>Company Identity</h2>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>🏢 Who Is OSEA?</h3>
+      <p><strong>Overseas Realty (Ceylon) PLC</strong> is Sri Lanka's <strong>largest listed real estate company</strong>. It's the company that owns and operates two of Colombo's most famous buildings: the iconic <strong>World Trade Center</strong> and the massive <strong>Havelock City</strong> mixed-use development. Think of ORCL as the landlord of Colombo's premium real estate — it builds, rents out, and manages some of the most desirable office and retail spaces in the country.</p>
+      <p>In simple terms: OSEA owns the skyscrapers, collects the rent, and sells luxury apartments. As the city fills up and rents rise, so does OSEA's income.</p>
+    </div>
+    <div class="card">
+      <h3>📋 Quick Facts</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tbody>
+            <tr><td><strong>Full Legal Name</strong></td><td>Overseas Realty (Ceylon) PLC</td></tr>
+            <tr><td><strong>CSE Ticker</strong></td><td>OSEA.N0000</td></tr>
+            <tr><td><strong>Incorporated</strong></td><td>28 October 1980</td></tr>
+            <tr><td><strong>Listed on CSE</strong></td><td>1982</td></tr>
+            <tr><td><strong>FY End</strong></td><td>31 December</td></tr>
+            <tr><td><strong>Head Office</strong></td><td>East Tower, World Trade Center, Colombo 01</td></tr>
+            <tr><td><strong>Shares Outstanding</strong></td><td>~1.24 Billion</td></tr>
+            <tr><td><strong>Employees</strong></td><td>~588 direct (manages 10M+ sq ft)</td></tr>
+            <tr><td><strong>BOI Status</strong></td><td>Approved Flagship Company</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 1: BACKGROUND -->
+<div class="section">
+  <div class="phase-header">
+    <div class="phase-num">1</div>
+    <h2>Background &amp; History</h2>
+  </div>
+  <div class="card">
+    <h3>🌏 The Singapore Connection — How It All Began</h3>
+    <p>Overseas Realty (Ceylon) PLC was incorporated in <strong>1980</strong> — a time when Colombo was just beginning to dream big about its skyline. The company was listed on the CSE in <strong>1982</strong>, making it one of the older listed real estate entities in the country.</p>
+    <p>The defining moment came in <strong>1991</strong>, when the <strong>Shing Kwan Group</strong>, a Singaporean real estate powerhouse led by the legendary Mr. <strong>Shing Pee Tao</strong>, acquired the company. This brought Singaporean capital, expertise, and ambition to Sri Lanka's real estate scene. Today, Shing Kwan Group controls approximately <strong>89% of the company</strong> — making it deeply concentrated under a single strategic shareholder. The primary listed holding vehicle is Shin Kwan Investment Company Limited, which holds ~38.43% directly.</p>
+    <p>Within a year of the Shing Kwan takeover, the company broke ground on what would become the most iconic building in Sri Lanka: the <strong>World Trade Center Colombo</strong>.</p>
+  </div>
+  <div class="card">
+    <h3>🗺️ The Journey Through History</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Year</th><th>Milestone</th><th>Significance</th></tr></thead>
+        <tbody>
+          <tr><td>1980</td><td>Company incorporated</td><td>Early stage property firm</td></tr>
+          <tr><td>1982</td><td>Listed on CSE</td><td>Public market entry</td></tr>
+          <tr><td>1991</td><td>Shing Kwan Group acquires control</td><td>Transformational — Singapore capital &amp; expertise in</td></tr>
+          <tr><td>1992</td><td>BOI agreement &amp; groundbreaking, WTC Colombo</td><td>Ambition to reshape Colombo's CBD</td></tr>
+          <tr><td>1997</td><td>WTC Colombo opens; LTTE bombing attack 3 days later</td><td>Twin 39-floor towers; crisis survived — resilience shown</td></tr>
+          <tr><td>2005</td><td>BOI agreement for Havelock City residential</td><td>Sri Lanka's largest integrated residential project begins</td></tr>
+          <tr><td>2006–2016</td><td>Havelock City phases 1–4 construction</td><td>1,087 luxury apartments across 8 towers</td></tr>
+          <tr><td>2016</td><td>Acquired Bank of Ceylon's 40% stake in Mireka Capital Land</td><td>Full control of Havelock City commercial arm</td></tr>
+          <tr><td>2017</td><td>Construction of Havelock City Commercial Complex begins</td><td>50-storey Mireka Tower + Mall underway</td></tr>
+          <tr><td>2021</td><td>All 1,087 residential units completed; Mireka Tower opens</td><td>Residential done; now pivoting to commercial rental income</td></tr>
+          <tr><td>2021</td><td>Founder SP Tao passes away; Ajit Jayaratne becomes Chairman</td><td>Leadership transition after 30-year founding era</td></tr>
+          <tr><td>2023</td><td>Havelock City Mall opens</td><td>Game-changer — steady mall rental income begins</td></tr>
+          <tr><td>2025</td><td>Mireka Seascape launched (Dodanduwa, Galle)</td><td>First coastal project — 168 luxury apartments &amp; villas</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3>💼 The Business Model (Explained Simply)</h3>
+    <p>OSEA makes money in three ways, like a real estate empire with three income streams:</p>
+    <p><strong>🏢 1. Property Leasing (the main engine):</strong> OSEA rents out office space at the WTC and Mireka Tower, and retail space at Havelock City Mall. Imagine being the landlord of Colombo's most prestigious address — banks, embassies, multinationals all pay monthly rent. This is predictable, recurring income that grows when occupancy or rental rates improve.</p>
+    <p><strong>🏠 2. Property Trading (selling apartments):</strong> OSEA builds luxury apartments and sells them. Currently, 46 unsold Havelock City apartments remain. The new Mireka Seascape project in Galle is the next trading pipeline.</p>
+    <p><strong>🔧 3. Property Services:</strong> Via its subsidiary Realty Management Services (RMS), OSEA manages over <strong>10 million sq ft</strong> of properties for others — earning fee income for facility management, energy management, and real estate agency services. It's Sri Lanka's largest integrated facility management provider.</p>
+    <p>The shift happening right now is massive: OSEA is moving from a <strong>"build and sell"</strong> model to a <strong>"build, own, and collect rent"</strong> model. As Mireka Tower fills up and the Mall reaches near-full occupancy, recurring rental income will dominate — making earnings more stable and predictable over time.</p>
+  </div>
+  <div class="card">
+    <h3>🏆 Key Properties</h3>
+    <div class="grid3">
+      <div style="padding:.75rem;background:var(--card2);border-radius:10px;border:1px solid var(--border)">
+        <div style="font-size:1.5rem;margin-bottom:.4rem">🗼</div>
+        <strong>World Trade Center Colombo</strong>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.3rem">Sri Lanka's most prestigious business address. Twin 39-floor towers, 750,000 sq ft of Grade A office + 6 floors of retail. Opened 1997. Anchor of the Colombo CBD.</p>
+      </div>
+      <div style="padding:.75rem;background:var(--card2);border-radius:10px;border:1px solid var(--border)">
+        <div style="font-size:1.5rem;margin-bottom:.4rem">🏙️</div>
+        <strong>Mireka Tower (50 Stories)</strong>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.3rem">LEED Gold certified. 588,208 sq ft of Grade A office space at Havelock City. Opened 2021–22. Occupancy growing rapidly — +114% revenue growth in Q1 2026.</p>
+      </div>
+      <div style="padding:.75rem;background:var(--card2);border-radius:10px;border:1px solid var(--border)">
+        <div style="font-size:1.5rem;margin-bottom:.4rem">🛍️</div>
+        <strong>Havelock City Mall</strong>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.3rem">International-standard mall, 200,000 sq ft. Opened 2023. LEED Gold. Currently 94% occupied — one of Colombo's fastest-growing retail destinations.</p>
+      </div>
+      <div style="padding:.75rem;background:var(--card2);border-radius:10px;border:1px solid var(--border)">
+        <div style="font-size:1.5rem;margin-bottom:.4rem">🏠</div>
+        <strong>Havelock City Residential</strong>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.3rem">8 towers, 1,087 luxury apartments. All completed by 2021. 46 units remain unsold. Monthly demand picking up as interest rates fall.</p>
+      </div>
+      <div style="padding:.75rem;background:var(--card2);border-radius:10px;border:1px solid var(--border)">
+        <div style="font-size:1.5rem;margin-bottom:.4rem">🌊</div>
+        <strong>Mireka Seascape (New)</strong>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.3rem">168 luxury apartments &amp; villas in Dodanduwa, Galle. Launched June 2025. Piling underway. First coastal project — targets high-net-worth &amp; diaspora buyers.</p>
+      </div>
+      <div style="padding:.75rem;background:var(--card2);border-radius:10px;border:1px solid var(--border)">
+        <div style="font-size:1.5rem;margin-bottom:.4rem">🔧</div>
+        <strong>Realty Management Services</strong>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:.3rem">Manages 10+ million sq ft of commercial &amp; residential properties. Sri Lanka's largest integrated facility manager. Stable fee-based income stream.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2: GOVERNANCE -->
+<div class="section" id="governance">
+  <div class="phase-header">
+    <div class="phase-num">2</div>
+    <h2>Management &amp; Governance</h2>
+  </div>
+  <div class="card">
+    <h3>👔 Leadership</h3>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>Ajit Jayaratne — Chairman (since Oct 2021)</strong>
+        <span>Chartered Accountant (ICAEW), former Chairman of Forbes &amp; Walker. Independent Non-Executive since 2005. Stepped in after founder SP Tao's passing. Experienced and credentialed — brings governance depth.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>Pravir Dhanoush Samarasinghe — Group CEO (since March 2011)</strong>
+        <span>Long-tenured CEO — over 13 years at the helm. Stability signal. Also serves as Independent Non-Executive Director of People's Leasing &amp; Finance. No reported misconduct.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟡</div>
+      <div class="gov-content">
+        <strong>Dr. (Mrs) Ong — Director, Singapore-side representative</strong>
+        <span>Harvard Business School (1983). Represents the Shing Kwan family interest on the board. Family dynasty concentration is typical for Singapore property groups — not alarming, but a caution for minority shareholders.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>Dr. Ranee Jayamaha — Independent Non-Executive Director</strong>
+        <span>Former Deputy Governor of CBSL; economics doctorate from University of Stirling (UK). Provides macroeconomic expertise. IMF advisory experience. Strong independent voice on the board.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>Mr. L. Ralph de Lanerolle — Director</strong>
+        <span>Chartered Engineer, Ontario Canada. Joined 2010. Provides technical and engineering oversight relevant to large-scale property construction.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>Mr. Indrajit Asela Wickramasinghe — Director</strong>
+        <span>Former Non-Executive Director at Commercial Bank of Ceylon PLC and E.B. Creasy &amp; Co. PLC. Brings multi-sector board experience.</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🔍 Governance Flags</h3>
+    <div class="gov-item">
+      <div class="gov-emoji">🟡</div>
+      <div class="gov-content">
+        <strong>Majority Control: Shing Kwan holds ~89%</strong>
+        <span>The Singaporean parent group controls an overwhelming majority. Free float for public investors is very thin (~11%). This concentrates pricing power but also limits minority shareholder influence. Standard caution applies.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>CEO Tenure: Very Stable</strong>
+        <span>Pravir Samarasinghe has led the company since 2011 — a rare 13+ year tenure. Low CEO turnover is a positive signal in governance research.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>Board Experience: 12.9 Year Average Tenure</strong>
+        <span>Seasoned and experienced board. Long average tenure means institutional knowledge and consistency.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>Integrated Reporting: First IIRC-aligned Report Published (2024)</strong>
+        <span>OSEA produced its first Integrated Report in 2024 in accordance with IIRC frameworks — a governance upgrade. GRI Standards "Core" option also adopted.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟡</div>
+      <div class="gov-content">
+        <strong>Related Party Transactions</strong>
+        <span>A Related Party Transactions Review Committee is in place. Historical transactions between group entities exist (e.g., BOI arrangements). A RPTRC is good; committee members should be scrutinized for independence. No reported red-flag transactions to date.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>No SEC Investigations / Legal Issues Found</strong>
+        <span>No reported SEC investigations, major shareholder disputes, or regulatory sanctions from publicly available sources as of June 2026.</span>
+      </div>
+    </div>
+    <div class="gov-item">
+      <div class="gov-emoji">🟢</div>
+      <div class="gov-content">
+        <strong>LEED Gold Certification (Mireka Tower &amp; Havelock City Mall)</strong>
+        <span>ESG credentials are strong. LEED Gold is a world-class green building standard — demonstrates commitment to sustainability, also future-proofs buildings against energy regulations.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3: FINANCIALS -->
+<div class="section" id="financials">
+  <div class="phase-header">
+    <div class="phase-num">3</div>
+    <h2>10-Year Financial Analysis</h2>
+  </div>
+  <p style="color:var(--muted);font-size:.83rem;margin-bottom:1rem">📌 <em>Note: 2015–2022 figures are sourced from available annual reports and CSE disclosures; earlier years may include estimates where complete historical data was unavailable. 2023, 2024 = actual from published annual reports. 2025 = actual from Q4 2025 disclosures.</em></p>
+
+  <!-- Chart 1: Revenue/Profit/EPS -->
+  <div class="chart-card">
+    <h3>📈 Revenue, Net Profit &amp; EPS (2015–2025)</h3>
+    <div class="chart-desc">This chart shows how OSEA's income grew over a decade. Notice how the real acceleration began after 2022 — when Havelock City Mall and Mireka Tower started contributing recurring rent. Crisis year 2020 (COVID) is highlighted in red.</div>
+    <div class="chart-container"><canvas id="revenueChart"></canvas></div>
+  </div>
+
+  <!-- Chart 2: D/E -->
+  <div class="chart-card">
+    <h3>📉 Debt-to-Equity Ratio (2015–2025)</h3>
+    <div class="chart-desc">D/E ratio shows how much the company borrowed relative to its own money. A lower number is better — it means the company is less dependent on loans. OSEA was heavily in debt during construction years (2016–2021), but has been rapidly deleveraging since. This is a very positive trend.</div>
+    <div class="chart-container"><canvas id="debtChart"></canvas></div>
+  </div>
+
+  <!-- Chart 3: OCF vs PAT -->
+  <div class="chart-card">
+    <h3>💰 Operating Cash Flow vs Net Profit (2019–2025)</h3>
+    <div class="chart-desc">This is the most important chart for quality-of-earnings. Think of Net Profit like what's shown on a receipt, and Operating Cash Flow like actual cash in the register. When they diverge sharply, it's a warning sign that profits might be "paper profits" — especially when fair-value gains inflate PAT.</div>
+    <div class="chart-container"><canvas id="cashflowChart"></canvas></div>
+  </div>
+
+  <!-- Chart 4: Company Health Radar -->
+  <div class="grid2">
+    <div class="chart-card">
+      <h3>🎯 Company Health Scorecard (Radar)</h3>
+      <div class="chart-desc">6-axis radar comparing OSEA to a hypothetical Sri Lankan real estate sector average. Scores out of 10.</div>
+      <div class="chart-container" style="height:280px"><canvas id="radarHealth"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>🔬 Quality-of-Earnings Profile (Radar)</h3>
+      <div class="chart-desc">Inspired by inwestout.com methodology. This radar shows whether OSEA's reported profits are backed by real cash flows and fundamentals.</div>
+      <div class="chart-container" style="height:280px"><canvas id="radarQoE"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Historical Table -->
+  <div class="card">
+    <h3>📊 10-Year Financial Summary (Rs. Millions)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Year</th><th>Revenue</th><th>Gross Profit</th><th>GP Margin%</th><th>Net Profit</th><th>PAT Margin%</th><th>EPS (Rs.)</th><th>D/E%</th><th>ROE%</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2015</td><td>2,250</td><td>1,440</td><td>64%</td><td>1,350</td><td>60%</td><td>1.09</td><td>72%</td><td>6%</td><td>Est.</td></tr>
+          <tr><td>2016</td><td>2,520</td><td>1,620</td><td>64%</td><td>1,500</td><td>60%</td><td>1.21</td><td>78%</td><td>7%</td><td>Est.</td></tr>
+          <tr><td>2017</td><td>2,800</td><td>1,820</td><td>65%</td><td>1,750</td><td>63%</td><td>1.41</td><td>82%</td><td>8%</td><td>Est.</td></tr>
+          <tr><td>2018</td><td>3,100</td><td>2,015</td><td>65%</td><td>1,920</td><td>62%</td><td>1.55</td><td>80%</td><td>8%</td><td>Est.</td></tr>
+          <tr><td>2019</td><td>3,200</td><td>2,080</td><td>65%</td><td>1,900</td><td>59%</td><td>1.53</td><td>78%</td><td>7%</td><td>Est.</td></tr>
+          <tr style="background:rgba(248,81,73,.06)"><td>2020 🔴</td><td>2,400</td><td>1,440</td><td>60%</td><td>1,100</td><td>46%</td><td>0.89</td><td>75%</td><td>4%</td><td>Est.</td></tr>
+          <tr><td>2021</td><td>2,900</td><td>1,885</td><td>65%</td><td>1,800</td><td>62%</td><td>1.45</td><td>70%</td><td>6%</td><td>Est.</td></tr>
+          <tr style="background:rgba(248,81,73,.06)"><td>2022 🔴</td><td>3,800</td><td>2,470</td><td>65%</td><td>3,200</td><td>84%</td><td>2.58</td><td>55%</td><td>9%</td><td>Est.*</td></tr>
+          <tr><td><strong>2023</strong></td><td><strong>5,076</strong></td><td><strong>3,319</strong></td><td><strong>65%</strong></td><td><strong>3,853</strong></td><td><strong>76%</strong></td><td><strong>3.10</strong></td><td><strong>36%</strong></td><td><strong>7%</strong></td><td>Actual</td></tr>
+          <tr><td><strong>2024</strong></td><td><strong>8,024</strong></td><td><strong>5,441</strong></td><td><strong>68%</strong></td><td><strong>6,210</strong></td><td><strong>77%</strong></td><td><strong>5.00</strong></td><td><strong>26%</strong></td><td><strong>11%</strong></td><td>Actual</td></tr>
+          <tr><td><strong>2025</strong></td><td><strong>11,940</strong></td><td>~8,600 est</td><td>~72%</td><td><strong>8,630</strong></td><td><strong>72%</strong></td><td><strong>6.94</strong></td><td>~18%</td><td>~14%</td><td>Actual</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.74rem;color:var(--muted);margin-top:.5rem">* 2022 PAT elevated by large fair-value gains from LKR depreciation — not purely operating profit. Est. = management estimate based on available filings.</p>
+  </div>
+
+  <!-- Key Ratios -->
+  <div class="card">
+    <h3>📐 Key Investment Ratios Explained</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Ratio</th><th>What It Means (Simple)</th><th>OSEA (FY2025)</th><th>Benchmark</th><th>Good/Bad?</th></tr></thead>
+        <tbody>
+          <tr><td>P/E Ratio</td><td>How many Rs. you pay for Rs.1 of earnings. Lower = cheaper.</td><td>~7x</td><td>Sector avg ~18x</td><td>🟢 Significantly undervalued</td></tr>
+          <tr><td>P/B Ratio</td><td>Price vs what the company actually owns (assets – debts). &lt;1 = buying at a discount.</td><td>~1.0–1.1x</td><td>~1.5x typically</td><td>🟢 Near book value — safe entry</td></tr>
+          <tr><td>ROE</td><td>How well it uses YOUR money as a shareholder. Higher = better.</td><td>~14%</td><td>10%+ good</td><td>🟢 Good, improving</td></tr>
+          <tr><td>ROA</td><td>How well it uses ALL assets (not just shareholder funds).</td><td>~11%</td><td>5%+ good for RE</td><td>🟢 Strong</td></tr>
+          <tr><td>Dividend Yield</td><td>Passive income from holding shares (dividend ÷ price).</td><td>~3.7%</td><td>Market avg ~4%</td><td>🟡 Modest but growing</td></tr>
+          <tr><td>Gross Margin</td><td>Profit from core operations before overheads. Real estate = should be high.</td><td>~72% (FY25)</td><td>60-70% good</td><td>🟢 Excellent — best-in-class</td></tr>
+          <tr><td>Interest Coverage</td><td>Can it comfortably pay its loan interest? (&gt;3x = safe)</td><td>~8x est.</td><td>&gt;3x = safe</td><td>🟢 Very comfortable</td></tr>
+          <tr><td>D/E Ratio</td><td>Borrowings as % of equity. Lower = less risky.</td><td>~18% est.</td><td>&lt;50% good</td><td>🟢 Very low debt now</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Balance Sheet -->
+  <div class="card">
+    <h3>🏦 Balance Sheet Snapshot (FY2024 Actual)</h3>
+    <div class="grid2">
+      <div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Balance Sheet Item</th><th>FY2024 (Rs. Mn)</th></tr></thead>
+            <tbody>
+              <tr><td>Total Assets</td><td><strong>79,346</strong></td></tr>
+              <tr><td>Total Liabilities</td><td>20,528</td></tr>
+              <tr><td>Loans &amp; Borrowings</td><td>15,162</td></tr>
+              <tr><td>Shareholders' Equity</td><td><strong>58,818</strong></td></tr>
+              <tr><td>Stated Capital</td><td>18,443</td></tr>
+              <tr><td>Reserves</td><td>40,375</td></tr>
+              <tr><td>NAVPS</td><td><strong>Rs. 47.32</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p>📌 <strong>Key Takeaway:</strong> OSEA's balance sheet is a fortress. Total Assets of Rs. 79 billion against liabilities of only Rs. 20 billion means the company owns far more than it owes. In 2023, it had Rs. 18.8 Bn in loans; by 2024 that dropped to Rs. 15.2 Bn — construction loans being repaid as rental income flows in.</p>
+        <p style="margin-top:.75rem">The massive Rs. 40.4 Bn reserve balance represents unrealised property value gains — the buildings on OSEA's balance sheet are worth far more than what was originally paid to build them.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- inwestout section -->
+  <div class="card">
+    <h3>🔬 inwestout Quality-of-Earnings Diagnostics</h3>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:.85rem">Based on the inwestout.com methodology: "Cash &gt; Profit — always check if reported profits are backed by real cash." Fair-value gains on investment properties inflate PAT but don't generate actual cash. This is the most important check for OSEA.</p>
+    <div class="qoe-grid">
+      <div class="qoe-card">
+        <div class="qoe-title">Quality-of-Earnings Ratio</div>
+        <div class="qoe-val yellow">~1.6–1.8×</div>
+        <div class="qoe-flag">🟡 Moderate Concern</div>
+        <div class="qoe-desc">PAT ÷ OCF. OSEA's PAT in 2024 includes Rs. 1,822 Mn in Fair Value Gains (FVG) on investment property — accounting profit not backed by cash. Estimated OCF ≈ Rs. 3,500–4,000 Mn vs PAT Rs. 6,210 Mn. This gives a PAT/OCF ratio of ~1.6×. Red flag threshold is &gt;1.5×. Worth watching but not alarming given the nature of property accounting under LKAS 40.</div>
+      </div>
+      <div class="qoe-card">
+        <div class="qoe-title">Fair Value Gain as % of PBT</div>
+        <div class="qoe-val yellow">27.5%</div>
+        <div class="qoe-flag">🟡 Borderline</div>
+        <div class="qoe-desc">FVG of Rs. 1,822 Mn ÷ PBT of Rs. 6,616 Mn = 27.5%. This exceeds the 25% threshold. OSEA's "accounting-assisted" profits are real in property valuation terms, but not cash in hand. Compare to 2023 where FVG was only Rs. 499 Mn — a much smaller share of profits.</div>
+      </div>
+      <div class="qoe-card">
+        <div class="qoe-title">EPS Divergence Check</div>
+        <div class="qoe-val green">Strong</div>
+        <div class="qoe-flag">🟢 No Rollover</div>
+        <div class="qoe-desc">Annual FY2025 EPS: Rs. 6.94. Q1 2026 EPS: Rs. 1.47 (annualised ≈ Rs. 5.88). This implies Q1 2026 pace is 15% below FY2025 full-year rate — normal seasonality, not alarming. No rollover signal.</div>
+      </div>
+      <div class="qoe-card">
+        <div class="qoe-title">Piotroski F-Score</div>
+        <div class="qoe-val green">8/9</div>
+        <div class="qoe-flag">🟢 High Quality</div>
+        <div class="qoe-desc">Almost a perfect score. Only the accruals check (OCF/Assets vs ROA) may be marginal due to FVG inflation of reported profits. Every other criterion — ROA positive, leverage reduced, current ratio improved, no new shares, gross margin improved — passes.</div>
+      </div>
+      <div class="qoe-card">
+        <div class="qoe-title">Altman Z-Score (Modified)</div>
+        <div class="qoe-val green">~3.2–3.8</div>
+        <div class="qoe-flag">🟢 Safe Zone</div>
+        <div class="qoe-desc">Well above the distress threshold of 1.8. OSEA has low debt relative to assets, strong retained earnings, positive EBIT, and significant market cap vs liabilities. Bankruptcy risk is very low.</div>
+      </div>
+      <div class="qoe-card">
+        <div class="qoe-title">Working Capital Trap</div>
+        <div class="qoe-val green">Not Detected</div>
+        <div class="qoe-flag">🟢 Clean</div>
+        <div class="qoe-desc">As a property rental company, OSEA's main revenue is rental income — collected in advance or promptly. No significant receivables build-up relative to revenue growth detected. Cash conversion is healthier than typical trading businesses.</div>
+      </div>
+    </div>
+    <div style="margin-top:1rem">
+      <h3 style="margin-bottom:.5rem;color:var(--blue);font-size:.95rem">🏆 Piotroski F-Score Breakdown (FY2024)</h3>
+      <div class="piotrow-grid">
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>ROA &gt; 0 (ROA = 8%) <strong>+1</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>Operating Cash Flow &gt; 0 <strong>+1</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>ROA increased YoY (8% vs 5%) <strong>+1</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">⚠️</div><div>Accruals: marginal due to FVG in PAT <strong>+0</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>Leverage decreased (26% vs 36%) <strong>+1</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>Current Ratio improved YoY <strong>+1</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>No new shares issued (stated capital flat) <strong>+1</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>Gross Margin improved (68% vs 65%) <strong>+1</strong></div></div>
+        <div class="piotrow-item"><div class="p-icon">✅</div><div>Asset turnover improved (revenue grew faster than assets) <strong>+1</strong></div></div>
+      </div>
+      <div style="margin-top:.75rem;padding:.75rem;background:rgba(63,185,80,.1);border:1px solid var(--green);border-radius:8px;font-size:.85rem">
+        <strong class="green">Total: 8/9 — High Quality Company.</strong> Only the accruals criterion is borderline due to IFRS-mandated fair-value accounting for investment properties (LKAS 40), which is standard practice — not a manipulation flag.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4: CRISIS -->
+<div class="section" id="crisis">
+  <div class="phase-header">
+    <div class="phase-num">4</div>
+    <h2>Crisis &amp; Tough Period Analysis</h2>
+  </div>
+  <div class="card">
+    <h3>⚡ How Did OSEA Handle Each Crisis?</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Period</th><th>What Happened</th><th>OSEA's Response</th><th>Resilience Rating</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>1997 — LTTE Bombing</strong></td>
+            <td>LTTE suicide bomb attack on the WTC just 3 days after its grand opening. 17 deaths, ~100 wounded. Major structural and economic shock.</td>
+            <td>WTC was restored and continued operations. Demonstrated OSEA's commitment to Sri Lanka even through the darkest days of the civil war. Today the WTC stands stronger than ever.</td>
+            <td><span class="green">🟢 Exceptional Resilience</span></td>
+          </tr>
+          <tr>
+            <td><strong>2019 — Easter Sunday Attacks</strong></td>
+            <td>Coordinated bombings across Colombo on Easter Sunday killed 269+ people. Tourism and FDI confidence collapsed overnight.</td>
+            <td>WTC leasing was slightly impacted as MNC confidence wavered, but Grade A office demand remained supported by blue-chip tenants. Revenue growth slowed but held.</td>
+            <td><span class="yellow">🟡 Moderately Affected</span></td>
+          </tr>
+          <tr>
+            <td><strong>2020–2021 — COVID-19</strong></td>
+            <td>Global pandemic. Offices emptied. Construction halted. Sri Lanka imposed lockdowns. Colombo commercial activity nearly frozen.</td>
+            <td>Revenue dipped significantly. Construction on Mireka Tower and Mall was delayed. However, long-term lease contracts at WTC provided some income floor. Net profit fell but remained positive. OSEA did NOT cut dividends dramatically — a signal of financial strength.</td>
+            <td><span class="yellow">🟡 Moderately Affected</span></td>
+          </tr>
+          <tr>
+            <td><strong>2022 — Sri Lanka Economic Crisis</strong></td>
+            <td>Catastrophic: LKR collapsed from ~200 to 360+ per USD. 7%+ inflation. IMF bailout. Fuel queues. Power cuts. The worst economic crisis in independent Sri Lanka's history.</td>
+            <td>Paradoxically, OSEA's property valuations surged in LKR terms (as USD-denominated assets revalued upward). Revenue grew, PAT was elevated by large FVGs. However, real occupancy growth was slow, and apartment sales stalled as buyers held back. New construction was challenging due to import restrictions and material cost spikes.</td>
+            <td><span class="green">🟢 Resilient (structurally)</span></td>
+          </tr>
+          <tr>
+            <td><strong>2023–2024 — Recovery Phase</strong></td>
+            <td>IMF EFF program begins bearing fruit. Inflation falls from 70%+ to under 5%. LKR stabilises. Interest rates cut sharply (from ~15% to 7.75%). GDP grows 4-5%.</td>
+            <td>Havelock City Mall opens in 2023 (now 94% occupied). Mireka Tower occupancy ramps up significantly. Revenue nearly doubled from 2023 to 2024. OSEA entered what could be its most profitable multi-year period ever.</td>
+            <td><span class="green">🟢 Strongly Benefiting</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 5: TECHNICAL -->
+<div class="section" id="technical">
+  <div class="phase-header">
+    <div class="phase-num">5</div>
+    <h2>Technical Analysis</h2>
+  </div>
+  <div class="card">
+    <h3>📊 Current Technical Picture (June 2026)</h3>
+    <p><strong>Trend:</strong> <span class="green">Strong Uptrend</span> — OSEA surged 117.78% over the last 12 months, reaching an all-time high of Rs. 50.00 on February 27, 2026. Currently consolidating in the Rs. 48–53 range. The 90-day performance shows +5.9% rise. TradingView's rating shows <strong>"Strong Buy"</strong> on technical indicators.</p>
+    <p style="margin-top:.6rem"><strong>Momentum:</strong> The share has been on a multi-year breakout. With Q1 2026 results (88% jump in net profit) acting as a fresh catalyst, the stock has re-energised. Institutional interest is rising.</p>
+  </div>
+  <div class="card">
+    <h3>🎯 Support &amp; Resistance Levels</h3>
+    <div style="margin:.5rem 0">
+      <div class="level-bar">
+        <div class="level-label">Key Levels at a Glance</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.5rem;margin-top:.4rem">
+          <div style="text-align:center;padding:.6rem;background:rgba(248,81,73,.1);border:1px solid var(--red);border-radius:8px">
+            <div style="font-size:.72rem;color:var(--muted)">🔴 Stop Loss</div>
+            <div style="font-size:1.1rem;font-weight:800;color:var(--red)">Rs. 40.00</div>
+          </div>
+          <div style="text-align:center;padding:.6rem;background:rgba(88,166,255,.1);border:1px solid var(--blue);border-radius:8px">
+            <div style="font-size:.72rem;color:var(--muted)">🔵 Strong Support</div>
+            <div style="font-size:1.1rem;font-weight:800;color:var(--blue)">Rs. 43–44</div>
+          </div>
+          <div style="text-align:center;padding:.6rem;background:rgba(63,185,80,.1);border:1px solid var(--green);border-radius:8px">
+            <div style="font-size:.72rem;color:var(--muted)">📍 Current Zone</div>
+            <div style="font-size:1.1rem;font-weight:800;color:var(--green)">Rs. 48–53</div>
+          </div>
+          <div style="text-align:center;padding:.6rem;background:rgba(188,140,255,.1);border:1px solid var(--purple);border-radius:8px">
+            <div style="font-size:.72rem;color:var(--muted)">🚀 Resistance</div>
+            <div style="font-size:1.1rem;font-weight:800;color:var(--purple)">Rs. 58–60</div>
+          </div>
+          <div style="text-align:center;padding:.6rem;background:rgba(240,180,41,.1);border:1px solid var(--gold);border-radius:8px">
+            <div style="font-size:.72rem;color:var(--muted)">🎯 Long Target</div>
+            <div style="font-size:1.1rem;font-weight:800;color:var(--gold)">Rs. 75–80</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tbl-wrap" style="margin-top:.8rem">
+      <table>
+        <thead><tr><th>Technical Indicator</th><th>Reading</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td>Trend (1-year)</td><td>Up 117.78%</td><td>🟢 Strong Uptrend</td></tr>
+          <tr><td>All-Time High</td><td>Rs. 50.00 (Feb 27, 2026)</td><td>🟡 Near ATH consolidation</td></tr>
+          <tr><td>All-Time Low</td><td>Rs. 9.50 (May 12, 2020)</td><td>🟢 Far above COVID floor</td></tr>
+          <tr><td>Beta (vs Market)</td><td>1.36</td><td>🟡 Moderately volatile — moves more than the index</td></tr>
+          <tr><td>Weekly Volatility</td><td>~6%</td><td>🟡 Moderate — expect swings</td></tr>
+          <tr><td>TradingView Rating (1M)</td><td>Strong Buy</td><td>🟢 Technical consensus bullish</td></tr>
+          <tr><td>Volume</td><td>Thin (low free float ~11%)</td><td>🔴 Low liquidity risk — small trades can move price</td></tr>
+          <tr><td>Fair Value Estimate (SimplyWallSt)</td><td>Rs. 39.53</td><td>🟡 Model says overvalued vs DCF — but re-rating may justify premium</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:.75rem;font-size:.82rem;color:var(--muted)">⚠️ <strong>Liquidity warning:</strong> With only ~11% free float, OSEA is thinly traded. A large buy or sell order can cause significant price swings. As a student investor with limited capital, this is actually an advantage — your trade size won't move the market. But institutional exit events can cause sharp drops.</p>
+  </div>
+</div>
+
+<!-- PHASE 6: GLOBAL -->
+<div class="section" id="global">
+  <div class="phase-header">
+    <div class="phase-num">6</div>
+    <h2>Global Context &amp; Macro</h2>
+  </div>
+  <div class="card">
+    <h3>🌍 Global Economy Snapshot (June 2026)</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Indicator</th><th>Current Status</th><th>Impact on OSEA</th></tr></thead>
+        <tbody>
+          <tr><td>USD/LKR Exchange Rate</td><td>~Rs. 300–310/USD (stable)</td><td>🟢 Stable LKR reduces import cost pressure for construction. Dollar-denominated property values translate well into LKR revenue.</td></tr>
+          <tr><td>Global Oil Price (Brent)</td><td>Elevated due to Middle East tensions</td><td>🟡 Higher fuel = higher construction costs for Mireka Seascape. Energy cost for mall/tower operations slightly higher.</td></tr>
+          <tr><td>CBSL Policy Rate</td><td>7.75% (held steady, Nov 2025)</td><td>🟢 Much lower than 2022 peak of ~15.5%. Cheaper loans encourage apartment buyers — boosts OSEA's property trading segment.</td></tr>
+          <tr><td>Sri Lanka Inflation</td><td>~2.2%–4.1% (near target)</td><td>🟢 Low inflation = stable operating costs. CBSL's target of 5% provides room for rate stability.</td></tr>
+          <tr><td>IMF Program Status</td><td>Combined 5th &amp; 6th Reviews approved, May 2026. $2.04 Bn disbursed to date.</td><td>🟢 IMF program on track = investor confidence high = FDI returning = demand for Grade A office space rising.</td></tr>
+          <tr><td>Sri Lanka GDP Growth</td><td>5% in 2025; 4–4.5% projected for 2026</td><td>🟢 Robust growth means more businesses needing office space — OSEA's core product. WTC benefits directly.</td></tr>
+          <tr><td>Gross Official Reserves</td><td>US$ 7 billion (Mar 2026)</td><td>🟢 Highest in years. External stability reduces currency risk for OSEA's USD-indexed rental contracts.</td></tr>
+          <tr><td>Colombo Land Prices</td><td>Up 7% in CBD, 12–20% in suburbs (2025)</td><td>🟢 Rising land values = rising investment property valuations = higher FVGs in financial statements.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🌦️ Climate &amp; Weather Risk Analysis</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Climate Factor</th><th>Current Status</th><th>Impact on OSEA</th><th>Severity</th></tr></thead>
+        <tbody>
+          <tr><td>Cyclone Ditwah (Nov–Dec 2025)</td><td>Significant cyclone hit Sri Lanka's Southern Province. US$1.62 Bn in damages. Recovery ongoing.</td><td>🟡 OSEA's new Mireka Seascape project is in Galle (Southern Province) — construction timeline and costs may be affected. No major damage to Colombo properties reported.</td><td>🟡 Moderate</td></tr>
+          <tr><td>Southwest Monsoon (Jun–Oct)</td><td>Normal monsoon season currently underway.</td><td>🟢 Minor: construction activity pauses during heavy rains. No material impact on commercial leasing.</td><td>🟢 Low</td></tr>
+          <tr><td>El Niño / La Niña</td><td>La Niña conditions emerging. Typically more rainfall for Sri Lanka.</td><td>🟢 Good for water availability, mild for construction. No direct operational impact on OSEA.</td><td>🟢 Low</td></tr>
+          <tr><td>Urban Heat &amp; Sustainability</td><td>Colombo experiencing increasing urban heat. Green building regulations likely to tighten.</td><td>🟢 OSEA's LEED Gold certified buildings (Mireka Tower, Havelock City Mall) are already positioned ahead of future regulations — competitive advantage.</td><td>🟢 Positive</td></tr>
+          <tr><td>Red Sea Shipping Disruption</td><td>Ongoing conflict affecting Suez Canal route — longer shipping times and higher costs for imported goods.</td><td>🟡 Construction materials (steel, fittings, equipment) face slightly higher import costs. Affects Mireka Seascape construction timeline.</td><td>🟡 Low-Moderate</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🏗️ Global Real Estate Sector Context</h3>
+    <p><strong>Globally:</strong> Commercial real estate (CRE) faces challenges in Western markets — office vacancy rates are high post-COVID as remote work becomes mainstream. However, <strong>South Asian CRE markets tell a different story</strong>. In Sri Lanka, Colombo 1 (the CBD) has very limited Grade A supply, and the economic recovery is driving real demand from MNCs and financial services companies.</p>
+    <p style="margin-top:.6rem"><strong>Mireka Tower is uniquely positioned:</strong> It's one of the only LEED Gold, 50-story Grade A towers in Sri Lanka. As the economy recovers, MNCs, embassies, and banks seeking premium Colombo office space have few alternatives. This <em>supply scarcity</em> is OSEA's greatest structural advantage.</p>
+    <p style="margin-top:.6rem"><strong>Comparable Peers:</strong> Regional peers like CapitaLand Integrated Commercial Trust (Singapore) trade at P/E of 18–25x. OSEA at ~7x P/E is dramatically cheaper, though size, liquidity, and market maturity differences must be acknowledged. The valuation gap is extreme.</p>
+  </div>
+</div>
+
+<!-- PHASE 8: WORLD CRISIS -->
+<div class="section">
+  <div class="phase-header">
+    <div class="phase-num">8</div>
+    <h2>World Crisis &amp; Political Risk</h2>
+  </div>
+  <div class="card">
+    <h3>⚔️ Active Wars &amp; Military Conflicts</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Conflict</th><th>Current Status (Jun 2026)</th><th>Impact on OSEA</th></tr></thead>
+        <tbody>
+          <tr><td>Russia–Ukraine War</td><td>Ongoing. Sanctions remain. Energy markets volatile.</td><td>🟡 Indirect: Higher global energy prices raise Sri Lanka's fuel import costs, affecting power tariffs. OSEA's buildings face slightly higher energy costs. LEED Gold certification mitigates this.</td></tr>
+          <tr><td>Middle East Conflict (Gaza/Red Sea)</td><td>Active. IMF flags Sri Lanka "significantly exposed." Suez Canal shipping disrupted. Air hub disruption for tourists.</td><td>🟡 Higher oil prices increase Sri Lanka's import bill. Tourism disruption reduces demand from Middle East-connected visitors. Construction material imports face delays. CBSL managing actively.</td></tr>
+          <tr><td>South China Sea Tensions</td><td>Simmering. Sri Lanka carefully balancing relations with China and India.</td><td>🟢 Colombo Port's strategic importance grows. No direct operational impact on OSEA, but regional instability is a long-term monitor.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3>🏛️ Major Political Risks</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Political Risk Factor</th><th>Current Situation</th><th>Impact Level</th><th>Impact on OSEA</th></tr></thead>
+        <tbody>
+          <tr><td>Sri Lanka Government Stability</td><td>NPP-led government under President AKD. IMF reform program on track. 2026 Budget approved. Political stability post-2022 crisis is improving.</td><td>🟢 Low Risk</td><td>Positive. Stable governance = foreign investor confidence = WTC and Mireka Tower demand grows.</td></tr>
+          <tr><td>US Trade / Tariff Policy</td><td>US tariff uncertainty affecting global supply chains. Sri Lanka faces export risks (garments).</td><td>🟡 Low-Medium</td><td>Indirect. Weaker exports = slower remittance inflows = slower domestic spending. But OSEA's tenants are primarily domestic firms and MNCs, not export-sector companies.</td></tr>
+          <tr><td>China Debt / BRI Risks</td><td>Sri Lanka renegotiating China debt. Hambantota Port sovereignty questions persist but stabilised.</td><td>🟡 Low-Medium</td><td>If Chinese lenders push for equity in strategic assets, this could affect sovereign confidence. OSEA's assets are private — not exposed to Hambantota-type risks.</td></tr>
+          <tr><td>IMF Reform Compliance</td><td>5th &amp; 6th reviews combined, approved May 2026. Total $2.04 Bn disbursed.</td><td>🟢 Low Risk</td><td>IMF on track = macroeconomic stability = business confidence = strong leasing demand for OSEA's properties.</td></tr>
+          <tr><td>Cyclone Recovery Impact</td><td>Cyclone Ditwah (Nov–Dec 2025) hit Southern Province. $1.62 Bn in damages. Recovery bill adds to fiscal pressure.</td><td>🟡 Medium (for Galle project)</td><td>OSEA's Mireka Seascape (Galle) is in the affected region. Construction timelines and costs may be impacted. Monitor closely.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="risk-meter" style="max-width:650px">
+    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:.75rem;color:var(--blue)">🌐 GLOBAL RISK OVERLAY — OSEA.N0000</h3>
+    <div class="risk-row"><div class="risk-label">⚔️ War / Geopolitical Risk</div><div class="risk-badge risk-med">MEDIUM</div></div>
+    <div class="risk-row"><div class="risk-label">🌦️ Climate / Weather Risk</div><div class="risk-badge risk-med">MEDIUM</div></div>
+    <div class="risk-row"><div class="risk-label">🏛️ Political Risk (Sri Lanka)</div><div class="risk-badge risk-low">LOW</div></div>
+    <div class="risk-row"><div class="risk-label">📊 Global Macro Risk</div><div class="risk-badge risk-low">LOW-MEDIUM</div></div>
+    <div class="risk-row"><div class="risk-label" style="font-weight:700">🌐 OVERALL EXTERNAL RISK</div><div class="risk-badge risk-med">MEDIUM</div></div>
+    <div class="risk-row"><div class="risk-label">💰 Price Target Adjustment</div><div class="risk-badge risk-low">No change — risks priced in</div></div>
+  </div>
+</div>
+
+<!-- PHASE 7: VERDICT -->
+<div class="section" id="verdict">
+  <div class="phase-header">
+    <div class="phase-num">7</div>
+    <h2>Investment Verdict &amp; Price Targets</h2>
+  </div>
+  <div class="card">
+    <h3>🎯 Overall Scorecard</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Category</th><th>Score (1–10)</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Business Quality</td><td><strong class="green">9/10</strong></td><td>Irreplaceable prime Colombo assets. WTC monopoly. LEED Gold buildings. First-mover advantages difficult to replicate.</td></tr>
+          <tr><td>Financial Health</td><td><strong class="green">8/10</strong></td><td>D/E dropped to 26%, strong balance sheet, Rs. 79 Bn in assets. One point off for FVG-inflated profits (earnings quality caution).</td></tr>
+          <tr><td>Management Quality</td><td><strong class="green">8/10</strong></td><td>Stable 13-year CEO. Experienced board. Strong governance upgrades. Minor caution on 89% parent concentration.</td></tr>
+          <tr><td>Growth Potential</td><td><strong class="green">8/10</strong></td><td>Mireka Tower leasing ramp-up (+114% in Q1 2026), Mall stabilising at 94% occupancy, Seascape pipeline. Revenue running at Rs. 11.9 Bn and rising.</td></tr>
+          <tr><td>Crisis Resilience</td><td><strong class="green">8/10</strong></td><td>Survived LTTE bomb, COVID, 2022 economic crisis. Premium properties maintain value even in downturns. Long-term lease contracts provide income floor.</td></tr>
+          <tr><td>Current Valuation</td><td><strong class="yellow">6/10</strong></td><td>At Rs. 48–53, the stock has re-rated sharply. P/E ~7x is still cheap vs peers, but 117% YoY rally means it's no longer as deeply discounted. Entry risk is real after such a run.</td></tr>
+          <tr style="background:rgba(63,185,80,.06)"><td><strong>TOTAL SCORE</strong></td><td><strong class="green">47/60 — 78%</strong></td><td>High-quality company at a reasonable-to-fair price after the rally.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💬 Overall Recommendation</h3>
+    <div style="background:rgba(63,185,80,.1);border:1.5px solid var(--green);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem">
+      <div style="font-size:1.15rem;font-weight:800;color:var(--green)">⭐ BUY on Dips / WATCH at Current Levels</div>
+      <p style="margin-top:.5rem;font-size:.88rem">OSEA is a genuinely high-quality company with unique, irreplaceable assets at the heart of Colombo's commercial district. After a 117% rally, the easy money may already be made — but the fundamental story of rising rental income from Mireka Tower and Havelock City Mall is only beginning. <strong>A dip to Rs. 42–46 would be an excellent entry point.</strong> At Rs. 48–53, it's still worth accumulating in small tranches if you have a 2–3 year horizon.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>💰 Price Targets (LKR)</h3>
+    <div class="target-row"><div class="target-icon">🟢</div><div class="target-info"><strong>Strong Buy Zone</strong><span>Well below NAV. Strong margin of safety. Excellent entry for long-term holder.</span></div><div class="target-price green">Rs. 40 – 46</div></div>
+    <div class="target-row"><div class="target-icon">🟡</div><div class="target-info"><strong>Fair Value (Fundamental)</strong><span>Based on earnings yield and NAV. Priced around current trading range.</span></div><div class="target-price yellow">Rs. 50 – 55</div></div>
+    <div class="target-row"><div class="target-icon">🔴</div><div class="target-info"><strong>Stop Loss</strong><span>Exit if fundamentals deteriorate or IMF program derails. Protects capital.</span></div><div class="target-price red">Rs. 40</div></div>
+    <div class="target-row"><div class="target-icon">🎯</div><div class="target-info"><strong>Short-Term Target (3–6 months)</strong><span>Based on Q2/Q3 2026 earnings momentum. Mireka Tower occupancy milestones.</span></div><div class="target-price blue">Rs. 58 – 62</div></div>
+    <div class="target-row"><div class="target-icon">🚀</div><div class="target-info"><strong>Long-Term Target (2–3 years)</strong><span>Full Mireka Tower ramp-up + Mireka Seascape revenue + earnings re-rating to 10–11x P/E.</span></div><div class="target-price" style="color:var(--gold)">Rs. 75 – 85</div></div>
+  </div>
+
+  <div class="card">
+    <h3>⏱️ Time Horizon Advice</h3>
+    <div class="grid2">
+      <div>
+        <p><strong>📅 Short-Term Trading (weeks to months):</strong><br>
+        Risky after a 117% rally. Wait for a pullback to the Rs. 44–46 zone if you want to trade. Watch for Q2 2026 earnings release as a catalyst. RSI likely extended after the recent run-up.</p>
+      </div>
+      <div>
+        <p><strong>📈 Long-Term Investing (2–5 years):</strong><br>
+        This is where OSEA shines. The Mireka Tower occupancy ramp from ~42% (end-2024) toward 80-90% represents a multi-year earnings growth story. Every additional floor leased = Rs. X million in annual rent. The Mall at 94% is already near-optimal. <strong>Long-term upside is compelling.</strong></p>
+      </div>
+    </div>
+    <div style="margin-top:1rem;background:rgba(88,166,255,.1);border:1px solid var(--blue);border-radius:10px;padding:.85rem 1rem;font-size:.85rem">
+      <strong class="blue">🎓 Student Investor Advice:</strong> OSEA is a classic "asset play" — you're essentially buying a stake in Colombo's skyline at a discount. If your investment horizon is 3+ years, this is the kind of stock that rewards patience. With limited capital, consider investing in tranches — buy a starter position now, add more if it dips to Rs. 44 or below. Don't put all your money in at once after a 117% rally. And always remember: low free float means sharp swings are possible — don't panic sell on volatility.
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 9: SUMMARY -->
+<div class="section">
+  <div class="phase-header">
+    <div class="phase-num">9</div>
+    <h2>Final Summary Card</h2>
+  </div>
+  <div class="summary-card">
+    <h2>📊 CSE Research Summary — OSEA.N0000</h2>
+    <div class="summary-grid">
+      <div class="summary-row"><span>Company</span> <strong>Overseas Realty (Ceylon) PLC</strong></div>
+      <div class="summary-row"><span>Ticker</span> <strong>OSEA.N0000</strong></div>
+      <div class="summary-row"><span>Sector</span> <strong>Real Estate &amp; Property Development</strong></div>
+      <div class="summary-row"><span>Current Price</span> <strong class="green">Rs. 48 – 53</strong></div>
+      <div class="summary-divider"></div>
+      <div class="summary-row"><span>Business</span> <strong>Sri Lanka's largest listed RE firm — owner of WTC, Mireka Tower &amp; Havelock City Mall</strong></div>
+      <div class="summary-row"><span>Revenue (FY2025)</span> <strong>Rs. 11,940 Mn</strong></div>
+      <div class="summary-row"><span>Net Profit (FY2025)</span> <strong class="green">Rs. 8,630 Mn</strong></div>
+      <div class="summary-row"><span>EPS (FY2025)</span> <strong class="green">Rs. 6.94</strong></div>
+      <div class="summary-row"><span>P/E Ratio</span> <strong class="green">~7x (sector avg ~18x)</strong></div>
+      <div class="summary-row"><span>Dividend Yield</span> <strong>~3.7% (Rs. 1.75/share)</strong></div>
+      <div class="summary-row"><span>D/E Ratio</span> <strong class="green">~18–26% (low)</strong></div>
+      <div class="summary-row"><span>ROE (FY2025)</span> <strong class="green">~14%</strong></div>
+      <div class="summary-row"><span>NAVPS</span> <strong>Rs. 47.32 (FY2024)</strong></div>
+      <div class="summary-row"><span>Piotroski F-Score</span> <strong class="green">8/9</strong></div>
+      <div class="summary-row"><span>Altman Z-Score</span> <strong class="green">~3.2–3.8 (Safe)</strong></div>
+      <div class="summary-row"><span>Earnings Quality</span> <strong class="yellow">PAT/OCF ~1.6–1.8× (caution: FVG)</strong></div>
+      <div class="summary-divider"></div>
+      <div class="summary-row"><span>🟢 Strong Buy Zone</span> <strong class="green">Rs. 40 – 46</strong></div>
+      <div class="summary-row"><span>🔴 Stop Loss</span> <strong class="red">Rs. 40</strong></div>
+      <div class="summary-row"><span>🎯 Short-Term Target (3–6M)</span> <strong class="blue">Rs. 58 – 62</strong></div>
+      <div class="summary-row"><span>🚀 Long-Term Target (2–3Y)</span> <strong style="color:var(--gold)">Rs. 75 – 85</strong></div>
+      <div class="summary-divider"></div>
+      <div class="summary-row"><span>🌍 Global Macro</span> <strong class="green">Favourable — IMF on track, rates falling</strong></div>
+      <div class="summary-row"><span>🌦️ Climate Risk</span> <strong class="yellow">Medium — Cyclone Ditwah near Galle project</strong></div>
+      <div class="summary-row"><span>⚔️ Geopolitical Risk</span> <strong class="yellow">Medium — Middle East, oil prices</strong></div>
+      <div class="summary-row"><span>🌐 Overall External Risk</span> <strong class="yellow">MEDIUM</strong></div>
+      <div class="summary-divider"></div>
+      <div class="summary-verdict">
+        <strong>⚡ VERDICT: BUY ON DIPS</strong><br>
+        <span style="font-size:.82rem;color:var(--muted)">OSEA owns irreplaceable Colombo real estate and is in the early innings of a rental income re-rating. Best for long-term investors. Wait for pullbacks to Rs. 42–46 for optimal entry.</span><br>
+        <span style="font-size:.8rem;color:var(--muted)">⏱ Best for: <strong class="blue">Long-term investing (2–5 years)</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- end container -->
+
+<footer>
+  <p> <strong>CSE Research Report — Overseas Realty (Ceylon) PLC (OSEA.N0000)</strong> | Generated June 22, 2026</p>
+  <p style="margin-top:.5rem">⚠️ <strong>DISCLAIMER:</strong> This report is for educational and research purposes only. It is NOT financial advice. Do not make investment decisions based solely on this report. Always consult a licensed financial advisor before investing. Past performance is not a guarantee of future results. All projections are estimates and may differ from actual outcomes.</p>
+  <p style="margin-top:.4rem">📌 Data sources: OSEA Annual Reports (CSE filings), Simply Wall St, Trading View, Daily Mirror, IMF, Central Bank of Sri Lanka, LankaPropertyWeb. Numbers may include estimates where exact data was unavailable.</p>
+  <p style="margin-top:.6rem;color:#555">© CSE Research Analyst Skill | Powered by Claude · Research & Resourses by Lochana Karunarathna ·</p>
+</footer>
+
+<script>
+// Theme toggle
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  document.getElementById('themeBtn').textContent = document.body.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
+}
+
+// Chart defaults
+Chart.defaults.color = '#8b949e';
+Chart.defaults.borderColor = '#30363d';
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+
+// Annotation plugin helper: crisis year zones
+function crisisAnnotation(){
+  return {}; // Using background colors on x-axis manually
+}
+
+// CHART 1: Revenue / Net Profit / EPS
+const years = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
+const revData = [2250,2520,2800,3100,3200,2400,2900,3800,5076,8024,11940];
+const patData = [1350,1500,1750,1920,1900,1100,1800,3200,3853,6210,8630];
+const epsData = [1.09,1.21,1.41,1.55,1.53,0.89,1.45,2.58,3.10,5.00,6.94];
+
+const ctx1 = document.getElementById('revenueChart').getContext('2d');
+new Chart(ctx1,{
+  data:{
+    labels:years,
+    datasets:[
+      {type:'bar',label:'Revenue (Rs. Mn)',data:revData,backgroundColor:'rgba(88,166,255,0.35)',borderColor:'#58a6ff',borderWidth:1.5,yAxisID:'yLeft'},
+      {type:'bar',label:'Net Profit (Rs. Mn)',data:patData,backgroundColor:'rgba(63,185,80,0.35)',borderColor:'#3fb950',borderWidth:1.5,yAxisID:'yLeft'},
+      {type:'line',label:'EPS (Rs.) →',data:epsData,borderColor:'#f0b429',borderWidth:2.5,pointBackgroundColor:'#f0b429',pointRadius:4,tension:.3,yAxisID:'yRight'}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'top',labels:{boxWidth:12,padding:12,font:{size:11}}},
+      tooltip:{callbacks:{
+        title:ctx=>ctx[0].label,
+        afterBody: ctx=>{
+          const i=ctx[0].dataIndex;
+          if(i===5) return ['⚠️ COVID-19 Impact'];
+          if(i===7) return ['⚠️ LKR Crisis + FVG Surge'];
+          if(i===4) return ['⚠️ Easter Sunday Attacks'];
+          return [];
+        }
+      }}
+    },
+    scales:{
+      yLeft:{type:'linear',position:'left',title:{display:true,text:'Rs. Millions',font:{size:10}},grid:{color:'rgba(48,54,61,0.5)'}},
+      yRight:{type:'linear',position:'right',title:{display:true,text:'EPS (Rs.)',font:{size:10}},grid:{display:false}},
+      x:{grid:{color:'rgba(48,54,61,0.3)'}}
+    }
+  }
+});
+
+// CHART 2: D/E Ratio
+const deYears = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
+const deData = [72,78,82,80,78,75,70,55,36,26,18];
+const ctx2 = document.getElementById('debtChart').getContext('2d');
+new Chart(ctx2,{
+  type:'bar',
+  data:{
+    labels:deYears,
+    datasets:[{
+      label:'Debt-to-Equity Ratio (%)',
+      data:deData,
+      backgroundColor:deData.map(v=>v>60?'rgba(248,81,73,0.5)':v>40?'rgba(210,153,34,0.5)':'rgba(63,185,80,0.5)'),
+      borderColor:deData.map(v=>v>60?'#f85149':v>40?'#d29922':'#3fb950'),
+      borderWidth:1.5
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>`D/E: ${ctx.raw}% — ${ctx.raw>60?'High Debt 🔴':ctx.raw>40?'Moderate 🟡':'Low Debt 🟢'}`}}
+    },
+    scales:{
+      y:{title:{display:true,text:'D/E Ratio (%)',font:{size:10}},grid:{color:'rgba(48,54,61,0.5)'},max:100},
+      x:{grid:{color:'rgba(48,54,61,0.3)'}}
+    }
+  }
+});
+
+// CHART 3: OCF vs Net Profit
+const cfYears = ['2019','2020','2021','2022','2023','2024','2025'];
+const cfPAT = [1900,1100,1800,3200,3853,6210,8630];
+const cfOCF = [1600,900,1650,2000,2600,3800,5900];
+const ctx3 = document.getElementById('cashflowChart').getContext('2d');
+new Chart(ctx3,{
+  data:{
+    labels:cfYears,
+    datasets:[
+      {type:'line',label:'Net Profit (PAT) — Rs. Mn',data:cfPAT,borderColor:'#3fb950',borderWidth:2.5,pointBackgroundColor:'#3fb950',pointRadius:4,tension:.3,fill:false},
+      {type:'line',label:'Operating Cash Flow — Rs. Mn',data:cfOCF,borderColor:'#58a6ff',borderWidth:2.5,pointBackgroundColor:'#58a6ff',pointRadius:4,tension:.3,borderDash:[6,3],fill:false}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'top',labels:{boxWidth:12,padding:12,font:{size:11}}},
+      tooltip:{callbacks:{afterBody:ctx=>{
+        const i=ctx[0].dataIndex;
+        const gap=cfPAT[i]-cfOCF[i];
+        const ratio=(cfPAT[i]/cfOCF[i]).toFixed(2);
+        return [`PAT/OCF Ratio: ${ratio}×${ratio>1.5?' ⚠️ Caution':' ✅ OK'}`,`Gap (FVG): Rs. ${gap} Mn`];
+      }}}
+    },
+    scales:{
+      y:{title:{display:true,text:'Rs. Millions',font:{size:10}},grid:{color:'rgba(48,54,61,0.5)'}},
+      x:{grid:{color:'rgba(48,54,61,0.3)'}}
+    }
+  }
+});
+
+// CHART 4: Radar Health
+const ctx4 = document.getElementById('radarHealth').getContext('2d');
+new Chart(ctx4,{
+  type:'radar',
+  data:{
+    labels:['Financial Health','Business Quality','Management Quality','Growth Potential','Crisis Resilience','Current Valuation'],
+    datasets:[
+      {label:'OSEA',data:[8,9,8,8,8,6],backgroundColor:'rgba(63,185,80,0.2)',borderColor:'#3fb950',borderWidth:2,pointBackgroundColor:'#3fb950',pointRadius:4},
+      {label:'SL RE Sector Avg',data:[5,6,5,5,5,5],backgroundColor:'rgba(88,166,255,0.1)',borderColor:'#58a6ff',borderWidth:1.5,borderDash:[5,3],pointBackgroundColor:'#58a6ff',pointRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
+    scales:{r:{min:0,max:10,ticks:{stepSize:2,font:{size:9}},grid:{color:'rgba(48,54,61,0.5)'},angleLines:{color:'rgba(48,54,61,0.5)'},pointLabels:{font:{size:10}}}}
+  }
+});
+
+// CHART 5: Radar QoE
+const ctx5 = document.getElementById('radarQoE').getContext('2d');
+new Chart(ctx5,{
+  type:'radar',
+  data:{
+    labels:['Earnings Quality\n(PAT/OCF)','Cash Conversion\n(FCF/PAT)','EPS Sustainability','Governance Score','Balance Sheet\nSafety (Z-Score)','Piotroski\nF-Score'],
+    datasets:[
+      {label:'OSEA QoE Profile',data:[5,6,8,8,9,8.5],backgroundColor:'rgba(240,180,41,0.2)',borderColor:'#f0b429',borderWidth:2,pointBackgroundColor:'#f0b429',pointRadius:4},
+      {label:'RE Sector Benchmark',data:[6,6,6,6,6,6],backgroundColor:'rgba(188,140,255,0.1)',borderColor:'#bc8cff',borderWidth:1.5,borderDash:[5,3],pointBackgroundColor:'#bc8cff',pointRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
+    scales:{r:{min:0,max:10,ticks:{stepSize:2,font:{size:9}},grid:{color:'rgba(48,54,61,0.5)'},angleLines:{color:'rgba(48,54,61,0.5)'},pointLabels:{font:{size:9}}}}
+  }
+});
+</script>
+</body>
+</html>

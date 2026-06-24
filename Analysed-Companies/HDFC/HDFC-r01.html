@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HDFC Bank Sri Lanka — CSE Research Report 2026</title>
+<link rel="shortcut icon" href="../../Assets/CE-3.png" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --card2: #1c2128;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --green: #3fb950;
+  --red: #f85149;
+  --yellow: #d29922;
+  --blue: #58a6ff;
+  --purple: #bc8cff;
+  --accent: #1f6feb;
+  --orange: #e3b341;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; line-height: 1.6; }
+
+/* NAV */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(13,17,23,0.95); border-bottom: 1px solid var(--border); padding: 0 20px; backdrop-filter: blur(10px); }
+.nav-inner { max-width: 1200px; margin: auto; display: flex; align-items: center; gap: 4px; overflow-x: auto; height: 52px; }
+.nav-inner a { color: var(--muted); text-decoration: none; font-size: 13px; padding: 6px 10px; border-radius: 6px; white-space: nowrap; transition: all 0.2s; }
+.nav-inner a:hover { color: var(--text); background: var(--card); }
+.nav-brand { color: var(--blue); font-weight: 700; font-size: 14px; margin-right: 12px; white-space: nowrap; }
+
+/* HERO */
+.hero { background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a2332 100%); border-bottom: 1px solid var(--border); padding: 48px 20px 36px; }
+.hero-inner { max-width: 1200px; margin: auto; }
+.hero-tag { display: inline-block; background: rgba(31,111,235,0.15); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; margin-bottom: 14px; }
+.hero-title { font-size: clamp(26px, 4vw, 42px); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+.hero-sub { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+.badge-hold { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); }
+.badge-price { background: rgba(63,185,80,0.12); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+.badge-sector { background: var(--card); color: var(--muted); border: 1px solid var(--border); }
+
+/* SCORECARD */
+.scorecard { background: var(--card); border-bottom: 1px solid var(--border); padding: 20px; }
+.scorecard-inner { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+.metric-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.metric-value { font-size: 22px; font-weight: 700; }
+.metric-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.metric-value.green { color: var(--green); }
+.metric-value.red { color: var(--red); }
+.metric-value.yellow { color: var(--yellow); }
+.metric-value.blue { color: var(--blue); }
+
+/* LAYOUT */
+.page { max-width: 1200px; margin: auto; padding: 32px 20px; }
+.section { margin-bottom: 40px; scroll-margin-top: 70px; }
+.section-title { font-size: 20px; font-weight: 700; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.section-icon { font-size: 22px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.card-title { font-size: 14px; font-weight: 700; color: var(--blue); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+p { margin-bottom: 10px; color: #c9d1d9; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 700px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--card2); color: var(--muted); text-align: left; padding: 8px 12px; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+td { padding: 8px 12px; border-top: 1px solid var(--border); color: #c9d1d9; }
+tr:hover td { background: rgba(255,255,255,0.03); }
+.tg { color: var(--green); }
+.tr { color: var(--red); }
+.ty { color: var(--yellow); }
+.tb { color: var(--blue); }
+
+/* FLAGS */
+.flag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 4px 10px; border-radius: 6px; }
+.flag-green { background: rgba(63,185,80,0.1); color: var(--green); }
+.flag-yellow { background: rgba(210,153,34,0.1); color: var(--yellow); }
+.flag-red { background: rgba(248,81,73,0.1); color: var(--red); }
+
+/* CHARTS */
+.chart-wrap { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.chart-title { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+.chart-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+/* VERDICT */
+.verdict-box { background: linear-gradient(135deg, rgba(31,111,235,0.15), rgba(63,185,80,0.1)); border: 1px solid rgba(88,166,255,0.3); border-radius: 12px; padding: 24px; }
+.verdict-title { font-size: 24px; font-weight: 800; color: var(--yellow); margin-bottom: 8px; }
+.price-targets { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 16px; }
+.price-target { background: var(--card2); border-radius: 10px; padding: 14px; text-align: center; }
+.price-target-label { font-size: 11px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+.price-target-value { font-size: 22px; font-weight: 800; }
+
+/* RISK METER */
+.risk-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.risk-row:last-child { border-bottom: none; }
+.risk-label { color: #c9d1d9; font-size: 14px; }
+.risk-pill { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.risk-low { background: rgba(63,185,80,0.15); color: var(--green); }
+.risk-med { background: rgba(210,153,34,0.15); color: var(--yellow); }
+.risk-high { background: rgba(248,81,73,0.15); color: var(--red); }
+
+/* PIOTROSKI */
+.pf-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.pf-item:last-child { border-bottom: none; }
+.pf-pass { color: var(--green); font-weight: 700; }
+.pf-fail { color: var(--red); font-weight: 700; }
+
+/* SUMMARY CARD */
+.summary-card { background: linear-gradient(135deg, #161b22, #1c2128); border: 1px solid var(--border); border-radius: 16px; padding: 28px; font-family: monospace; }
+.summary-line { border-top: 1px solid var(--border); margin: 10px 0; }
+.summary-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 13px; }
+.summary-row-key { color: var(--muted); }
+.summary-row-val { color: var(--text); font-weight: 600; }
+.summary-verdict { font-size: 18px; font-weight: 800; color: var(--yellow); padding: 12px 0; }
+
+/* DISCLAIMER */
+footer { background: var(--card); border-top: 1px solid var(--border); padding: 24px 20px; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.8; }
+
+/* STAR SCORE */
+.score-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.score-bar-label { font-size: 13px; color: #c9d1d9; min-width: 150px; }
+.score-bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; }
+.score-bar-val { font-size: 13px; font-weight: 700; min-width: 36px; text-align: right; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">📊 CSE Research</span>
+    <a href="#overview">Overview</a>
+    <a href="#background">Background</a>
+    <a href="#governance">Governance</a>
+    <a href="#financials">Financials</a>
+    <a href="#crisis">Crisis</a>
+    <a href="#technical">Technical</a>
+    <a href="#global">Global</a>
+    <a href="#verdict">Verdict</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="overview">
+  <div class="hero-inner">
+    <div class="hero-tag">📈 CSE Research — Housing Finance | Specialized Bank</div>
+    <div class="hero-title">Housing Development Finance Corporation Bank</div>
+    <div class="hero-sub">HDFC.N0000 · Colombo Stock Exchange · Licensed Specialised Bank · Sri Lanka</div>
+    <div class="hero-badges">
+      <span class="badge badge-hold">⚠️ CAUTIOUS HOLD / SPECULATIVE BUY</span>
+      <span class="badge badge-price">Rs. 76.50 (Jun 2026)</span>
+      <span class="badge badge-sector">🏦 Housing Finance</span>
+      <span class="badge badge-sector">🇱🇰 51% Govt Owned</span>
+      <span class="badge badge-sector">BB+(lka) Fitch</span>
+    </div>
+  </div>
+</div>
+
+<!-- SCORECARD -->
+<div class="scorecard">
+  <div class="scorecard-inner">
+    <div class="metric">
+      <div class="metric-label">Share Price</div>
+      <div class="metric-value blue">Rs 76.50</div>
+      <div class="metric-sub">📈 +66.3% in 1 year</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Market Cap (est.)</div>
+      <div class="metric-value">Rs 4.95 Bn</div>
+      <div class="metric-sub">~64.7 Mn shares</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Book Value / Share</div>
+      <div class="metric-value green">Rs 117.79</div>
+      <div class="metric-sub">P/B = 0.65× (discount!)</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Total Assets (2024)</div>
+      <div class="metric-value">Rs 65.4 Bn</div>
+      <div class="metric-sub">Deposits Rs 52 Bn</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">2024 EPS</div>
+      <div class="metric-value red">-Rs 2.95</div>
+      <div class="metric-sub">Loss year (vs +20.12 in 2023)</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Q1 2026 PAT</div>
+      <div class="metric-value green">Rs 70 Mn</div>
+      <div class="metric-sub">+126% vs Q1 2025 (Rs 31 Mn)</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Capital Adequacy</div>
+      <div class="metric-value green">34.65%</div>
+      <div class="metric-sub">Min required: 12.50%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Fitch Rating</div>
+      <div class="metric-value yellow">BB+(lka)</div>
+      <div class="metric-sub">Stable outlook</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- PHASE 0 + 1: BACKGROUND -->
+<div class="section" id="background">
+  <div class="section-title"><span class="section-icon">🏛️</span> Company Background & Identity</div>
+  
+  <div class="card">
+    <div class="card-title">The Origin Story</div>
+    <p>Picture Sri Lanka in 1984 — a young nation with a housing shortage and most people unable to get a simple home loan from commercial banks. To solve this, the government created the Housing Development Finance Corporation, a <strong>building society</strong> dedicated to giving ordinary Sri Lankans — especially low-to-middle income families — a way to own their homes.</p>
+    <p>Over four decades, HDFC evolved. In <strong>2003</strong>, it became a <strong>Licensed Specialised Bank (LSB)</strong> under the CBSL, upgrading from a simple building society to a proper bank. Then in <strong>2005</strong>, it listed on the <strong>Colombo Stock Exchange</strong>, allowing ordinary investors to own a piece of Sri Lanka's housing finance story.</p>
+    <p>Today it serves over <strong>500,000 customers</strong> across 39 branches with 462 employees. It holds the status of one of only <strong>four Licensed Specialised Banks</strong> in Sri Lanka authorised to offer EPF (Employees' Provident Fund)-backed housing loans — a huge competitive moat.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Company Identity</div>
+      <table>
+        <tr><td><strong>Full Name</strong></td><td>Housing Development Finance Corporation Bank of Sri Lanka</td></tr>
+        <tr><td><strong>CSE Ticker</strong></td><td class="tb">HDFC.N0000</td></tr>
+        <tr><td><strong>ISIN</strong></td><td>LK0339N00008</td></tr>
+        <tr><td><strong>Sector</strong></td><td>Diversified Financials / Housing Finance</td></tr>
+        <tr><td><strong>Founded</strong></td><td>1984 (as building society)</td></tr>
+        <tr><td><strong>Specialised Bank</strong></td><td>2003 (under Banking Act)</td></tr>
+        <tr><td><strong>Listed on CSE</strong></td><td>2005</td></tr>
+        <tr><td><strong>Head Office</strong></td><td>Sir Chittampalam A. Gardiner Mawatha, Colombo 02</td></tr>
+        <tr><td><strong>Branches</strong></td><td>39 (unchanged 2023–2025)</td></tr>
+        <tr><td><strong>Employees</strong></td><td>448 (Q1 2026)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Ownership Structure</div>
+      <p style="margin-bottom:14px;">HDFC is <strong>majority state-owned</strong> — a classic Sri Lankan state-enterprise structure where the government retains control but private investors can participate.</p>
+      <div style="text-align:center; margin: 16px 0;">
+        <canvas id="ownershipChart" width="200" height="200" style="max-width:200px;"></canvas>
+      </div>
+      <table>
+        <tr><td>🏛️ Government of Sri Lanka (via SOEs)</td><td class="tb"><strong>51%</strong></td></tr>
+        <tr><td>👥 Private Investors (CSE public)</td><td class="tg"><strong>49%</strong></td></tr>
+      </table>
+      <p style="margin-top:10px; font-size:12px; color:var(--muted);">Key SOE shareholders include the National Housing Development Authority (NHDA), Sri Lanka Social Security Board, and Samurdhi Development Bank.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">How HDFC Makes Money (Business Model — Simply Explained)</div>
+    <p>Think of HDFC like a <strong>middleman between savers and homebuyers</strong>. Here's the simple loop:</p>
+    <p>① Sri Lankans deposit money (savings, fixed deposits) at HDFC → HDFC pays them interest (say 9-12%). ② HDFC lends that money to people who want to buy or build homes → HDFC charges them higher interest (say 14-18%). ③ The difference is HDFC's profit — called the <strong>Net Interest Margin (NIM)</strong>.</p>
+    <p>The unique twist: HDFC is one of <strong>only 4 banks</strong> allowed to give loans backed by your EPF (retirement savings fund). If you're a government employee with Rs 1 Mn in your EPF, HDFC can lend you money using that EPF as security — much lower risk, because if you default, EPF pays the arrears annually.</p>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap:12px; margin-top:16px;">
+      <div style="background:var(--card2); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:22px;">🏠</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">EPF Housing Loans</div>
+        <div style="color:var(--blue); font-weight:700;">Rs 17.75 Bn</div>
+      </div>
+      <div style="background:var(--card2); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:22px;">🏡</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">Mortgage Loans</div>
+        <div style="color:var(--blue); font-weight:700;">Rs 12.18 Bn</div>
+      </div>
+      <div style="background:var(--card2); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:22px;">🤝</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">Guarantor Loans</div>
+        <div style="color:var(--blue); font-weight:700;">Rs 5.37 Bn</div>
+      </div>
+      <div style="background:var(--card2); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:22px;">🥇</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">Gold Loans</div>
+        <div style="color:var(--orange); font-weight:700;">Rs 4.0 Bn</div>
+      </div>
+      <div style="background:var(--card2); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:22px;">🚗</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">Leasing</div>
+        <div style="color:var(--orange); font-weight:700;">Rs 0.58 Bn</div>
+      </div>
+      <div style="background:var(--card2); border-radius:8px; padding:12px; text-align:center;">
+        <div style="font-size:22px;">🏦</div>
+        <div style="font-size:12px; color:var(--muted); margin-top:4px;">Fixed Deposits</div>
+        <div style="color:var(--green); font-weight:700;">Rs 43.16 Bn</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2: GOVERNANCE -->
+<div class="section" id="governance">
+  <div class="section-title"><span class="section-icon">⚖️</span> Management & Governance</div>
+  
+  <div class="card">
+    <div class="card-title">Board & Leadership Assessment</div>
+    <table>
+      <thead><tr><th>Governance Item</th><th>Finding</th><th>Rating</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Board Composition</strong></td>
+          <td>7 out of 11 mandated seats filled at end-2024. Six directors resigned in 2024 — high turnover. New chairman appointed Sep 2024.</td>
+          <td><span class="flag flag-yellow">🟡 Caution</span></td>
+        </tr>
+        <tr>
+          <td><strong>CEO Stability</strong></td>
+          <td>GM/CEO currently Mr. Anura Hettiarachchi (also CFO). State-owned bank = management subject to government changes. Some instability evident.</td>
+          <td><span class="flag flag-yellow">🟡 Caution</span></td>
+        </tr>
+        <tr>
+          <td><strong>Political Connections</strong></td>
+          <td>Board includes government nominees (e.g. Mr. W.M. Ananda, Additional Secretary from Ministry of Urban Development). Normal for a 51% SOE.</td>
+          <td><span class="flag flag-yellow">🟡 Caution</span></td>
+        </tr>
+        <tr>
+          <td><strong>Related Party Transactions</strong></td>
+          <td>Board has a dedicated Related Party Transaction Review Committee — good transparency. No material RPT red flags reported.</td>
+          <td><span class="flag flag-green">🟢 Good</span></td>
+        </tr>
+        <tr>
+          <td><strong>Regulatory Compliance</strong></td>
+          <td>Meets all CBSL capital adequacy ratios. Capital tiers well above minimums. Audited by Auditor General + EY assurance.</td>
+          <td><span class="flag flag-green">🟢 Good</span></td>
+        </tr>
+        <tr>
+          <td><strong>NPL Management</strong></td>
+          <td>NPL ratio higher than industry. Government policy limiting forced property sales (can't easily repossess homes). Structural challenge.</td>
+          <td><span class="flag flag-red">🔴 Red Flag</span></td>
+        </tr>
+        <tr>
+          <td><strong>Auditing</strong></td>
+          <td>Audited by Auditor General (GOSL), with EY providing independent assurance on integrated reporting framework compliance.</td>
+          <td><span class="flag flag-green">🟢 Good</span></td>
+        </tr>
+        <tr>
+          <td><strong>Dividend History</strong></td>
+          <td>No dividend declared for 2024 (loss year). Dividends paid in prior profitable years. Capital retained to strengthen buffer.</td>
+          <td><span class="flag flag-yellow">🟡 Caution</span></td>
+        </tr>
+        <tr>
+          <td><strong>Legacy IT / Core Banking</strong></td>
+          <td>Core banking system from 2014/2017 — outdated. RFP for new system initiated in 2024. Operational risk until upgrade complete.</td>
+          <td><span class="flag flag-yellow">🟡 Caution</span></td>
+        </tr>
+        <tr>
+          <td><strong>ESG / Sustainability</strong></td>
+          <td>Green loan products launched (HDFC Green Leasing, HDFC Go Green savings). Financial inclusion mandate serves underserved. Strong social score.</td>
+          <td><span class="flag flag-green">🟢 Good</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <p><strong>💡 Student Note:</strong> HDFC is a <strong>government-owned bank</strong>, which brings both advantages (safety, regulatory support) and risks (political influence in board appointments, inability to quickly foreclose on defaulting homeowners). The 2024 board turmoil with 6 resignations is a yellow flag, but normal for SOEs when governments change. The new NPP government under President Dissanayake appears reform-minded and committed to corporate governance improvements.</p>
+  </div>
+</div>
+
+<!-- PHASE 3: FINANCIALS -->
+<div class="section" id="financials">
+  <div class="section-title"><span class="section-icon">📊</span> 10-Year Financial Analysis</div>
+
+  <!-- Revenue & Profit Chart -->
+  <div class="chart-wrap" style="margin-bottom:20px;">
+    <div class="chart-title">Revenue, Net Profit & EPS — 2015 to 2024</div>
+    <canvas id="revenueChart" height="120"></canvas>
+    <div class="chart-note">⚡ Years 2015–2022 are estimates based on available disclosures and industry data. 2023–2024 are confirmed from audited annual reports. Red vertical lines mark crisis years.</div>
+  </div>
+
+  <!-- D/E Chart -->
+  <div class="chart-wrap" style="margin-bottom:20px;">
+    <div class="chart-title">Leverage Ratio (Total Liabilities / Shareholders' Equity) — 10 Years</div>
+    <canvas id="deChart" height="80"></canvas>
+    <div class="chart-note">Note: For banks, high leverage is normal (7–9× is typical). Crisis year 2022 saw leverage spike due to economic meltdown impacting equity.</div>
+  </div>
+
+  <!-- OCF vs Net Profit -->
+  <div class="chart-wrap" style="margin-bottom:20px;">
+    <div class="chart-title">Operating Cash Flow vs Net Profit (Rs Mn) — Key Quality Check</div>
+    <canvas id="ocfChart" height="80"></canvas>
+    <div class="chart-note">⚠️ When Net Profit significantly exceeds Operating Cash Flow, it means profit is "paper profit" not backed by real cash — an inwestout-style red flag.</div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:20px;">
+    <!-- Radar 1: Health Scorecard -->
+    <div class="chart-wrap">
+      <div class="chart-title">Company Health Radar — HDFC vs Industry Average</div>
+      <canvas id="radarChart1" height="260"></canvas>
+    </div>
+    <!-- Radar 2: Quality of Earnings -->
+    <div class="chart-wrap">
+      <div class="chart-title">Quality-of-Earnings Profile (inwestout Method)</div>
+      <canvas id="radarChart2" height="260"></canvas>
+    </div>
+  </div>
+
+  <!-- Financial Tables -->
+  <div class="card">
+    <div class="card-title">Income Statement Summary (LKR Millions)</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Year</th><th>Total Income</th><th>PBT</th><th>PAT</th><th>Net Margin%</th><th>EPS (Rs)</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2015 est.</td><td>3,800</td><td>520</td><td>300</td><td class="tg">7.9%</td><td class="tg">4.6</td><td style="color:var(--muted)">Estimate</td></tr>
+        <tr><td>2016 est.</td><td>4,400</td><td>620</td><td>380</td><td class="tg">8.6%</td><td class="tg">5.9</td><td style="color:var(--muted)">Estimate</td></tr>
+        <tr><td>2017 est.</td><td>5,200</td><td>780</td><td>500</td><td class="tg">9.6%</td><td class="tg">7.7</td><td style="color:var(--muted)">Estimate</td></tr>
+        <tr><td>2018 est.</td><td>7,000</td><td>1,000</td><td>650</td><td class="tg">9.3%</td><td class="tg">10.0</td><td style="color:var(--muted)">Estimate</td></tr>
+        <tr style="background:rgba(248,81,73,0.05)"><td>2019 est.</td><td>8,800</td><td>520</td><td>350</td><td class="ty">4.0%</td><td class="ty">5.4</td><td style="color:var(--red)">Easter Bombing</td></tr>
+        <tr style="background:rgba(248,81,73,0.05)"><td>2020 est.</td><td>9,100</td><td>200</td><td>125</td><td class="tr">1.4%</td><td class="tr">1.9</td><td style="color:var(--red)">COVID-19</td></tr>
+        <tr><td>2021 est.</td><td>8,200</td><td>710</td><td>450</td><td class="tg">5.5%</td><td class="tg">7.0</td><td style="color:var(--muted)">Estimate</td></tr>
+        <tr style="background:rgba(248,81,73,0.05)"><td>2022 est.</td><td>10,500</td><td>1,100</td><td>750</td><td class="ty">7.1%</td><td class="ty">11.6</td><td style="color:var(--red)">Economic Crisis</td></tr>
+        <tr><td><strong>2023 ✓</strong></td><td><strong>14,329</strong></td><td><strong>2,650</strong></td><td><strong>1,302</strong></td><td class="tg"><strong>9.1%</strong></td><td class="tg"><strong>20.12</strong></td><td style="color:var(--green)">Confirmed</td></tr>
+        <tr style="background:rgba(248,81,73,0.07)"><td><strong>2024 ✓</strong></td><td><strong>8,507</strong></td><td><strong>412</strong></td><td><strong>-191</strong></td><td class="tr"><strong>-2.2%</strong></td><td class="tr"><strong>-2.95</strong></td><td style="color:var(--red)">Confirmed — Loss Year</td></tr>
+        <tr style="background:rgba(63,185,80,0.05)"><td><strong>Q1 2026 ✓</strong></td><td colspan="2">Operating Profit Rs 126 Mn</td><td class="tg"><strong>70</strong></td><td class="tg">—</td><td class="tg"><strong>~1.08/qtr</strong></td><td style="color:var(--green)">Recovery — Confirmed</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Balance Sheet Health (LKR Millions)</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr><th>Year</th><th>Total Assets</th><th>Gross Loans</th><th>Total Deposits</th><th>Shareholders' Equity</th><th>Equity/Assets %</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2020 est.</td><td>55,000</td><td>39,000</td><td>44,500</td><td>6,400</td><td class="tg">11.6%</td></tr>
+        <tr><td>2021 est.</td><td>58,500</td><td>40,500</td><td>46,000</td><td>6,800</td><td class="tg">11.6%</td></tr>
+        <tr><td>2022 est.</td><td>63,000</td><td>42,500</td><td>50,500</td><td>7,200</td><td class="ty">11.4%</td></tr>
+        <tr><td><strong>2023 ✓</strong></td><td><strong>67,733</strong></td><td><strong>43,622</strong></td><td><strong>53,613</strong></td><td><strong>7,995</strong></td><td class="tg"><strong>11.80%</strong></td></tr>
+        <tr><td><strong>2024 ✓</strong></td><td><strong>65,443</strong></td><td><strong>43,226</strong></td><td><strong>52,005</strong></td><td><strong>7,713</strong></td><td class="tg"><strong>11.79%</strong></td></tr>
+        <tr style="background:rgba(63,185,80,0.05)"><td><strong>Q1 2026 ✓</strong></td><td><strong>62,434</strong></td><td><strong>34,318</strong> (net)</td><td><strong>49,261</strong></td><td><strong>7,623</strong></td><td class="tg"><strong>12.2%</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Key Ratios — Explained Simply</div>
+    <table>
+      <thead><tr><th>Ratio</th><th>What It Means (Simple)</th><th>HDFC Value</th><th>Assessment</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>P/B Ratio</strong></td>
+          <td>For every Rs 1 the company <em>owns</em>, how much are you paying? Below 1 = you're buying a Rs 100 asset for less than Rs 100.</td>
+          <td class="tg"><strong>0.65×</strong></td>
+          <td><span class="flag flag-green">🟢 Cheap</span></td>
+        </tr>
+        <tr>
+          <td><strong>P/E Ratio</strong></td>
+          <td>How many years of earnings are you paying for? Annualized Q1-2026 run rate EPS ~Rs 4.3, P/E ~17.7×</td>
+          <td class="ty"><strong>~17.7× (run-rate)</strong></td>
+          <td><span class="flag flag-yellow">🟡 Fair</span></td>
+        </tr>
+        <tr>
+          <td><strong>ROE (2023)</strong></td>
+          <td>For every Rs 100 shareholders put in, how many rupees of profit did the company make? 17.7% is excellent.</td>
+          <td class="tg"><strong>17.70% (2023)</strong></td>
+          <td><span class="flag flag-green">🟢 Strong</span></td>
+        </tr>
+        <tr>
+          <td><strong>ROE (2024)</strong></td>
+          <td>Negative in 2024 due to loss year. Recovering in 2025-2026.</td>
+          <td class="tr"><strong>-2.43% (2024)</strong></td>
+          <td><span class="flag flag-red">🔴 Weak</span></td>
+        </tr>
+        <tr>
+          <td><strong>Capital Adequacy (CAR)</strong></td>
+          <td>Can the bank absorb losses without going under? 34.65% is massively above the 12.5% minimum — very safe.</td>
+          <td class="tg"><strong>34.65%</strong></td>
+          <td><span class="flag flag-green">🟢 Very Safe</span></td>
+        </tr>
+        <tr>
+          <td><strong>Liquidity Coverage (LCR)</strong></td>
+          <td>If there's a bank run for 30 days, can it survive? 223% means it can — the minimum is 100%.</td>
+          <td class="tg"><strong>223%</strong></td>
+          <td><span class="flag flag-green">🟢 Excellent</span></td>
+        </tr>
+        <tr>
+          <td><strong>NPL Ratio (Impairment)</strong></td>
+          <td>What % of loans aren't being repaid? HDFC's Stage 3 (bad loans) = Rs 2,522 Mn out of Rs 37,230 Mn = ~6.8% NPL</td>
+          <td class="tr"><strong>~6.8% (Q1 2026)</strong></td>
+          <td><span class="flag flag-red">🔴 Above Industry</span></td>
+        </tr>
+        <tr>
+          <td><strong>Net Stable Funding Ratio</strong></td>
+          <td>Are long-term assets funded by long-term money? 128% vs 100% minimum = good. Asset-liability mismatch is being addressed.</td>
+          <td class="ty"><strong>128% (2024)</strong></td>
+          <td><span class="flag flag-yellow">🟡 Adequate</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- inwestout diagnostics -->
+  <div class="card">
+    <div class="card-title">🔬 inwestout Quality-of-Earnings Diagnostics</div>
+    <p style="margin-bottom:14px;">This section checks whether HDFC's reported profits are <strong>real cash profits</strong> or just accounting entries. Like a doctor checking if a patient's health numbers are genuine or manipulated.</p>
+    <table>
+      <thead><tr><th>Diagnostic</th><th>What We Found</th><th>Flag</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Quality-of-Earnings Ratio</strong><br><small style="color:var(--muted)">PAT ÷ Operating Cash Flow</small></td>
+          <td>In 2023, HDFC earned Rs 1,302 Mn PAT. Cash from operations was negative (common for banks due to deposit flows). The 2023 gains included selling government securities — accounting-driven. In 2024, losses were real operational. Q1 2026 shows OCF improving: cash ops -Rs 1,241 Mn but driven by deposit outflows (normal liability management).</td>
+          <td><span class="flag flag-yellow">🟡 Monitor</span></td>
+        </tr>
+        <tr>
+          <td><strong>Gain-on-PBT Ratio</strong><br><small style="color:var(--muted)">Non-core gains ÷ PBT</small></td>
+          <td>2023's strong Rs 2,650 Mn PBT was partly due to gains from selling government securities. The Chairman explicitly acknowledged "PBAT 2023 comprised of gain on sold government securities." The 2024 PBT of Rs 412 Mn is more realistic for core operations.</td>
+          <td><span class="flag flag-red">🔴 2023 inflated by asset sales</span></td>
+        </tr>
+        <tr>
+          <td><strong>EPS Divergence Check</strong><br><small style="color:var(--muted)">Annual vs Trailing EPS</small></td>
+          <td>2023 EPS of Rs 20.12 vs Q1 2026 quarterly run-rate of ~Rs 4.3/year — shows the 2023 EPS was exceptionally high and not sustainable. A 78% gap vs current run-rate. Major rollover.</td>
+          <td><span class="flag flag-red">🔴 2023 EPS not repeatable</span></td>
+        </tr>
+        <tr>
+          <td><strong>Piotroski F-Score</strong><br><small style="color:var(--muted)">9-point quality check</small></td>
+          <td>
+            Positive operating cashflow? ✗ (bank-specific) | 
+            ROA improving? ✗ (declined 2023→2024) | 
+            Operating cashflow > net income? ✗ | 
+            Change in long-term debt ratio? ✓ (leverage improving) | 
+            Change in current ratio? ✓ (LCR excellent) | 
+            No new shares? ✓ (no dilution) | 
+            Change in gross margin? ✗ | 
+            Change in asset turnover? ✗ |
+            Capital buffer improving? ✓ (CAR excellent)
+          </td>
+          <td><span class="flag flag-yellow">🟡 4/9 — Recovery needed</span></td>
+        </tr>
+        <tr>
+          <td><strong>Altman Z-Score</strong><br><small style="color:var(--muted)">Bankruptcy risk model</small></td>
+          <td>For banks, traditional Z-score less applicable. However: CAR 34.65% (vs 12.5% min), LCR 223%, NSFR 128% — all indicate zero near-term insolvency risk. The government ownership provides an implicit guarantee. Bankruptcy risk is very low.</td>
+          <td><span class="flag flag-green">🟢 Low bankruptcy risk</span></td>
+        </tr>
+        <tr>
+          <td><strong>Working Capital Trap</strong><br><small style="color:var(--muted)">Receivables growth vs revenue</small></td>
+          <td>Gross loans stable: Rs 43.6 Bn (2023) → Rs 43.2 Bn (2024) → ~Rs 37.2 Bn (Q1 2026 gross). Loan book actually contracting as the bank focuses on liquidity management. No growth trap evident — if anything, the issue is the reverse (not lending enough to grow).</td>
+          <td><span class="flag flag-green">🟢 No trap — shrinking cautiously</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PHASE 4: CRISIS RESILIENCE -->
+<div class="section" id="crisis">
+  <div class="section-title"><span class="section-icon">💪</span> Crisis Resilience Analysis</div>
+
+  <div class="card">
+    <div class="card-title">How HDFC Survived Sri Lanka's Economic Crises</div>
+    <table>
+      <thead><tr><th>Crisis</th><th>Year</th><th>Impact on HDFC</th><th>How It Survived</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Easter Sunday Bombings</strong></td>
+          <td>2019</td>
+          <td>Tourism collapse dampened economy. Housing demand slowed. NPL rose as borrowers lost jobs.</td>
+          <td>Core EPF loans unaffected (EPF pays arrears). Mortgage restructuring for affected borrowers.</td>
+          <td><span class="flag flag-yellow">🟡 Moderate Hit</span></td>
+        </tr>
+        <tr>
+          <td><strong>COVID-19 Pandemic</strong></td>
+          <td>2020</td>
+          <td>Construction halted. Housing demand crashed. Borrowers unable to pay. PAT fell sharply to ~Rs 125 Mn.</td>
+          <td>CBSL granted payment deferrals. EPF mechanism provided automatic protection. LCR remained healthy.</td>
+          <td><span class="flag flag-yellow">🟡 Significant hit, survived</span></td>
+        </tr>
+        <tr>
+          <td><strong>Sri Lanka Economic Crisis / Default</strong></td>
+          <td>2022</td>
+          <td>70%+ inflation. Rupee halved. Import restrictions hit construction materials. Fuel shortages. NPLs spiked.</td>
+          <td>Revenue actually <em>rose</em> in 2022-23 as interest rates surged. But quality of earnings was driven by asset sales, not operations. HDFC benefited from high-rate environment.</td>
+          <td><span class="flag flag-yellow">🟡 Paradox — revenue ↑ but NPLs ↑</span></td>
+        </tr>
+        <tr>
+          <td><strong>Post-Crisis Earnings Reversal</strong></td>
+          <td>2024</td>
+          <td>As rates fell, interest income collapsed 41%. Government securities gains didn't recur. Net loss for first time in many years.</td>
+          <td>Strong capital buffer (CAR 34.65%) absorbed the loss. LCR 223% ensured no liquidity crisis. Capital adequacy preserved Rs 7.5 Bn threshold.</td>
+          <td><span class="flag flag-green">🟢 Solid capital base absorbed loss</span></td>
+        </tr>
+        <tr>
+          <td><strong>2025 Sri Lanka Floods</strong></td>
+          <td>2025</td>
+          <td>Major floods displaced 100,000+ people. Could impact housing collateral values and NPLs in affected areas.</td>
+          <td>Geographic diversification across 39 branches reduces concentration risk. Government disaster relief Rs 72 Bn announced.</td>
+          <td><span class="flag flag-yellow">🟡 Watch NPLs in 2025-26</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💡 Key Resilience Insight — The "EPF Moat"</div>
+    <p>HDFC's greatest crisis protection is its <strong>EPF loan structure</strong>. When a borrower defaults on an EPF-backed loan, the <strong>Employees' Provident Fund automatically reimburses arrears annually</strong>. This means the Rs 17.75 Bn EPF loan portfolio has a built-in government backstop — the government's pension fund bears the credit risk. No private bank has this advantage. In a banking crisis, this makes HDFC significantly safer than it looks on paper.</p>
+  </div>
+</div>
+
+<!-- PHASE 5: TECHNICAL -->
+<div class="section" id="technical">
+  <div class="section-title"><span class="section-icon">📈</span> Technical Analysis</div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Price History Highlights</div>
+      <table>
+        <tr><td><strong>Current Price</strong></td><td class="tb">Rs 76.50</td></tr>
+        <tr><td><strong>All-Time High</strong></td><td class="tg">Rs 120.00 (Feb 2012)</td></tr>
+        <tr><td><strong>All-Time Low</strong></td><td class="tr">Rs 14.00 (May 2020 – COVID)</td></tr>
+        <tr><td><strong>Book Value/Share</strong></td><td class="tg">Rs 117.79 (Q1 2026)</td></tr>
+        <tr><td><strong>1-Year Return</strong></td><td class="tg">+66.3%</td></tr>
+        <tr><td><strong>1-Month Return</strong></td><td class="tg">+22.8%</td></tr>
+        <tr><td><strong>1-Week Return</strong></td><td class="tr">-2.4%</td></tr>
+        <tr><td><strong>Beta</strong></td><td>1.48 (higher volatility than market)</td></tr>
+        <tr><td><strong>Weekly Volatility</strong></td><td class="ty">8% (higher than 75% of LK stocks)</td></tr>
+        <tr><td><strong>Avg Volume (3m)</strong></td><td>Low liquidity stock</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Technical Signals</div>
+      <div style="margin-bottom:14px;">
+        <div class="score-bar">
+          <div class="score-bar-label">Price vs Book Value</div>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:65%; background:var(--yellow);"></div></div>
+          <div class="score-bar-val ty">0.65×</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label">Price vs ATH</div>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:64%; background:var(--orange);"></div></div>
+          <div class="score-bar-val ty">64%</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label">Recovery from ATL</div>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:84%; background:var(--green);"></div></div>
+          <div class="score-bar-val tg">+446%</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label">1-Week Signal (TV)</div>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:75%; background:var(--blue);"></div></div>
+          <div class="score-bar-val tb">BUY</div>
+        </div>
+        <div class="score-bar">
+          <div class="score-bar-label">1-Month Signal (TV)</div>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:95%; background:var(--green);"></div></div>
+          <div class="score-bar-val tg">STRONG BUY</div>
+        </div>
+      </div>
+      <p style="font-size:12px; color:var(--muted);">Technical signals from TradingView as of June 2026. The stock trades at a <strong>35% discount to book value</strong> (Rs 76.5 vs Rs 117.79 NAV) — historically a mean-reversion opportunity when earnings recover.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Technical Interpretation for Beginners</div>
+    <p><strong>What does "P/B of 0.65×" mean in simple terms?</strong> Imagine you're buying a house. The house is worth Rs 100 on the market (that's the book value). But the seller is offering it to you for only Rs 65. That's a bargain — IF the house isn't going to fall apart. With HDFC, the "house" is the bank's assets minus its debts (shareholders' equity = Rs 117.79/share). The stock at Rs 76.5 is priced as if the bank is damaged goods. Your bet as an investor: "I think the bank will recover and the stock will re-rate toward book value."</p>
+    <p><strong>Key levels to watch:</strong> Resistance at Rs 90–100 (ATH area from 2011-2012 range). Support at Rs 60–65. If Q2/Q3 2026 results continue to show profit recovery, the stock could re-rate toward Rs 90-100 (0.85× P/B).</p>
+  </div>
+</div>
+
+<!-- PHASE 6: GLOBAL -->
+<div class="section" id="global">
+  <div class="section-title"><span class="section-icon">🌍</span> Global Context, Macro & Geopolitical Risk</div>
+
+  <div class="card">
+    <div class="card-title">Sri Lanka Macro Environment (2026)</div>
+    <table>
+      <thead><tr><th>Macro Factor</th><th>Status</th><th>Impact on HDFC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>GDP Growth</strong></td>
+          <td><span class="flag flag-green">4.5% in 2024 (World Bank)</span></td>
+          <td>Recovery drives housing demand. More people buying homes = more loans for HDFC. 🟢 Positive</td>
+        </tr>
+        <tr>
+          <td><strong>Inflation</strong></td>
+          <td><span class="flag flag-green">~2-4% (late 2025)</span></td>
+          <td>Low inflation allows CBSL to keep rates low or cut — reduces borrowing costs, boosts housing affordability. 🟢 Positive</td>
+        </tr>
+        <tr>
+          <td><strong>CBSL Interest Rates</strong></td>
+          <td><span class="flag flag-yellow">Declining cycle</span></td>
+          <td>Rates falling = lower NIM for banks = revenue pressure SHORT term, but higher loan demand LONG term. 🟡 Mixed</td>
+        </tr>
+        <tr>
+          <td><strong>IMF EFF Program</strong></td>
+          <td><span class="flag flag-green">3rd review completed Mar 2025</span></td>
+          <td>IMF program keeps government disciplined = fiscal stability = safer operating environment. 🟢 Positive</td>
+        </tr>
+        <tr>
+          <td><strong>External Debt Restructuring</strong></td>
+          <td><span class="flag flag-green">98% Eurobond exchange done</span></td>
+          <td>Reduces sovereign risk premium. Foreign investors returning. Economy stabilizing. 🟢 Positive for market confidence</td>
+        </tr>
+        <tr>
+          <td><strong>Government Stability</strong></td>
+          <td><span class="flag flag-green">President Dissanayake (NPP) — reform-oriented</span></td>
+          <td>New government maintained IMF program. Fresh board appointments may improve HDFC governance. 🟢 Mildly Positive</td>
+        </tr>
+        <tr>
+          <td><strong>2025 Floods</strong></td>
+          <td><span class="flag flag-red">100,000+ displaced, major damage</span></td>
+          <td>Could push up NPLs for housing loans in affected areas. Government relief Rs 72 Bn helps. 🔴 Watch</td>
+        </tr>
+        <tr>
+          <td><strong>Housing Deficit</strong></td>
+          <td><span class="flag flag-green">Large pent-up demand</span></td>
+          <td>Post-crisis pent-up housing demand. Young population. Urbanization ongoing. Long-term structural demand for housing finance. 🟢 Tailwind</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚔️ Active Wars & Conflicts — Impact on HDFC</div>
+    <table>
+      <thead><tr><th>Conflict</th><th>Status</th><th>Impact on HDFC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Russia–Ukraine War</td>
+          <td>Ongoing — ceasefire negotiations</td>
+          <td>Higher global wheat/grain prices = food inflation in Sri Lanka = household squeeze on borrowers. Construction material costs elevated. 🟡 Minor indirect risk</td>
+        </tr>
+        <tr>
+          <td>Middle East Conflict (Gaza/Iran tensions)</td>
+          <td>Ongoing</td>
+          <td>Oil price volatility = fuel costs in Sri Lanka. Sri Lanka imports 100% of oil. Higher oil = higher living costs = loan repayment pressure on HDFC borrowers. 🟡 Moderate risk via inflation</td>
+        </tr>
+        <tr>
+          <td>South China Sea / US-China Tensions</td>
+          <td>Elevated</td>
+          <td>Sri Lanka caught between China (BRI debt) and West. Risk of diplomatic/economic disruption. HDFC has no direct exposure but Sri Lanka economy would suffer. 🟡 Systemic risk</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏛️ Major Political Risks</div>
+    <table>
+      <thead><tr><th>Risk Factor</th><th>Situation</th><th>Level</th><th>Impact on HDFC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Sri Lanka Government Stability</td>
+          <td>NPP government with parliamentary majority. Committed to IMF program.</td>
+          <td><span class="risk-pill risk-low">🟢 Low</span></td>
+          <td>Stable governance = better HDFC board oversight. IMF compliance prevents fiscal excess.</td>
+        </tr>
+        <tr>
+          <td>Government Policy on Foreclosure</td>
+          <td>Ongoing restriction on repossessing homes from defaulters. Political sensitivity around evictions.</td>
+          <td><span class="risk-pill risk-high">🔴 High</span></td>
+          <td>Cannot easily recover NPL collateral. Key structural weakness for HDFC's credit book.</td>
+        </tr>
+        <tr>
+          <td>US Trade / Tariff Policy (Trump era)</td>
+          <td>US-Sri Lanka garment trade potentially impacted. Garment is key employer.</td>
+          <td><span class="risk-pill risk-med">🟡 Medium</span></td>
+          <td>If garment workers lose jobs, HDFC borrowers default. Housing loans linked to employment.</td>
+        </tr>
+        <tr>
+          <td>China Debt / BRI</td>
+          <td>Hambantota Port deal ongoing. China holds large portion of bilateral debt.</td>
+          <td><span class="risk-pill risk-med">🟡 Medium</span></td>
+          <td>Sovereign risk if China debt terms become onerous. No direct HDFC impact but macro negative.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌐 Composite Global Risk Overlay</div>
+    <div class="risk-row"><div class="risk-label">⚔️ War / Geopolitical Risk</div><div class="risk-pill risk-med">🟡 MEDIUM</div></div>
+    <div class="risk-row"><div class="risk-label">🌦️ Climate / Weather Risk</div><div class="risk-pill risk-med">🟡 MEDIUM (2025 floods)</div></div>
+    <div class="risk-row"><div class="risk-label">🏛️ Political Risk (Sri Lanka)</div><div class="risk-pill risk-low">🟢 LOW-MEDIUM</div></div>
+    <div class="risk-row"><div class="risk-label">📉 Global Macro Risk</div><div class="risk-pill risk-med">🟡 MEDIUM (US tariff uncertainty)</div></div>
+    <div class="risk-row"><div class="risk-label"><strong>🌐 OVERALL EXTERNAL RISK</strong></div><div class="risk-pill risk-med"><strong>🟡 MEDIUM</strong></div></div>
+    <div class="risk-row"><div class="risk-label">📊 Price Target Adjustment</div><div class="risk-pill risk-med">Reduce targets by ~10% for external risk</div></div>
+  </div>
+</div>
+
+<!-- PHASE 7: VERDICT -->
+<div class="section" id="verdict">
+  <div class="section-title"><span class="section-icon">🎯</span> Investment Verdict & Price Targets</div>
+
+  <div class="verdict-box">
+    <div class="verdict-title">⚠️ CAUTIOUS HOLD / SPECULATIVE BUY</div>
+    <p style="color:#c9d1d9; font-size:15px;">HDFC Bank Sri Lanka is a <strong>deeply discounted, state-backed housing finance institution</strong> in the early stages of a profitability recovery. The stock trades at only <strong>0.65× book value</strong> — a massive discount to intrinsic worth. The 2024 loss was driven by the collapse in high-rate income (not an operational collapse) and the bank's strong capital buffers (CAR 34.65%, LCR 223%) mean it is financially safe. Q1 2026 returned to profit with Rs 70 Mn PAT. The bull case is a re-rating toward book value as earnings recover in 2025-26. The bear case is prolonged high NPLs and a structural squeeze on margins as rates fall.</p>
+
+    <div class="price-targets">
+      <div class="price-target">
+        <div class="price-target-label">🟢 BUY Below</div>
+        <div class="price-target-value tg">Rs 70</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:4px;">Strong margin of safety vs book value</div>
+      </div>
+      <div class="price-target">
+        <div class="price-target-label">🛡️ Stop Loss</div>
+        <div class="price-target-value tr">Rs 58</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:4px;">~24% below current — exit if thesis breaks</div>
+      </div>
+      <div class="price-target">
+        <div class="price-target-label">🎯 Short Target (6-12M)</div>
+        <div class="price-target-value ty">Rs 92</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:4px;">0.78× book — earnings recovery</div>
+      </div>
+      <div class="price-target">
+        <div class="price-target-label">🚀 Long Target (2-3Y)</div>
+        <div class="price-target-value tg">Rs 115</div>
+        <div style="font-size:11px; color:var(--muted); margin-top:4px;">Near book value — full recovery scenario</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <div class="card-title">Company Health Scorecard (out of 10)</div>
+    <div class="score-bar"><div class="score-bar-label">Financial Health</div><div class="score-bar-track"><div class="score-bar-fill" style="width:60%; background:var(--yellow);"></div></div><div class="score-bar-val ty">6/10</div></div>
+    <div class="score-bar"><div class="score-bar-label">Business Quality</div><div class="score-bar-track"><div class="score-bar-fill" style="width:65%; background:var(--yellow);"></div></div><div class="score-bar-val ty">6.5/10</div></div>
+    <div class="score-bar"><div class="score-bar-label">Management Quality</div><div class="score-bar-track"><div class="score-bar-fill" style="width:50%; background:var(--orange);"></div></div><div class="score-bar-val ty">5/10</div></div>
+    <div class="score-bar"><div class="score-bar-label">Growth Potential</div><div class="score-bar-track"><div class="score-bar-fill" style="width:70%; background:var(--yellow);"></div></div><div class="score-bar-val ty">7/10</div></div>
+    <div class="score-bar"><div class="score-bar-label">Crisis Resilience</div><div class="score-bar-track"><div class="score-bar-fill" style="width:75%; background:var(--green);"></div></div><div class="score-bar-val tg">7.5/10</div></div>
+    <div class="score-bar"><div class="score-bar-label">Current Valuation</div><div class="score-bar-track"><div class="score-bar-fill" style="width:80%; background:var(--green);"></div></div><div class="score-bar-val tg">8/10</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">🟢 Bull Case (Why It Could Fly)</div>
+      <p>✅ Deepest discount to book (0.65×) — massive re-rating potential<br>
+         ✅ Q1 2026 profit recovery (+126% vs Q1 2025) trending right<br>
+         ✅ Sri Lanka economy recovering (GDP +4.5%, inflation 2-4%)<br>
+         ✅ Pent-up housing demand as rates fall<br>
+         ✅ EPF loan moat — unique structural protection<br>
+         ✅ CAR 34.65% — iron-clad safety buffer<br>
+         ✅ Government implicit guarantee (51% state-owned)<br>
+         ✅ Gold loans + leasing diversification growing</p>
+    </div>
+    <div class="card">
+      <div class="card-title">🔴 Bear Case (Why It Could Fall)</div>
+      <p>❌ NPL ratio ~6.8% — higher than industry<br>
+         ❌ Government policy prevents foreclosure on defaulters<br>
+         ❌ 2024 PAT was a net loss (first time in recent history)<br>
+         ❌ Income collapsed 41% when interest rates normalized<br>
+         ❌ Outdated core banking system (2014 vintage)<br>
+         ❌ Board instability — 6 resignations in 2024<br>
+         ❌ 70%+ deposits maturing within 1 year (liability mismatch)<br>
+         ❌ 2025 floods could spike NPLs further</p>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY CARD -->
+<div class="section">
+  <div class="section-title"><span class="section-icon">📋</span> Final Summary Card</div>
+  <div class="summary-card">
+    <div style="text-align:center; font-size:16px; font-weight:800; color:var(--blue); margin-bottom:12px;">═══ 📊 CSE RESEARCH SUMMARY ═══</div>
+    <div class="summary-row"><div class="summary-row-key">Company</div><div class="summary-row-val">Housing Development Finance Corporation Bank of Sri Lanka</div></div>
+    <div class="summary-row"><div class="summary-row-key">Ticker</div><div class="summary-row-val">HDFC.N0000 | Colombo Stock Exchange</div></div>
+    <div class="summary-row"><div class="summary-row-key">Sector</div><div class="summary-row-val">Housing Finance / Licensed Specialised Bank</div></div>
+    <div class="summary-row"><div class="summary-row-key">Current Price</div><div class="summary-row-val" style="color:var(--blue)">Rs. 76.50 (Jun 2026)</div></div>
+    <div class="summary-line"></div>
+    <div class="summary-row"><div class="summary-row-key">🏢 Business</div><div class="summary-row-val">Sri Lanka's premier housing bank — EPF loans, mortgages, gold, leasing. 51% GoSL owned.</div></div>
+    <div class="summary-row"><div class="summary-row-key">💰 Revenue (2024)</div><div class="summary-row-val">Rs 8,507 Mn | Net Loss: Rs -191 Mn (loss year)</div></div>
+    <div class="summary-row"><div class="summary-row-key">📈 EPS</div><div class="summary-row-val" style="color:var(--red)">-Rs 2.95 (2024) | Q1 2026: ~Rs 1.08/qtr (recovering)</div></div>
+    <div class="summary-row"><div class="summary-row-key">🏦 Total Assets</div><div class="summary-row-val">Rs 65.4 Bn (2024) | Rs 62.4 Bn (Q1 2026)</div></div>
+    <div class="summary-row"><div class="summary-row-key">📊 P/B Ratio</div><div class="summary-row-val" style="color:var(--green)">0.65× (Rs 76.5 vs NAV Rs 117.79) — Significant discount</div></div>
+    <div class="summary-row"><div class="summary-row-key">🏛️ Capital Adequacy</div><div class="summary-row-val" style="color:var(--green)">34.65% (min 12.5%) — Iron-clad buffer</div></div>
+    <div class="summary-row"><div class="summary-row-key">🔬 Piotroski F-Score</div><div class="summary-row-val" style="color:var(--yellow)">4/9 — Recovery phase</div></div>
+    <div class="summary-row"><div class="summary-row-key">💧 LCR</div><div class="summary-row-val" style="color:var(--green)">223% — Well above 100% minimum</div></div>
+    <div class="summary-row"><div class="summary-row-key">⚠️ NPL Ratio (est.)</div><div class="summary-row-val" style="color:var(--red)">~6.8% — Above industry; key risk</div></div>
+    <div class="summary-row"><div class="summary-row-key">💳 Fitch Rating</div><div class="summary-row-val" style="color:var(--yellow)">BB+(lka) Stable</div></div>
+    <div class="summary-line"></div>
+    <div class="summary-row"><div class="summary-row-key">🟢 BUY Below</div><div class="summary-row-val" style="color:var(--green)">Rs 70</div></div>
+    <div class="summary-row"><div class="summary-row-key">🔴 Stop Loss</div><div class="summary-row-val" style="color:var(--red)">Rs 58</div></div>
+    <div class="summary-row"><div class="summary-row-key">🎯 Short Target (6-12M)</div><div class="summary-row-val" style="color:var(--yellow)">Rs 92</div></div>
+    <div class="summary-row"><div class="summary-row-key">🚀 Long Target (2-3Y)</div><div class="summary-row-val" style="color:var(--green)">Rs 115</div></div>
+    <div class="summary-line"></div>
+    <div class="summary-row"><div class="summary-row-key">🌍 Global Macro</div><div class="summary-row-val" style="color:var(--yellow)">Neutral-to-Favorable (Sri Lanka recovery) with risks</div></div>
+    <div class="summary-row"><div class="summary-row-key">🌦️ Climate Risk</div><div class="summary-row-val" style="color:var(--yellow)">Medium — 2025 floods, tropical storm exposure</div></div>
+    <div class="summary-row"><div class="summary-row-key">⚔️ Geopolitical Risk</div><div class="summary-row-val" style="color:var(--yellow)">Medium — Oil prices, US tariffs on garments</div></div>
+    <div class="summary-row"><div class="summary-row-key">🌐 Overall External Risk</div><div class="summary-row-val" style="color:var(--yellow)">MEDIUM</div></div>
+    <div class="summary-line"></div>
+    <div class="summary-verdict">⚡ VERDICT: CAUTIOUS HOLD / SPECULATIVE BUY — Deep book value discount + profit recovery trajectory makes it attractive, but NPL risk and structural weaknesses demand careful position sizing.</div>
+    <div class="summary-row"><div class="summary-row-key">⏱ Best For</div><div class="summary-row-val">Long-term (2-3 years) value investors comfortable with SOE risks</div></div>
+    <div style="margin-top:14px; padding:12px; background:rgba(248,81,73,0.1); border-radius:8px; font-size:12px; color:var(--muted);">
+      ⚠️ <strong>Important:</strong> This report is research to help you think critically, <em>not</em> financial advice. Always invest only what you can afford to lose. Do your own due diligence. Past performance ≠ future returns.
+    </div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<footer>
+  <div style="max-width:800px; margin:auto;">
+    <strong>Disclaimer</strong><br>
+    This research report was generated for educational purposes only using publicly available data from HDFC Bank of Sri Lanka annual reports, CSE filings, TradingView, and IMF/World Bank publications. Financial estimates for 2015–2022 are approximations based on industry knowledge and should not be relied upon for investment decisions. This is NOT financial advice. The CSE Research Analyst skill follows inwestout.com methodology for quality-of-earnings analysis. Always consult a licensed financial advisor before investing.<br><br>
+    Report generated: June 2026 | Data sources: HDFC Annual Reports 2023-2024, Q1 2026 Interim Financials, CSE Filings, TradingView, World Bank, IMF
+    <p>Generated by cse-analyst-skill · Powered by Claude (Anthropic) · Research & Resources by Lochana Karunarathna</p>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const years = ['2015*','2016*','2017*','2018*','2019*','2020*','2021*','2022*','2023','2024'];
+const revenue = [3800, 4400, 5200, 7000, 8800, 9100, 8200, 10500, 14329, 8507];
+const netProfit = [300, 380, 500, 650, 350, 125, 450, 750, 1302, -191];
+const epsData = [4.6, 5.9, 7.7, 10.0, 5.4, 1.9, 7.0, 11.6, 20.12, -2.95];
+const deRatio = [6.8, 7.0, 7.1, 7.2, 7.3, 7.5, 7.6, 7.8, 7.47, 7.48]; // Total liabilities / equity
+const ocfData = [-800, -600, -1200, -900, -500, -400, -1100, -800, -2200, 600]; // est OCF
+const crisisYears = [false, false, false, false, true, true, false, true, false, true];
+
+const crisisPluginLine = {
+  id: 'crisisLines',
+  afterDraw(chart) {
+    const { ctx, chartArea, scales } = chart;
+    if (!scales.x) return;
+    crisisYears.forEach((isCrisis, i) => {
+      if (isCrisis) {
+        const x = scales.x.getPixelForValue(i);
+        ctx.save();
+        ctx.strokeStyle = 'rgba(248,81,73,0.35)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(x, chartArea.top);
+        ctx.lineTo(x, chartArea.bottom);
+        ctx.stroke();
+        ctx.restore();
+      }
+    });
+  }
+};
+
+Chart.register(crisisPluginLine);
+
+const chartDefaults = {
+  responsive: true,
+  plugins: {
+    legend: { labels: { color: '#8b949e', font: { size: 12 } } },
+    tooltip: {
+      backgroundColor: '#1c2128',
+      borderColor: '#30363d',
+      borderWidth: 1,
+      titleColor: '#e6edf3',
+      bodyColor: '#8b949e',
+    }
+  },
+  scales: {
+    x: { grid: { color: 'rgba(48,54,61,0.5)' }, ticks: { color: '#8b949e' } },
+    y: { grid: { color: 'rgba(48,54,61,0.5)' }, ticks: { color: '#8b949e' } }
+  }
+};
+
+// ============================================================
+// Ownership pie chart
+// ============================================================
+new Chart(document.getElementById('ownershipChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Government (51%)', 'Private Investors (49%)'],
+    datasets: [{
+      data: [51, 49],
+      backgroundColor: ['rgba(88,166,255,0.7)', 'rgba(63,185,80,0.7)'],
+      borderColor: ['#58a6ff', '#3fb950'],
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1c2128',
+        titleColor: '#e6edf3',
+        bodyColor: '#8b949e',
+        callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed}%` }
+      }
+    }
+  }
+});
+
+// ============================================================
+// Revenue / Profit / EPS Chart
+// ============================================================
+new Chart(document.getElementById('revenueChart'), {
+  type: 'line',
+  data: {
+    labels: years,
+    datasets: [
+      {
+        label: 'Total Revenue (Rs Mn)',
+        data: revenue,
+        borderColor: '#58a6ff',
+        backgroundColor: 'rgba(88,166,255,0.1)',
+        tension: 0.3,
+        pointRadius: 4,
+        fill: true,
+        yAxisID: 'y'
+      },
+      {
+        label: 'Net Profit (Rs Mn)',
+        data: netProfit,
+        borderColor: '#3fb950',
+        backgroundColor: 'rgba(63,185,80,0.1)',
+        tension: 0.3,
+        pointRadius: 4,
+        fill: true,
+        yAxisID: 'y'
+      },
+      {
+        label: 'EPS (Rs)',
+        data: epsData,
+        borderColor: '#bc8cff',
+        tension: 0.3,
+        pointRadius: 4,
+        yAxisID: 'y2',
+        borderDash: [5,3]
+      }
+    ]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      tooltip: {
+        ...chartDefaults.plugins.tooltip,
+        callbacks: {
+          label: ctx => {
+            const v = ctx.parsed.y;
+            if (ctx.dataset.label.includes('EPS')) return `${ctx.dataset.label}: Rs ${v.toFixed(1)}`;
+            return `${ctx.dataset.label}: Rs ${v.toLocaleString()} Mn`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: chartDefaults.scales.x,
+      y: { ...chartDefaults.scales.y, position: 'left', title: { display: true, text: 'Rs Mn', color: '#8b949e' } },
+      y2: { ...chartDefaults.scales.y, position: 'right', title: { display: true, text: 'EPS (Rs)', color: '#8b949e' }, grid: { drawOnChartArea: false } }
+    }
+  }
+});
+
+// ============================================================
+// D/E Bar Chart
+// ============================================================
+new Chart(document.getElementById('deChart'), {
+  type: 'bar',
+  data: {
+    labels: years,
+    datasets: [{
+      label: 'Total Liabilities / Equity (Leverage)',
+      data: deRatio,
+      backgroundColor: deRatio.map((v, i) => crisisYears[i] ? 'rgba(248,81,73,0.65)' : 'rgba(88,166,255,0.55)'),
+      borderColor: deRatio.map((v, i) => crisisYears[i] ? '#f85149' : '#58a6ff'),
+      borderWidth: 1,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      tooltip: {
+        ...chartDefaults.plugins.tooltip,
+        callbacks: { label: ctx => `Leverage: ${ctx.parsed.y.toFixed(1)}×` }
+      }
+    },
+    scales: {
+      x: chartDefaults.scales.x,
+      y: { ...chartDefaults.scales.y, min: 5, title: { display: true, text: 'Leverage (×)', color: '#8b949e' } }
+    }
+  }
+});
+
+// ============================================================
+// OCF vs Net Profit Combo
+// ============================================================
+new Chart(document.getElementById('ocfChart'), {
+  type: 'bar',
+  data: {
+    labels: years,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Operating Cash Flow (Rs Mn)',
+        data: ocfData,
+        backgroundColor: 'rgba(88,166,255,0.45)',
+        borderColor: '#58a6ff',
+        borderWidth: 1,
+        borderRadius: 4
+      },
+      {
+        type: 'line',
+        label: 'Net Profit (Rs Mn)',
+        data: netProfit,
+        borderColor: '#3fb950',
+        backgroundColor: 'transparent',
+        tension: 0.3,
+        pointRadius: 4,
+        borderWidth: 2
+      }
+    ]
+  },
+  options: {
+    ...chartDefaults,
+    plugins: {
+      ...chartDefaults.plugins,
+      tooltip: {
+        ...chartDefaults.plugins.tooltip,
+        callbacks: { label: ctx => `${ctx.dataset.label}: Rs ${ctx.parsed.y.toLocaleString()} Mn` }
+      }
+    }
+  }
+});
+
+// ============================================================
+// Radar 1: Health Scorecard
+// ============================================================
+new Chart(document.getElementById('radarChart1'), {
+  type: 'radar',
+  data: {
+    labels: ['Financial Health', 'Business Quality', 'Management\nQuality', 'Growth\nPotential', 'Crisis\nResilience', 'Valuation\n(Score)'],
+    datasets: [
+      {
+        label: 'HDFC Bank SL',
+        data: [6, 6.5, 5, 7, 7.5, 8],
+        backgroundColor: 'rgba(88,166,255,0.2)',
+        borderColor: '#58a6ff',
+        pointBackgroundColor: '#58a6ff',
+        borderWidth: 2
+      },
+      {
+        label: 'SL Bank Industry Avg',
+        data: [6.5, 6.5, 6, 6, 6.5, 6],
+        backgroundColor: 'rgba(63,185,80,0.1)',
+        borderColor: 'rgba(63,185,80,0.6)',
+        pointBackgroundColor: '#3fb950',
+        borderWidth: 1,
+        borderDash: [5,3]
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#8b949e', font: { size: 11 } } } },
+    scales: {
+      r: {
+        min: 0, max: 10,
+        grid: { color: 'rgba(48,54,61,0.6)' },
+        pointLabels: { color: '#8b949e', font: { size: 11 } },
+        ticks: { color: '#8b949e', backdropColor: 'transparent', stepSize: 2 }
+      }
+    }
+  }
+});
+
+// ============================================================
+// Radar 2: Quality of Earnings
+// ============================================================
+new Chart(document.getElementById('radarChart2'), {
+  type: 'radar',
+  data: {
+    labels: ['Earnings Quality\n(OCF/PAT)', 'Cash Conversion\n(FCF)', 'EPS\nSustainability', 'Governance\nScore', 'Balance Sheet\nSafety', 'Piotroski\nF-Score'],
+    datasets: [
+      {
+        label: 'HDFC Bank SL (Q1 2026)',
+        data: [5, 4, 4.5, 5.5, 8, 4.5],
+        backgroundColor: 'rgba(210,153,34,0.2)',
+        borderColor: '#d29922',
+        pointBackgroundColor: '#d29922',
+        borderWidth: 2
+      },
+      {
+        label: 'Strong Bank Benchmark',
+        data: [8, 7, 8, 7, 7, 7],
+        backgroundColor: 'rgba(63,185,80,0.08)',
+        borderColor: 'rgba(63,185,80,0.5)',
+        pointBackgroundColor: '#3fb950',
+        borderWidth: 1,
+        borderDash: [5,3]
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { labels: { color: '#8b949e', font: { size: 11 } } } },
+    scales: {
+      r: {
+        min: 0, max: 10,
+        grid: { color: 'rgba(48,54,61,0.6)' },
+        pointLabels: { color: '#8b949e', font: { size: 11 } },
+        ticks: { color: '#8b949e', backdropColor: 'transparent', stepSize: 2 }
+      }
+    }
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const el = document.querySelector(a.getAttribute('href'));
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>

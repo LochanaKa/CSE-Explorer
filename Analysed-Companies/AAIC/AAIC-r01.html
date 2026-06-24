@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Softlogic Life Insurance PLC (AAIC.N0000) — CSE Research Report</title>
+<link rel="shortcut icon" href="../../Assets/CE-3.png" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --navy:#0A1628; --sky:#66B2FF; --teal:#2A9D8F; --offwhite:#F4F4F4; --charcoal:#2E2E2E;
+  --green:#3FB950; --red:#F85149; --yellow:#D29922; --purple:#BC8CFF;
+  --radius:14px;
+}
+html[data-theme="dark"]{
+  --bg:var(--navy); --bg-elevated:#0F1F36; --card:#122036; --card-2:#0E1B30; --border:#1F3454;
+  --text:var(--offwhite); --text-secondary:#C3CEDD; --muted:#8B98AC;
+  --accent:var(--sky); --accent-2:var(--teal);
+  --nav-bg:rgba(10,22,40,.92); --chart-grid:#233A5C; --chart-text:#C3CEDD;
+  --tooltip-bg:#0F1F36; --tooltip-text:var(--offwhite);
+  --table-stripe:#0E1B30; --shadow:0 8px 24px rgba(0,0,0,.35);
+}
+html[data-theme="light"]{
+  --bg:var(--offwhite); --bg-elevated:#FFFFFF; --card:#FFFFFF; --card-2:#F7F8FA; --border:#DCE1E6;
+  --text:var(--charcoal); --text-secondary:#4A5160; --muted:#6B7280;
+  --accent:#1E73C9; --accent-2:#1F7A6E;
+  --nav-bg:rgba(244,244,244,.92); --chart-grid:#DCE1E6; --chart-text:#2E2E2E;
+  --tooltip-bg:#FFFFFF; --tooltip-text:#2E2E2E;
+  --table-stripe:#F7F8FA; --shadow:0 8px 24px rgba(10,22,40,.08);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.55;transition:background .2s ease,color .2s ease;}
+h1,h2,h3,h4{font-family:inherit;line-height:1.25;}
+a{color:var(--accent);text-decoration:none;}
+.muted{color:var(--muted);}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.brand{font-weight:800;letter-spacing:.3px;margin-right:auto;display:flex;align-items:center;gap:8px;}
+.brand .tick{font-size:12px;background:var(--accent);color:var(--navy);padding:2px 8px;border-radius:999px;font-weight:700;}
+.navlinks{display:flex;gap:14px;flex-wrap:wrap;}
+.navlinks a{font-size:13px;color:var(--text-secondary);font-weight:600;padding:6px 4px;}
+.navlinks a:hover{color:var(--accent);}
+#themeToggle{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:999px;width:38px;height:38px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#themeToggle:hover{border-color:var(--accent);}
+
+/* HERO */
+.hero{padding:42px 0 26px;border-bottom:1px solid var(--border);}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;}
+.hero h1{font-size:30px;margin:0 0 4px;}
+.hero .ticker{font-family:ui-monospace,Menlo,monospace;color:var(--accent);font-size:15px;font-weight:700;}
+.hero .sub{color:var(--text-secondary);margin-top:6px;max-width:640px;}
+.price-badge{text-align:right;}
+.price-badge .price{font-size:34px;font-weight:800;}
+.price-badge .chg{color:var(--green);font-weight:700;font-size:14px;}
+.verdict{display:inline-block;margin-top:10px;padding:7px 16px;border-radius:999px;font-weight:800;font-size:13px;letter-spacing:.4px;}
+.v-buy{background:var(--green);color:#08210C;}
+.v-hold{background:var(--yellow);color:#2B1E00;}
+.v-avoid{background:var(--red);color:#2B0805;}
+
+/* SCORECARD */
+.scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 0;}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;}
+.metric .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+.metric .value{font-size:20px;font-weight:800;margin-top:4px;}
+.metric .delta{font-size:12px;font-weight:700;margin-top:2px;}
+.up{color:var(--green);} .down{color:var(--red);} .flat{color:var(--muted);}
+
+/* SECTIONS */
+section{padding:40px 0;border-bottom:1px solid var(--border);}
+section h2{font-size:24px;margin:0 0 4px;display:flex;align-items:center;gap:10px;}
+section .phase-tag{font-size:11px;background:var(--card-2);border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:999px;font-weight:700;}
+section > .lead{color:var(--text-secondary);max-width:760px;margin-bottom:22px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr;} .hero-top{flex-direction:column;} .price-badge{text-align:left;}}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px;}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--border);}
+th{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;font-weight:700;}
+tbody tr:nth-child(even){background:var(--table-stripe);}
+.flag-g{color:var(--green);font-weight:700;} .flag-y{color:var(--yellow);font-weight:700;} .flag-r{color:var(--red);font-weight:700;}
+
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-top:16px;}
+.chart-box h4{margin:0 0 4px;font-size:14px;}
+.chart-box .note{font-size:12px;color:var(--muted);margin-bottom:10px;}
+canvas{max-height:340px;}
+
+.summary-card{background:linear-gradient(135deg,var(--card),var(--card-2));border:1px solid var(--border);border-radius:var(--radius);padding:26px;}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px;}
+.pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.pill{font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid var(--border);}
+
+footer{padding:30px 0 60px;text-align:center;color:var(--muted);font-size:12.5px;}
+footer .disc{max-width:680px;margin:0 auto 8px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">Softlogic Life <span class="tick">AAIC.N0000</span></div>
+    <div class="navlinks">
+      <a href="#overview">Overview</a>
+      <a href="#financials">Financials</a>
+      <a href="#governance">Governance</a>
+      <a href="#crisis">Crisis</a>
+      <a href="#technical">Technical</a>
+      <a href="#global">Global</a>
+      <a href="#verdict">Verdict</a>
+    </div>
+    <button id="themeToggle" title="Toggle light/dark mode"><span id="themeToggleIcon">☀️</span></button>
+  </div>
+</nav>
+
+<header class="hero wrap" id="overview">
+  <div class="hero-top">
+    <div>
+      <h1>Softlogic Life Insurance PLC</h1>
+      <div class="ticker">CSE: AAIC.N0000 &nbsp;·&nbsp; Sector: Life Insurance &nbsp;·&nbsp; Listed 2000</div>
+      <p class="sub">Sri Lanka's 2nd-largest life insurer by gross written premium, formerly Asian Alliance Insurance, majority-owned by the Softlogic Group. This report walks through the business, the numbers, the risks, and a specific price view — explained the way I'd explain it to a smart friend who's never bought a stock before.</p>
+      <div class="verdict v-buy">⚡ VERDICT: BUY (Long-Term) / ACCUMULATE ON DIPS</div>
+    </div>
+    <div class="price-badge">
+      <div class="label muted" style="font-size:12px;">CURRENT PRICE</div>
+      <div class="price">Rs. 94.00</div>
+      <div class="chg up">▲ +23.6% (1Y)</div>
+      <div class="muted" style="font-size:12px;margin-top:6px;">Market Cap: Rs. 29.7B&nbsp;·&nbsp;P/E: 6.1×</div>
+    </div>
+  </div>
+
+  <div class="scorecard">
+    <div class="metric"><div class="label">Revenue (FY25)</div><div class="value">Rs. 44.9B</div><div class="delta up">▲ 8.4% YoY</div></div>
+    <div class="metric"><div class="label">Net Profit (FY25)</div><div class="value">Rs. 4.68B</div><div class="delta up">▲ 3.5% YoY</div></div>
+    <div class="metric"><div class="label">EPS (FY25)</div><div class="value">Rs. 14.79</div><div class="delta up">▲ 17.3% YoY</div></div>
+    <div class="metric"><div class="label">ROE</div><div class="value">38.97%</div><div class="delta flat">5-yr avg ~29%</div></div>
+    <div class="metric"><div class="label">Dividend Yield</div><div class="value">4.7%</div><div class="delta flat">Rs. 4.50/share</div></div>
+    <div class="metric"><div class="label">Debt / Equity</div><div class="value">0.14×</div><div class="delta up">Improved YoY</div></div>
+  </div>
+</header>
+
+<!-- ================= PHASE 0/1 — IDENTITY & HISTORY ================= -->
+<section class="wrap">
+  <h2><span class="phase-tag">PHASE 0–1</span> Who Is Softlogic Life, And How Did It Get Here?</h2>
+  <p class="lead">Before looking at a single number, it helps to know the story — what the company actually does, who owns it, and how it grew.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4 style="margin-top:0;">🏢 The Business, In Plain English</h4>
+      <p>Softlogic Life sells life insurance — policies that pay out money to your family if you die, or to you if you save through the policy and survive to retirement. Think of it as a long-term promise: you pay a small amount every month (a "premium"), and the company invests that money. Most of the time it pays out claims and gives you back growth on your savings; if you pass away, your family gets a lump sum.</p>
+      <p>The company runs two "buckets" of money: the <strong>Policyholder Fund</strong> (everyone's premiums, used to pay claims and benefits) and the <strong>Shareholder Fund</strong> (the company's own capital, invested to earn returns for shareholders). Both showed strong growth in FY2025.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">📜 The 25-Year Story</h4>
+      <ul style="padding-left:18px;margin:0;">
+        <li><strong>1999</strong> — Founded as <em>Asian Alliance Insurance</em>, a joint venture between Asia Capital PLC and Richard Pieris & Co.</li>
+        <li><strong>2000</strong> — Listed on the CSE Diri Savi Board.</li>
+        <li><strong>2011</strong> — Softlogic Holdings (via Softlogic Capital PLC) bought a 73.5% controlling stake for Rs. 3.3B. Richard Pieris exited.</li>
+        <li><strong>2012</strong> — Sold 19% stakes each to <strong>DEG</strong> (German development finance institution) and <strong>Norfund</strong> — bringing in disciplined, long-term foreign capital and governance standards.</li>
+        <li><strong>2016</strong> — Spun off its general (non-life) insurance business to Fairfax Financial and rebranded as <strong>Softlogic Life Insurance</strong>, going "life-only."</li>
+        <li><strong>2016–2025</strong> — Climbed from the <strong>5th to the 2nd-largest</strong> life insurer in Sri Lanka, with gross written premiums growing roughly 10× in a decade.</li>
+        <li><strong>July 2025</strong> — Completed a <strong>100% acquisition of Allianz Life Insurance Lanka</strong> (the German Allianz Group's local life book), rebranded as SL Insurance Lanka Ltd, a wholly-owned subsidiary — a major scale-up move.</li>
+        <li><strong>Jan 2026</strong> — Secured USD 15M in long-term capital from <strong>Norfund and OP Finnfund</strong> to fund further growth, and won "AI Initiative of the Year" at the 2025 Asia Insurance Awards for its AI-driven underwriting and claims.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h4 style="margin-top:0;">🧬 Ownership Structure — Who Actually Controls This Company?</h4>
+    <table>
+      <thead><tr><th>Shareholder</th><th>Stake</th><th>What This Means</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Softlogic Capital PLC</strong></td><td>~51.7%</td><td>Controlling parent. Softlogic Capital itself is a subsidiary of <strong>Softlogic Holdings PLC</strong> (the listed conglomerate, ticker SHL.N0000), Sri Lanka's largest retail/healthcare/ICT/leisure group, chaired and founded by Ashok Pathirage.</td></tr>
+        <tr><td>Dalvik Inclusion Pvt Ltd / impact investors (DEG, Norfund-linked vehicles)</td><td>~19%</td><td>Development-finance-grade investors — these typically demand strong governance and reporting discipline, a quiet positive signal.</td></tr>
+        <tr><td>Milford (Ceylon)</td><td>~19%</td><td>Institutional fund manager — adds market discipline and liquidity-aware ownership.</td></tr>
+        <tr><td>Free float (other CSE shareholders)</td><td>~10%</td><td>Relatively thin free float — a structural reason the stock can be more volatile and harder to accumulate in size than its fundamentals alone would suggest.</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:10px;font-size:13px;">⚠️ <strong>Important context:</strong> the ultimate parent, <strong>Softlogic Holdings PLC</strong>, has been in real financial distress at the group level — Wikipedia-sourced figures show Softlogic Holdings posted a <strong>net loss of roughly Rs. 23.7B and negative shareholder equity of about Rs. 17.9B in FY2023</strong> at the consolidated group level. This is a group-level overhang, not a Softlogic Life problem directly (Softlogic Life is separately regulated, ring-fenced by insurance solvency rules, and has its own healthy balance sheet) — but it's a real governance and "related-party" risk worth tracking, covered in Phase 2.</p>
+  </div>
+</section>
+
+<!-- ================= PHASE 2 — GOVERNANCE ================= -->
+<section class="wrap" id="governance">
+  <h2><span class="phase-tag">PHASE 2</span> Management &amp; Governance Deep Dive</h2>
+  <p class="lead">Numbers can be manipulated; people usually can't fake a 10-year track record. Here's who's running the show.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4 style="margin-top:0;">👤 Leadership Stability</h4>
+      <table>
+        <tbody>
+          <tr><td>Chairman</td><td>Ashok Pathirage <span class="muted">(since 2011, also founder/Chairman of Softlogic Holdings)</span></td></tr>
+          <tr><td>Managing Director (de facto CEO)</td><td>Iftikar Ahamed <span class="muted">(since 2014 — 11+ years, ex-Deputy CEO at Nations Trust Bank, ex-Deutsche Bank)</span></td></tr>
+          <tr><td>Board size</td><td>8 directors — majority non-executive, ~3 independent non-executive</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;"><span class="flag-g">🟢 Good</span> — over a decade of MD continuity is rare and valuable in Sri Lankan listed companies; high CEO turnover is usually a red flag, and this is the opposite.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">🚦 Governance Scorecard</h4>
+      <table>
+        <thead><tr><th>Item</th><th>Rating</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Management continuity</td><td><span class="flag-g">🟢 Good</span></td><td>MD tenure 11+ yrs, Chairman 14+ yrs</td></tr>
+          <tr><td>Board independence</td><td><span class="flag-g">🟢 Good</span></td><td>~3 of 8 directors independent non-executive; impact-investor board seats add scrutiny</td></tr>
+          <tr><td>Related-party exposure (parent group)</td><td><span class="flag-y">🟡 Caution</span></td><td>Ultimate parent Softlogic Holdings has had serious group-level financial stress (negative equity in FY2023) — watch for any cash upstreamed to the parent beyond normal dividends</td></tr>
+          <tr><td>Capital discipline</td><td><span class="flag-g">🟢 Good</span></td><td>Executed a Rs. 6B share buyback in 2024 while still keeping CAR ratio ~3× the regulatory minimum — disciplined, shareholder-friendly use of excess capital</td></tr>
+          <tr><td>Regulatory standing</td><td><span class="flag-g">🟢 Good</span></td><td>No adverse IRCSL findings identified in research; CAR consistently above the 120% regulatory floor every year reviewed</td></tr>
+          <tr><td>2023 takeover-bid episode</td><td><span class="flag-y">🟡 Caution</span></td><td>In Feb 2023, Softlogic Capital disclosed it was evaluating an unsolicited bid for Softlogic Life (market speculation pointed to AIA Insurance Lanka). The bid never closed — the company instead went on to acquire Allianz Life itself in 2025. Worth knowing the parent has, in the past, been open to selling control.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h4 style="margin-top:0;">🔍 Related-Party & Conflict-of-Interest Notes</h4>
+    <p>No specific evidence of value being siphoned from Softlogic Life to the distressed parent was found in this research — the company's own balance sheet, solvency ratios, and cash position have all strengthened, not weakened, even as the parent group struggled. That said, minority shareholders in any Sri Lankan group company with a financially stressed parent should keep an eye on: (1) related-party loans or guarantees flowing to Softlogic Capital/Holdings, (2) any future "special dividend" pressure to support the parent, and (3) disclosure quality around inter-group transactions in each annual report. None of these are currently flagged as active problems, but they are the standard governance risks for a subsidiary of a stressed conglomerate.</p>
+  </div>
+</section>
+
+<!-- ================= PHASE 3 — FINANCIALS ================= -->
+<section class="wrap" id="financials">
+  <h2><span class="phase-tag">PHASE 3</span> 5-Year Financial Analysis</h2>
+  <p class="lead">Note on data depth: audited, line-item financials going back a clean 10 years were not all consistently available from public aggregators during this research session — the numbers below are five full fiscal years (FY2021–FY2025) of verified data from S&P Global Market Intelligence (via stockanalysis.com), cross-checked against Softlogic Life's own 2024 Integrated Annual Report. Where the company's own narrative gives a longer-run figure (e.g. "GWP grew 10× in a decade"), it's noted as such rather than presented as a hard number.</p>
+
+  <div class="chart-box">
+    <h4>📈 Revenue, Net Profit & EPS — FY2021–FY2025</h4>
+    <div class="note">Revenue and Net Profit in Rs. Millions (left axis), EPS in Rs. (right axis). 2022's economic-crisis dip in profit growth and 2025's deceleration in EPS growth (still +17%, just slower than 2024's +67%) are both visible.</div>
+    <canvas id="chartRevenue"></canvas>
+  </div>
+
+  <div class="grid2" style="margin-top:18px;">
+    <div class="chart-box" style="margin-top:0;">
+      <h4>🏦 Debt-to-Equity Ratio — FY2021–FY2025</h4>
+      <div class="note">Lower is generally safer. The 2024 buyback temporarily shrank equity (pushing the ratio up that year) before FY2025's debt paydown brought it to a 5-year low.</div>
+      <canvas id="chartDebt"></canvas>
+    </div>
+    <div class="chart-box" style="margin-top:0;">
+      <h4>💵 Operating Cash Flow vs Net Profit</h4>
+      <div class="note">When the cash bar is taller than the profit bar, earnings are well-backed by real cash — good. 2023 is the one year cash flow lagged profit (flagged below).</div>
+      <canvas id="chartOcf"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h4 style="margin-top:0;">📋 Key Ratios Explained Simply</h4>
+    <table>
+      <thead><tr><th>Ratio</th><th>What It Means</th><th>FY2025</th><th>5-Yr Trend</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>P/E Ratio</td><td>Price you pay for Rs. 1 of yearly earnings</td><td>6.1×</td><td>12.65× → 6.1× (cheaper relative to earnings as profits grew faster than the price)</td><td><span class="flag-g">🟢 Cheap</span> for a 20%+ ROE compounder</td></tr>
+        <tr><td>P/B Ratio</td><td>Price vs. what the company actually owns net of debt</td><td>1.8–2.1×</td><td>2.52× → ~2× </td><td><span class="flag-y">🟡 Fair</span> — not dirt cheap, but reasonable for an insurer earning ~39% ROE</td></tr>
+        <tr><td>ROE</td><td>How well it turns shareholders' money into profit</td><td>38.97%</td><td>20.5% → 25% → 23.5% → 38.2% → 39.0%</td><td><span class="flag-g">🟢 Excellent</span> — well above typical insurer ROE of 12-18%</td></tr>
+        <tr><td>ROA</td><td>How well it uses ALL its assets (not just equity)</td><td>7.16%</td><td>5.4% → 2.8% → 5.7% → 11.6% → 7.2%</td><td><span class="flag-g">🟢 Good</span> for an insurer (asset-heavy by nature)</td></tr>
+        <tr><td>Dividend Yield</td><td>Passive cash income just from holding the shares</td><td>4.7–4.9%</td><td>5.1% → 5.1% → 8.4% → 6.9% → 4.7%</td><td><span class="flag-g">🟢 Solid</span>, paid every year reviewed</td></tr>
+        <tr><td>Interest Coverage (EBIT/Interest)</td><td>How comfortably it can pay loan interest</td><td>~12.4×</td><td>Healthy throughout — debt levels are modest relative to earnings</td><td><span class="flag-g">🟢 Very safe</span></td></tr>
+        <tr><td>Current Ratio</td><td>Can it cover short-term bills with short-term assets?</td><td>2.77</td><td>2.60 → 1.20 → 1.94 → 1.30 → 2.77</td><td><span class="flag-g">🟢 Strong</span> in FY2025, though it swings year to year</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h4 style="margin-top:0;">🔬 Quality-of-Earnings Diagnostics (inwestout.com-style screens)</h4>
+    <p class="muted" style="font-size:13px;margin-top:-4px;">These checks ask one question: is the profit on the income statement actually backed by real cash, or partly an accounting artifact?</p>
+    <table>
+      <thead><tr><th>Diagnostic</th><th>FY2025</th><th>5-Yr Pattern</th><th>Flag</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Quality-of-Earnings Ratio</strong> (PAT ÷ OCF)</td><td>≈0.64×</td><td>0.30× (2021) → 0.52× (2022) → <strong>1.68× (2023)</strong> → 0.78× (2024) → 0.64× (2025)</td><td><span class="flag-g">🟢 2025 is healthy</span> — but <span class="flag-r">🔴 2023 crossed the &gt;1.5× warning line</span>, meaning that year's reported profit ran ahead of actual cash collected (plausible explanation: 2023 was peak Sri Lankan economic-crisis turmoil, with forex losses (-Rs.402M) distorting both sides of the ledger). The ratio has since normalized well below the danger zone.</td></tr>
+        <tr><td><strong>EPS Divergence</strong> (annual vs. recent run-rate)</td><td>TTM EPS ≈15.39 vs FY2025 EPS 14.79</td><td>+4% gap</td><td><span class="flag-g">🟢 Fine</span> — well under the 30% rollover-warning threshold; earnings momentum is still accelerating into FY2026, not decelerating</td></tr>
+        <tr><td><strong>Working Capital Trap</strong> (Receivables vs Revenue growth)</td><td>Other receivables ~Rs.2.0B vs Rs.44.9B revenue</td><td>Receivables have NOT grown faster than revenue in any reviewed year</td><td><span class="flag-g">🟢 No trap detected</span></td></tr>
+        <tr><td><strong>Piotroski-style F-Score</strong> (adapted for an insurer, /9)</td><td>~6/9</td><td>ROA positive ✅, OCF positive ✅, leverage down YoY ✅, current ratio up YoY ✅, no net new share issuance (buyback instead) ✅, but ROA and asset turnover both dipped slightly YoY ❌❌, and 2024's merger/restructuring charges complicate a clean accrual read ❌</td><td><span class="flag-y">🟡 Solid, not perfect</span> — standard caveat: Piotroski's F-Score was designed for industrial/retail balance sheets, not insurers, so treat this as a rough cross-check, not gospel</td></tr>
+        <tr><td><strong>Altman Z-Score / bankruptcy risk</strong></td><td>n/a</td><td>—</td><td><span class="flag-y">🟡 Not meaningfully applicable</span> — Altman's model explicitly excludes financial institutions/insurers because their balance sheets (large investment portfolios funded by policyholder liabilities) violate its core assumptions. The more relevant solvency check for an insurer is the <strong>regulatory Capital Adequacy Ratio (CAR)</strong> below.</td></tr>
+        <tr><td><strong>Capital Adequacy Ratio (CAR)</strong> — the real solvency test</td><td>Comfortably above 120% minimum, historically ~3× the requirement</td><td>Maintained every year reviewed, even after the Rs. 6B 2024 buyback</td><td><span class="flag-g">🟢 Very strong</span> — this is the metric Sri Lanka's insurance regulator (IRCSL) actually uses, and it's the one that matters most for policyholder safety</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-box">
+    <h4>🕸️ Company Health Scorecard</h4>
+    <div class="note">Six dimensions scored 0–10 from the research above, vs. an estimated Sri Lankan life-insurance industry average.</div>
+    <canvas id="chartRadarHealth"></canvas>
+  </div>
+
+  <div class="chart-box">
+    <h4>🕸️ Quality-of-Earnings Profile</h4>
+    <div class="note">Earnings Quality is shown inverted (high = good, i.e. low PAT/OCF). Governance and Balance Sheet Safety use the CAR-based solvency view rather than Altman Z, for the reason explained above.</div>
+    <canvas id="chartRadarQuality"></canvas>
+  </div>
+</section>
+
+<!-- ================= PHASE 4 — CRISIS ================= -->
+<section class="wrap" id="crisis">
+  <h2><span class="phase-tag">PHASE 4</span> How Has It Survived Sri Lanka's Tough Years?</h2>
+  <p class="lead">A company's character shows up in a crisis, not in good times. Here's how Softlogic Life held up through every major shock in the last decade.</p>
+  <div class="card">
+    <table>
+      <thead><tr><th>Period</th><th>What Happened</th><th>How Softlogic Life Reacted</th><th>Resilience</th></tr></thead>
+      <tbody>
+        <tr><td>2019</td><td>Easter Sunday terror attacks — tourism collapsed, confidence shaken nationwide</td><td>Life insurance demand is sticky (people don't cancel policies in a panic); the business kept growing through this period</td><td><span class="flag-g">🟢 Resilient</span></td></tr>
+        <tr><td>2020–2021</td><td>COVID-19 pandemic, lockdowns, health-system strain</td><td>Revenue still grew (+30.7% in 2021); higher mortality claims were a real cost, but the protection-product demand surge offset it</td><td><span class="flag-g">🟢 Resilient</span></td></tr>
+        <tr><td>2022</td><td>Sri Lanka's sovereign default, LKR collapse (USD/LKR briefly hit ~372), 50%+ inflation, fuel/power crisis, IMF bailout negotiations</td><td>Net profit growth slowed sharply and currency losses hit the books (-Rs.2,020M loss on investment sales that year); the company still stayed profitable and kept paying a dividend</td><td><span class="flag-y">🟡 Moderately Affected</span></td></tr>
+        <tr><td>2023</td><td>Domestic debt restructuring, continued high rates, the year the quality-of-earnings ratio briefly flagged red</td><td>Revenue still grew +31.8%; profit grew but cash conversion lagged — the one genuinely "watch closely" year in this dataset</td><td><span class="flag-y">🟡 Moderately Affected</span></td></tr>
+        <tr><td>2024–2025</td><td>Post-crisis stabilization, IMF program progressing, rate cuts</td><td>Best two years in the dataset: revenue +34.6% then +8.4%, EPS +66.6% then +17.3%, completed the Allianz Life acquisition, executed a confident Rs. 6B buyback</td><td><span class="flag-g">🟢 Strong recovery & expansion</span></td></tr>
+        <tr><td>Nov–Dec 2025</td><td><strong>Cyclone Ditwah</strong> — Sri Lanka's worst flooding disaster in decades, ~$4.1B in national damage (≈4% of GDP), 600+ dead/missing, all 25 districts hit</td><td>No company-specific disclosure of major claims impact found in this research; life insurers are typically far less exposed to a flood/property event than general (non-life) insurers, since Softlogic Life exited the general insurance business back in 2016</td><td><span class="flag-g">🟢 Limited direct exposure</span> (see Phase 6A for the macro read-through)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PHASE 5 — TECHNICAL ================= -->
+<section class="wrap" id="technical">
+  <h2><span class="phase-tag">PHASE 5</span> Technical Analysis</h2>
+  <p class="lead">What the chart is saying right now, in plain terms.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4 style="margin-top:0;">📊 Current Picture</h4>
+      <table>
+        <tbody>
+          <tr><td>Trend</td><td><span class="flag-g">Uptrend</span> — multi-year pattern, with the stock recently breaking decisively above its old resistance zone</td></tr>
+          <tr><td>Prior resistance (now likely support)</td><td>~Rs. 75–76</td></tr>
+          <tr><td>Prior support floor</td><td>~Rs. 58–64</td></tr>
+          <tr><td>52-week range (approx., based on available data)</td><td>Rs. 58.10 – Rs. 94 (high made very recently)</td></tr>
+          <tr><td>RSI (Relative Strength Index)</td><td>~63 — firmly bullish momentum, but not yet in classic "overbought" (&gt;70) territory</td></tr>
+          <tr><td>Beta (volatility vs. the CSE market)</td><td>~0.77–0.89 — moves a bit less violently than the broader market</td></tr>
+          <tr><td>Volume / institutional interest</td><td>CSE has historically queried the company twice over unusual price moves (a 136% rally episode tied to takeover speculation), so liquidity can be lumpy around news events</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">🧭 Reading The Chart Like a Beginner</h4>
+      <p><strong>Support</strong> is a price floor — like a trampoline, where buyers have historically stepped in. <strong>Resistance</strong> is a price ceiling — like a glass ceiling, where sellers have historically taken profit and pushed the price back down.</p>
+      <p>For years, Rs. 64–76 acted as a "buy zone / resistance" range. The stock has now broken cleanly above that old ceiling and is trading near Rs. 94 — its highest level in this dataset. That's bullish, but it also means the stock is no longer "on sale" at the price levels chartists were watching a year ago. A pullback toward the old Rs. 75–86 zone (now expected to act as new support) would be the more attractive technical entry than chasing fresh highs.</p>
+      <p><strong>RSI ~63</strong> means the stock has strong upward momentum without yet being stretched to the point where a sharp pullback is statistically more likely (that typically starts above RSI 70).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PHASE 6/6A — GLOBAL CONTEXT ================= -->
+<section class="wrap" id="global">
+  <h2><span class="phase-tag">PHASE 6</span> Global Sector Context &amp; Macro Conditions</h2>
+  <p class="lead">What's happening in the world — and in Sri Lanka's economy specifically — that actually moves the needle for this company.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4 style="margin-top:0;">🌍 Global Life-Insurance Sector</h4>
+      <p>Globally, life insurance in emerging/frontier markets is a structurally growing industry — rising incomes plus low existing insurance penetration ("insurance penetration" = insurance premiums as a % of GDP) means there's a long growth runway as more households can afford protection products for the first time. Sri Lanka's life insurance penetration remains low by regional standards, which is the core bull case for the whole sector, not just this one company.</p>
+      <p>Consolidation is also a live global theme — multinational insurers (like Allianz) have been exiting smaller frontier markets to focus capital elsewhere, creating acquisition opportunities for strong local players. Softlogic Life's purchase of Allianz's Sri Lankan life book in 2025 is a direct example of this trend playing in the company's favor.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">🌐 Global Economy Snapshot</h4>
+      <table>
+        <tbody>
+          <tr><td>USD/LKR Exchange Rate</td><td>~Rs. 333.7 per USD (mid-June 2026), rupee down ~10–11% vs. USD over the past year</td></tr>
+          <tr><td>Sri Lanka Policy Rate (CBSL)</td><td>7.75% (held steady through late 2025/early 2026)</td></tr>
+          <tr><td>Sri Lanka Inflation</td><td>5.5% (May 2026) — back near the central bank's 5% target after a low-inflation 2024–25 stretch, now ticking back up partly on Middle East-driven fuel/transport costs</td></tr>
+          <tr><td>US Federal Reserve Rate</td><td>~3.75%</td></tr>
+          <tr><td>IMF Program Status</td><td>Staff-level agreement reached (Apr 2026) on the combined 5th &amp; 6th reviews of the Extended Fund Facility; ~$700M tranche pending final Board approval, conditional on cost-recovery fuel/electricity pricing reforms</td></tr>
+          <tr><td>Sri Lanka GDP Growth</td><td>5.0% in 2025 (resilient despite Cyclone Ditwah's Q4 disruption)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px;">
+    <h4 style="margin-top:0;">🌦️ Climate & Disaster Risk</h4>
+    <p><strong>Cyclone Ditwah (Nov–Dec 2025)</strong> was Sri Lanka's worst flooding disaster in decades — ~$4.1B in direct damage (~4% of GDP), 600+ dead/missing, 91,000+ homes damaged, all 25 districts affected. For a <em>life</em> insurer like Softlogic Life, the direct underwriting exposure is far lower than it would be for a property/general insurer (Softlogic Life exited general insurance back in 2016) — but the indirect effects matter: a poorer, more indebted population in flood-hit districts is a headwind for new policy sales and premium persistency in 2026, and rising reconstruction-driven inflation (visible in the May 2026 CPI print) raises claims-cost inflation on health and protection products.</p>
+    <table>
+      <thead><tr><th>Climate Factor</th><th>Current Status</th><th>Impact on Softlogic Life</th><th>Severity</th></tr></thead>
+      <tbody>
+        <tr><td>Cyclone Ditwah aftermath</td><td>Reconstruction phase ongoing through 2026; ~$818M emergency aid committed so far (~20% of estimated need)</td><td>Headwind to new business in worst-hit districts (Kandy, Badulla, Nuwara Eliya); inflationary pressure on claims costs</td><td><span class="flag-y">🟡</span></td></tr>
+        <tr><td>Future cyclone/monsoon risk</td><td>Climate scientists note the storm was likely "supercharged" by warmer sea temperatures — a recurring risk, not a one-off</td><td>Structural, long-term watch item for the whole Sri Lankan insurance sector</td><td><span class="flag-y">🟡</span></td></tr>
+        <tr><td>Shipping/Suez/Red Sea disruption</td><td>Ongoing Middle East tensions affecting global shipping and oil prices</td><td>Indirect — raises imported-fuel costs, feeds into the inflation that's now ticking up</td><td><span class="flag-y">🟡</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PHASE 8 — WORLD/POLITICAL RISK ================= -->
+<section class="wrap">
+  <h2><span class="phase-tag">PHASE 8</span> World Crisis, War &amp; Political Risk</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4 style="margin-top:0;">⚔️ Active Conflicts &amp; Effect on This Company</h4>
+      <table>
+        <tbody>
+          <tr><td>Middle East Conflict</td><td>Driving up global oil/fuel prices and shipping costs, a direct contributor to Sri Lanka's recent inflation uptick (transport costs were a named driver in the April/May 2026 CPI reports)</td></tr>
+          <tr><td>Russia–Ukraine War</td><td>Lower direct relevance to Sri Lanka than in 2022; residual effect via global grain/energy prices</td></tr>
+          <tr><td>South China Sea Tensions</td><td>Low direct relevance to a domestic-focused life insurer</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">🏛️ Political Risk Factors</h4>
+      <table>
+        <tbody>
+          <tr><td>Sri Lanka Government Stability</td><td>President Anura Kumara Dissanayake's NPP/JVP government (in power since Sept 2024) has presented its 2026 budget and is managing a politically sensitive IMF-mandated fuel/electricity price reform — <span class="flag-y">🟡 Medium</span> watch item given the Cyclone Ditwah recovery burden</td></tr>
+          <tr><td>IMF Program Continuity</td><td>On track but conditional on unpopular subsidy-removal reforms — <span class="flag-y">🟡 Medium</span></td></tr>
+          <tr><td>Group-level political/financial risk (Softlogic Holdings)</td><td>Parent conglomerate's distressed balance sheet is a Sri Lanka-specific corporate-governance risk, not a sovereign one — <span class="flag-y">🟡 Medium</span>, tracked in Phase 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px;">
+    <h4 style="margin-top:0;">🌐 Composite External Risk Meter</h4>
+    <pre style="white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:13px;line-height:1.7;color:var(--text-secondary);background:var(--card-2);padding:14px;border-radius:10px;border:1px solid var(--border);">
+War / Geopolitical Risk:    🟡 Medium (indirect, via oil & shipping)
+Climate / Weather Risk:     🟡 Medium (post-Ditwah reconstruction drag)
+Political Risk (Sri Lanka): 🟡 Medium (IMF reform sensitivity, parent-group stress)
+Global Macro Risk:          🟢 Low-Medium (inflation ticking up but near target, GDP growing)
+─────────────────────────────────────────────
+OVERALL EXTERNAL RISK:      🟡 MEDIUM
+Price Target Adjustment:    No change to long-term targets; trim near-term short-term target slightly to reflect post-rally extension + macro noise
+    </pre>
+  </div>
+</section>
+
+<!-- ================= PHASE 7 — VERDICT ================= -->
+<section class="wrap" id="verdict">
+  <h2><span class="phase-tag">PHASE 7</span> Investment Verdict &amp; Price Targets</h2>
+
+  <div class="card">
+    <h4 style="margin-top:0;">🎯 Overall Scorecard</h4>
+    <table>
+      <thead><tr><th>Category</th><th>Score (1–10)</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Business Quality</td><td>8.5</td><td>Clear #2 market position, recently strengthened via the Allianz acquisition, in a structurally underpenetrated market</td></tr>
+        <tr><td>Financial Health</td><td>8.5</td><td>Low debt, strong CAR, strong cash conversion outside one flagged year</td></tr>
+        <tr><td>Management Quality</td><td>8.0</td><td>Long-tenured leadership, disciplined capital allocation (buyback while still over-capitalized)</td></tr>
+        <tr><td>Growth Potential</td><td>8.0</td><td>Low insurance penetration in Sri Lanka + recent inorganic scale-up via Allianz deal</td></tr>
+        <tr><td>Crisis Resilience</td><td>7.5</td><td>Held up through Easter attacks, COVID, the 2022 default, and 2023's turbulence; limited direct Ditwah exposure</td></tr>
+        <tr><td>Current Valuation</td><td>6.0</td><td>Already up ~24% over the past year and trading at/near 5-year highs; cheap on P/E (6.1×) relative to ROE, but technically extended short-term</td></tr>
+        <tr><td><strong>TOTAL SCORE</strong></td><td><strong>46.5 / 60</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2" style="margin-top:18px;">
+    <div class="card">
+      <h4 style="margin-top:0;">💰 Price Targets (LKR)</h4>
+      <table>
+        <tbody>
+          <tr><td>🟢 Strong Accumulate Zone</td><td>Rs. 75 – Rs. 86</td></tr>
+          <tr><td>🟡 Fair Value (current)</td><td>Rs. 90 – Rs. 96</td></tr>
+          <tr><td>🔴 Stop Loss (for traders)</td><td>Rs. 70 <span class="muted">(below the old resistance-turned-support shelf)</span></td></tr>
+          <tr><td>🎯 Short-Term Target (3–6 mo)</td><td>Rs. 105</td></tr>
+          <tr><td>🚀 Long-Term Target (2–3 yr)</td><td>Rs. 165 – Rs. 190</td></tr>
+        </tbody>
+      </table>
+      <p class="muted" style="font-size:12.5px;">Long-term target assumes earnings keep compounding at a more moderate ~15–18%/yr (well below the 2024–25 burst) and the P/E re-rates modestly from today's cheap 6× toward 8–9×, still well below where high-ROE insurers in healthier markets trade.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0;">⏱ Time Horizon Advice</h4>
+      <p><strong>Short-term trading (weeks–months):</strong> the stock just broke to fresh highs on strong momentum (RSI ~63) — chasing here has worse risk/reward than waiting for a pullback toward Rs. 80–86, which is where the old resistance should now act as a floor.</p>
+      <p><strong>Long-term investing (2–5 yrs):</strong> this is the more compelling case. A 20%+ historical ROE, a disciplined, long-tenured management team, a low-penetration domestic market, and a recent scale-up acquisition all point toward a genuine long-term compounder — the parent-group governance risk is the main thing to monitor, not a reason to avoid the stock outright.</p>
+      <p><strong>Student investor advice:</strong> with limited capital, this is a better "buy a little now, add more on dips toward Rs. 80–86" stock than an all-in-today stock. Never put more than you can afford to lose into a single Sri Lankan equity, however good the story looks.</p>
+    </div>
+  </div>
+
+  <div class="summary-card" style="margin-top:24px;" id="summarycard">
+    <h3 style="margin-top:0;">📊 CSE Research Summary</h3>
+    <p style="margin:2px 0;"><strong>Company:</strong> Softlogic Life Insurance PLC &nbsp;|&nbsp; <strong>Ticker:</strong> AAIC.N0000 &nbsp;|&nbsp; <strong>Sector:</strong> Life Insurance &nbsp;|&nbsp; <strong>Current Price:</strong> Rs. 94.00</p>
+    <div class="summary-grid">
+      <div>
+        <p><strong>🏢 Business:</strong> Sri Lanka's #2 life insurer, owned by the Softlogic Group, recently expanded via the Allianz Life acquisition</p>
+        <p><strong>💰 Revenue (FY25):</strong> Rs. 44.9B &nbsp;|&nbsp; <strong>Net Profit:</strong> Rs. 4.68B</p>
+        <p><strong>📈 EPS:</strong> Rs. 14.79 &nbsp;|&nbsp; <strong>P/E:</strong> 6.1× &nbsp;|&nbsp; <strong>Div Yield:</strong> 4.7%</p>
+        <p><strong>🏦 Debt/Equity:</strong> 0.14 &nbsp;|&nbsp; <strong>ROE:</strong> 38.97%</p>
+        <p><strong>🔬 Earnings Quality:</strong> PAT/OCF ≈0.64× (healthy) &nbsp;|&nbsp; <strong>CAR:</strong> ~3× regulatory minimum</p>
+      </div>
+      <div>
+        <div class="pill-row">
+          <span class="pill" style="background:var(--green);color:#08210C;">🟢 Accumulate: Rs. 75–86</span>
+          <span class="pill" style="background:var(--red);color:#2B0805;">🔴 Stop Loss: Rs. 70</span>
+        </div>
+        <div class="pill-row">
+          <span class="pill" style="background:var(--accent);color:var(--navy);">🎯 Short Target: Rs. 105</span>
+          <span class="pill" style="background:var(--accent-2);color:var(--navy);">🚀 Long Target: Rs. 165–190</span>
+        </div>
+        <p style="margin-top:14px;"><strong>🌍 Global Macro:</strong> Neutral-favorable &nbsp;|&nbsp; <strong>🌦️ Climate Risk:</strong> Medium (post-Ditwah) &nbsp;|&nbsp; <strong>⚔️ Geopolitical Risk:</strong> Medium (indirect, oil/shipping) &nbsp;|&nbsp; <strong>🌐 Overall External Risk:</strong> MEDIUM</p>
+        <div class="verdict v-buy" style="margin-top:10px;">⚡ VERDICT: BUY (Long-Term) / ACCUMULATE ON DIPS</div>
+        <p class="muted" style="font-size:12.5px;margin-top:8px;">⏱ Best for: Long-term holding, with tactical patience on entry price</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+</br></br>
+  <p class="disc">This is research to help you think, not financial advice. Figures are compiled from public sources (CSE filings, the company's 2024 Integrated Annual Report, S&amp;P Global Market Intelligence via stockanalysis.com, Central Bank of Sri Lanka, World Bank, and news reporting) believed reliable as of June 2026, but markets move fast — always verify the latest price and filings before acting.</p>
+  <p>Generated by the CSE Research Analyst skill · Research & Resourses by Lochana Karunarathna</p>
+</footer>
+
+<script>
+/* ============== THEME ============== */
+let currentTheme = 'dark';
+const chartInstances = [];
+
+function getThemeColors(theme){
+  return theme === 'light'
+    ? { text:'#2E2E2E', grid:'#DCE1E6', tooltipBg:'#FFFFFF', tooltipText:'#2E2E2E' }
+    : { text:'#C3CEDD', grid:'#233A5C', tooltipBg:'#0F1F36', tooltipText:'#F4F4F4' };
+}
+
+function applyThemeToChart(chart, theme){
+  const c = getThemeColors(theme);
+  if (chart.options.scales){
+    Object.values(chart.options.scales).forEach(scale=>{
+      if (scale.ticks) scale.ticks.color = c.text;
+      if (scale.grid) scale.grid.color = c.grid;
+      if (scale.angleLines) scale.angleLines.color = c.grid;
+      if (scale.pointLabels) scale.pointLabels.color = c.text;
+    });
+  }
+  if (chart.options.plugins?.legend?.labels) chart.options.plugins.legend.labels.color = c.text;
+  if (chart.options.plugins?.tooltip){
+    chart.options.plugins.tooltip.backgroundColor = c.tooltipBg;
+    chart.options.plugins.tooltip.titleColor = c.tooltipText;
+    chart.options.plugins.tooltip.bodyColor = c.tooltipText;
+  }
+  chart.update();
+}
+
+function setTheme(theme){
+  currentTheme = theme;
+  document.documentElement.setAttribute('data-theme', theme);
+  const icon = document.getElementById('themeToggleIcon');
+  if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  chartInstances.forEach(ch => applyThemeToChart(ch, theme));
+}
+function toggleTheme(){ setTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+/* ============== DATA ============== */
+const years = ['FY2021','FY2022','FY2023','FY2024','FY2025'];
+const revenue = [20988, 23376, 30803, 41449, 44943];
+const netProfit = [2105, 2683, 2838, 4522, 4680];
+const eps = [5.61, 7.15, 7.57, 12.61, 14.79];
+const debtEquity = [0.38, 0.60, 0.45, 0.44, 0.14];
+const ocf = [6988, 5123, 1688, 6141, 7308];
+
+/* ============== CHARTS ============== */
+const tc = getThemeColors(currentTheme);
+
+const chartRevenue = new Chart(document.getElementById('chartRevenue'), {
+  type:'line',
+  data:{ labels:years, datasets:[
+    { label:'Revenue (Rs. M)', data:revenue, borderColor:'#66B2FF', backgroundColor:'rgba(102,178,255,.15)', yAxisID:'y', tension:.3, fill:true },
+    { label:'Net Profit (Rs. M)', data:netProfit, borderColor:'#2A9D8F', backgroundColor:'rgba(42,157,143,.15)', yAxisID:'y', tension:.3, fill:true },
+    { label:'EPS (Rs.)', data:eps, borderColor:'#D29922', backgroundColor:'rgba(210,153,34,.15)', yAxisID:'y1', tension:.3 }
+  ]},
+  options:{
+    responsive:true,
+    interaction:{ mode:'index', intersect:false },
+    scales:{
+      x:{ ticks:{color:tc.text}, grid:{color:tc.grid} },
+      y:{ position:'left', ticks:{color:tc.text}, grid:{color:tc.grid}, title:{display:true,text:'Rs. Millions',color:tc.text} },
+      y1:{ position:'right', ticks:{color:tc.text}, grid:{drawOnChartArea:false}, title:{display:true,text:'EPS (Rs.)',color:tc.text} }
+    },
+    plugins:{
+      legend:{ labels:{color:tc.text} },
+      tooltip:{ backgroundColor:tc.tooltipBg, titleColor:tc.tooltipText, bodyColor:tc.tooltipText }
+    }
+  }
+});
+chartInstances.push(chartRevenue);
+
+const chartDebt = new Chart(document.getElementById('chartDebt'), {
+  type:'bar',
+  data:{ labels:years, datasets:[{ label:'Debt / Equity', data:debtEquity, backgroundColor:'#66B2FF' }] },
+  options:{
+    responsive:true,
+    scales:{ x:{ ticks:{color:tc.text}, grid:{color:tc.grid} }, y:{ ticks:{color:tc.text}, grid:{color:tc.grid} } },
+    plugins:{ legend:{ labels:{color:tc.text} }, tooltip:{ backgroundColor:tc.tooltipBg, titleColor:tc.tooltipText, bodyColor:tc.tooltipText } }
+  }
+});
+chartInstances.push(chartDebt);
+
+const chartOcf = new Chart(document.getElementById('chartOcf'), {
+  type:'bar',
+  data:{ labels:years, datasets:[
+    { label:'Operating Cash Flow (Rs. M, est.)', data:ocf, backgroundColor:'#2A9D8F' },
+    { label:'Net Profit (Rs. M)', data:netProfit, backgroundColor:'#BC8CFF' }
+  ]},
+  options:{
+    responsive:true,
+    scales:{ x:{ ticks:{color:tc.text}, grid:{color:tc.grid} }, y:{ ticks:{color:tc.text}, grid:{color:tc.grid} } },
+    plugins:{ legend:{ labels:{color:tc.text} }, tooltip:{ backgroundColor:tc.tooltipBg, titleColor:tc.tooltipText, bodyColor:tc.tooltipText } }
+  }
+});
+chartInstances.push(chartOcf);
+
+const chartRadarHealth = new Chart(document.getElementById('chartRadarHealth'), {
+  type:'radar',
+  data:{
+    labels:['Financial Health','Business Quality','Management Quality','Growth Potential','Crisis Resilience','Current Valuation'],
+    datasets:[
+      { label:'Softlogic Life', data:[8.5,8.5,8.0,8.0,7.5,6.0], borderColor:'#66B2FF', backgroundColor:'rgba(102,178,255,.25)', pointBackgroundColor:'#66B2FF' },
+      { label:'Industry Average (est.)', data:[6.5,6.0,6.0,6.0,6.0,6.5], borderColor:'#BC8CFF', backgroundColor:'rgba(188,140,255,.15)', pointBackgroundColor:'#BC8CFF' }
+    ]
+  },
+  options:{
+    responsive:true,
+    scales:{ r:{ min:0, max:10, ticks:{color:tc.text, backdropColor:'transparent'}, grid:{color:tc.grid}, angleLines:{color:tc.grid}, pointLabels:{color:tc.text} } },
+    plugins:{ legend:{ labels:{color:tc.text} }, tooltip:{ backgroundColor:tc.tooltipBg, titleColor:tc.tooltipText, bodyColor:tc.tooltipText } }
+  }
+});
+chartInstances.push(chartRadarHealth);
+
+const chartRadarQuality = new Chart(document.getElementById('chartRadarQuality'), {
+  type:'radar',
+  data:{
+    labels:['Earnings Quality (inv.)','Cash Conversion','Earnings Sustainability','Governance Score','Balance Sheet Safety (CAR-based)','Piotroski-style F-Score'],
+    datasets:[{ label:'Softlogic Life', data:[7.5,7.0,8.0,7.5,9.0,6.5], borderColor:'#2A9D8F', backgroundColor:'rgba(42,157,143,.25)', pointBackgroundColor:'#2A9D8F' }]
+  },
+  options:{
+    responsive:true,
+    scales:{ r:{ min:0, max:10, ticks:{color:tc.text, backdropColor:'transparent'}, grid:{color:tc.grid}, angleLines:{color:tc.grid}, pointLabels:{color:tc.text} } },
+    plugins:{ legend:{ labels:{color:tc.text} }, tooltip:{ backgroundColor:tc.tooltipBg, titleColor:tc.tooltipText, bodyColor:tc.tooltipText } }
+  }
+});
+chartInstances.push(chartRadarQuality);
+
+/* Smooth scroll for nav */
+document.querySelectorAll('.navlinks a').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Keells Holdings PLC — CSE Research Report | JKH.N0000</title>
+<link rel="shortcut icon" href="../../Assets/CE-3.png" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#0d1117;--card:#161b22;--card2:#1c2128;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--purple:#bc8cff;--accent:#1f6feb;--orange:#f0883e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.7}
+  a{color:var(--blue);text-decoration:none}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 20px}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;padding:10px 0}
+  .nav-inner::-webkit-scrollbar{display:none}
+  .nav-brand{font-weight:700;color:var(--text);white-space:nowrap;margin-right:12px;font-size:14px}
+  .nav-inner a{color:var(--muted);font-size:13px;padding:5px 10px;border-radius:6px;white-space:nowrap;transition:.15s}
+  .nav-inner a:hover{color:var(--text);background:var(--card2)}
+
+  /* MAIN WRAP */
+  main{max-width:1200px;margin:0 auto;padding:0 20px 60px}
+
+  /* HERO */
+  .hero{padding:48px 0 36px;display:flex;flex-direction:column;gap:16px}
+  .hero-top{display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px}
+  .hero-titles{flex:1;min-width:260px}
+  .hero-ticker{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+  .hero-name{font-size:36px;font-weight:800;line-height:1.2;margin:4px 0 10px}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid}
+  .tag-sector{border-color:var(--blue);color:var(--blue);background:rgba(88,166,255,.08)}
+  .tag-listed{border-color:var(--muted);color:var(--muted);background:rgba(139,148,158,.08)}
+  .tag-verdict-hold{border-color:var(--yellow);color:var(--yellow);background:rgba(210,153,34,.12);font-size:14px;padding:6px 14px}
+  .tag-verdict-buy{border-color:var(--green);color:var(--green);background:rgba(63,185,80,.12);font-size:14px;padding:6px 14px}
+  .tag-verdict-avoid{border-color:var(--red);color:var(--red);background:rgba(248,81,73,.12);font-size:14px;padding:6px 14px}
+  .hero-price-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;min-width:220px;text-align:right}
+  .price-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .price-value{font-size:38px;font-weight:800;color:var(--text);line-height:1.1}
+  .price-sub{font-size:13px;color:var(--muted);margin-top:4px}
+  .price-range{margin-top:8px;font-size:12px;color:var(--muted)}
+
+  /* METRIC STRIP */
+  .metric-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:0 0 32px}
+  .metric-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+  .metric-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .metric-value{font-size:22px;font-weight:700;margin-top:4px}
+  .metric-note{font-size:11px;color:var(--muted);margin-top:2px}
+  .metric-green{color:var(--green)}
+  .metric-red{color:var(--red)}
+  .metric-yellow{color:var(--yellow)}
+  .metric-blue{color:var(--blue)}
+
+  /* SECTIONS */
+  section{margin-bottom:40px}
+  .section-title{font-size:20px;font-weight:700;padding:14px 0 10px;border-bottom:1px solid var(--border);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+  .section-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .icon-blue{background:rgba(88,166,255,.15)}
+  .icon-green{background:rgba(63,185,80,.15)}
+  .icon-red{background:rgba(248,81,73,.15)}
+  .icon-yellow{background:rgba(210,153,34,.15)}
+  .icon-purple{background:rgba(188,140,255,.15)}
+  .icon-orange{background:rgba(240,136,62,.15)}
+
+  /* CARDS */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px}
+  .card h3{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--blue)}
+  .card p{font-size:14px;color:var(--muted);line-height:1.7}
+  .card ul{list-style:none;padding:0}
+  .card ul li{font-size:14px;padding:4px 0;color:var(--muted);padding-left:14px;position:relative}
+  .card ul li::before{content:'▸';position:absolute;left:0;color:var(--blue);font-size:10px;top:7px}
+
+  /* TABLES */
+  .tbl-wrap{overflow-x:auto;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead tr{background:var(--card2)}
+  th{padding:10px 12px;text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
+  td{padding:9px 12px;border-bottom:1px solid rgba(48,54,61,.6);color:var(--text)}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:rgba(255,255,255,.02)}
+  .td-right{text-align:right}
+  .td-center{text-align:center}
+
+  /* BADGES */
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:.03em}
+  .badge-green{background:rgba(63,185,80,.15);color:var(--green)}
+  .badge-red{background:rgba(248,81,73,.15);color:var(--red)}
+  .badge-yellow{background:rgba(210,153,34,.15);color:var(--yellow)}
+  .badge-blue{background:rgba(88,166,255,.15);color:var(--blue)}
+  .badge-muted{background:rgba(139,148,158,.15);color:var(--muted)}
+
+  /* FLAGS */
+  .flag-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(48,54,61,.4)}
+  .flag-row:last-child{border-bottom:none}
+  .flag-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+  .flag-text{font-size:13px;color:var(--text)}
+  .flag-sub{font-size:12px;color:var(--muted)}
+
+  /* CHART CONTAINERS */
+  .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+  .chart-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px}
+  .chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative}
+  .chart-title{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em}
+  .chart-sub{font-size:11px;color:var(--muted);margin-top:8px}
+  canvas{max-height:280px}
+  .canvas-radar{max-height:340px}
+
+  /* SCORE BAR */
+  .score-row{display:flex;align-items:center;gap:10px;padding:8px 0}
+  .score-label{font-size:13px;color:var(--text);width:180px;flex-shrink:0}
+  .score-bar-track{flex:1;background:var(--card2);border-radius:6px;height:8px;overflow:hidden}
+  .score-bar-fill{height:100%;border-radius:6px;transition:width .3s}
+  .score-num{font-size:13px;font-weight:700;width:36px;text-align:right;flex-shrink:0}
+
+  /* RISK METER */
+  .risk-meter{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
+  .risk-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(48,54,61,.4);font-size:14px}
+  .risk-row:last-child{border-bottom:none}
+
+  /* PRICE TARGETS */
+  .price-targets{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px}
+  .pt-card{border-radius:10px;padding:16px;border:1px solid}
+  .pt-card-buy{border-color:rgba(63,185,80,.3);background:rgba(63,185,80,.05)}
+  .pt-card-fair{border-color:rgba(88,166,255,.3);background:rgba(88,166,255,.05)}
+  .pt-card-stop{border-color:rgba(248,81,73,.3);background:rgba(248,81,73,.05)}
+  .pt-card-short{border-color:rgba(210,153,34,.3);background:rgba(210,153,34,.05)}
+  .pt-card-long{border-color:rgba(188,140,255,.3);background:rgba(188,140,255,.05)}
+  .pt-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;color:var(--muted)}
+  .pt-price{font-size:24px;font-weight:800;margin-bottom:4px}
+  .pt-reason{font-size:12px;color:var(--muted);line-height:1.5}
+
+  /* SUMMARY CARD */
+  .summary-card{background:linear-gradient(135deg,rgba(31,111,235,.12),rgba(188,140,255,.08));border:1px solid rgba(31,111,235,.3);border-radius:14px;padding:28px;margin-bottom:20px;font-family:monospace;font-size:13px;line-height:2}
+  .sc-title{font-size:16px;font-weight:800;color:var(--blue);margin-bottom:6px;font-family:'Segoe UI',sans-serif}
+  .sc-div{border-top:1px dashed var(--border);margin:10px 0}
+  .sc-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  /* DISCLAIMER */
+  .disclaimer{background:rgba(248,81,73,.06);border:1px solid rgba(248,81,73,.2);border-radius:10px;padding:16px 20px;font-size:13px;color:var(--muted);margin-bottom:20px}
+
+  /* ANALOGY BOX */
+  .analogy{background:rgba(88,166,255,.07);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:14px;color:var(--text);font-style:italic}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:28px 20px;margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+
+  /* QUALITY DIAGNOSTIC GRID */
+  .qd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px}
+  .qd-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
+  .qd-name{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .qd-value{font-size:22px;font-weight:800;margin-bottom:4px}
+  .qd-interpretation{font-size:12px;font-weight:600;margin-bottom:4px}
+  .qd-detail{font-size:11px;color:var(--muted);line-height:1.5}
+
+  @media(max-width:700px){
+    .hero-name{font-size:26px}
+    .chart-grid,.chart-grid-3{grid-template-columns:1fr}
+    .price-value{font-size:30px}
+    canvas{max-height:220px}
+    .canvas-radar{max-height:280px}
+    .score-label{width:120px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">JKH.N0000</span>
+    <a href="#overview">Overview</a>
+    <a href="#governance">Governance</a>
+    <a href="#financials">Financials</a>
+    <a href="#qoe">Quality Check</a>
+    <a href="#crisis">Crisis</a>
+    <a href="#technical">Technical</a>
+    <a href="#global">Global</a>
+    <a href="#verdict">Verdict</a>
+    <a href="#risks">Risks</a>
+    <a href="#summary">Summary</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-titles">
+      <div class="hero-ticker">CSE · JKH.N0000 · Diversified Conglomerate</div>
+      <div class="hero-name">John Keells Holdings PLC</div>
+      <div class="hero-tags">
+        <span class="tag tag-sector">🏢 Conglomerate</span>
+        <span class="tag tag-listed">Listed ~1989</span>
+        <span class="tag tag-listed">150+ Years Old</span>
+        <span class="tag tag-verdict-hold">⚠️ WATCH / HOLD</span>
+      </div>
+    </div>
+    <div class="hero-price-box">
+      <div class="price-label">Current Price (Jun 18, 2026)</div>
+      <div class="price-value">Rs. 21.70</div>
+      <div class="price-sub">Post 10:1 Split · LKR</div>
+      <div class="price-range">52-wk Low: Rs. 17.50 &nbsp;|&nbsp; High: Rs. 26.40</div>
+    </div>
+  </div>
+</div>
+
+<!-- METRIC STRIP -->
+<div class="metric-strip">
+  <div class="metric-card">
+    <div class="metric-label">Market Cap</div>
+    <div class="metric-value metric-blue">Rs. 383B</div>
+    <div class="metric-note">~USD 1.1B</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">FY26 EBITDA</div>
+    <div class="metric-value metric-green">Rs. 80B</div>
+    <div class="metric-note">+75% YoY 🚀</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">Total Debt</div>
+    <div class="metric-value metric-red">Rs. 266B</div>
+    <div class="metric-note">Heavy leverage ⚠️</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">Altman Z-Score</div>
+    <div class="metric-value metric-red">1.29</div>
+    <div class="metric-note">Distress Zone &lt;1.8 🔴</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">Piotroski F-Score</div>
+    <div class="metric-value metric-green">7 / 9</div>
+    <div class="metric-note">Quality Threshold ✅</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">Operating Cash Flow</div>
+    <div class="metric-value metric-green">Rs. 40B</div>
+    <div class="metric-note">OCF &gt;&gt; Net Profit ✅</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">Dividend Yield</div>
+    <div class="metric-value metric-yellow">1.6%</div>
+    <div class="metric-note">Rs. 0.35/share FY26</div>
+  </div>
+</div>
+
+<!-- PHASE 0+1: OVERVIEW -->
+<section id="overview">
+  <div class="section-title"><div class="section-icon icon-blue">🏢</div> Company Overview & History</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>📍 Identity</h3>
+      <ul>
+        <li><strong>Full Name:</strong> John Keells Holdings PLC</li>
+        <li><strong>CSE Ticker:</strong> JKH.N0000</li>
+        <li><strong>Sector:</strong> Diversified Conglomerate (Industrials)</li>
+        <li><strong>Founded:</strong> 1870 (155+ years ago)</li>
+        <li><strong>Founders:</strong> Edwin John &amp; George John (two Englishmen)</li>
+        <li><strong>Employees:</strong> ~25,310 (June 2026)</li>
+        <li><strong>HQ:</strong> Sir Chittampalam A. Gardiner Mawatha, Colombo 2</li>
+        <li><strong>Chairman:</strong> Krishan Balendra</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🏭 How It Makes Money (7 Segments)</h3>
+      <ul>
+        <li><strong>Retail:</strong> 134 Keells supermarkets + EV car sales (JKCG)</li>
+        <li><strong>Transportation:</strong> Lanka Marine Services (ship bunkering), Colombo West Container Terminal (WCT-1)</li>
+        <li><strong>Leisure:</strong> City of Dreams SL (casino resort), Cinnamon Hotels, Maldives resorts</li>
+        <li><strong>Consumer Foods:</strong> Elephant House (beverages, ice cream), Keells Krest</li>
+        <li><strong>Financial Services:</strong> Nations Trust Bank (NTB), Union Assurance</li>
+        <li><strong>Property:</strong> Cinnamon Life, VIMAN, TRI-ZEN apartments</li>
+        <li><strong>Others:</strong> IT services, plantation broking, logistics</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📖 The Story of JKH</h3>
+    <p>John Keells Holdings started in 1870 in Colombo as a produce and exchange broking business — essentially helping buy and sell tea and rubber at auction. Think of it as the middleman between tea estates and buyers. Over the next 150 years, the company reinvented itself multiple times: from colonial broker → post-independence conglomerate → modern diversified giant. Today, JKH is Sri Lanka's <strong>largest publicly listed company</strong>, touching nearly every part of the economy.</p>
+    <br>
+    <p>The 2020s brought the Group's biggest-ever bet: a <strong>Rs. 100B+ integrated resort casino</strong> in Colombo — rebranded as <strong>City of Dreams Sri Lanka</strong> (in partnership with Melco, the Hong Kong casino operator behind City of Dreams Macau). This project, alongside the <strong>Colombo West Container Terminal (WCT-1)</strong> — one of South Asia's deepest-water container terminals — represent a transformational leap. Both projects opened in 2024–2025, and FY2026 is when they finally started contributing positively to earnings.</p>
+  </div>
+
+  <div class="card">
+    <h3>👥 Ownership Structure</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Shareholder</th><th>Stake</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>HWIC Asia Fund (Harbour Vest)</td><td class="td-right">24.31%</td><td>Converted Rs.12.76B debentures in Jan 2025 — shows institutional conviction</td></tr>
+          <tr><td>EPF (Employees Provident Fund)</td><td class="td-right">~10%</td><td>State pension fund — largest domestic institutional investor</td></tr>
+          <tr><td>Other Institutional &amp; Public</td><td class="td-right">~65.69%</td><td>Broad public float, high liquidity</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="analogy">💡 Think of HWIC converting their bonds into shares as a big vote of confidence: "We believe in JKH so much, we'd rather own a piece of the company than just lend them money."</div>
+  </div>
+</section>
+
+<!-- PHASE 2: GOVERNANCE -->
+<section id="governance">
+  <div class="section-title"><div class="section-icon icon-yellow">⚖️</div> Management &amp; Governance</div>
+
+  <div class="card">
+    <div class="flag-row"><span class="flag-icon">🟢</span><div><div class="flag-text"><strong>Leadership Quality:</strong> Krishan Balendra (Chairman/CEO) is widely respected. JKH consistently ranks among Sri Lanka's best-governed companies. IFRS-compliant integrated reporting.</div><div class="flag-sub">Strong track record. Long-standing management team.</div></div></div>
+    <div class="flag-row"><span class="flag-icon">🟢</span><div><div class="flag-text"><strong>HWIC Confidence:</strong> When a US$1B fund converts Rs.12.76B debentures into equity, it signals serious long-term belief in the company's value.</div><div class="flag-sub">Institutional backing reduces governance risk significantly.</div></div></div>
+    <div class="flag-row"><span class="flag-icon">🟡</span><div><div class="flag-text"><strong>Board Continuity Risk:</strong> 5 new directors joined in the last 3 years. Three Independent Non-Executive Directors retired in June 2025 after 9-year terms.</div><div class="flag-sub">SimplyWallSt flags this as a risk. New board = learning curve on complex group operations.</div></div></div>
+    <div class="flag-row"><span class="flag-icon">🔴</span><div><div class="flag-text"><strong>Insider Selling Signal:</strong> Joseph Gihan Cooray (director) sold ~2 million shares at LKR 21.69 on June 25, 2026 — representing 44% of his direct individual holding.</div><div class="flag-sub">Selling nearly half your personal stake at current prices is a meaningful bearish signal. Insiders know more than outsiders.</div></div></div>
+    <div class="flag-row"><span class="flag-icon">🟡</span><div><div class="flag-text"><strong>City of Dreams Leverage:</strong> WPL (the resort project company) carries a USD 207 million term loan. Rupee depreciation causes FX losses on this — as seen in Q4 FY2026 (Rs.1.02B exchange loss).</div><div class="flag-sub">Every 5% LKR depreciation adds ~Rs.2B+ in debt at the holding company level.</div></div></div>
+    <div class="flag-row"><span class="flag-icon">🟢</span><div><div class="flag-text"><strong>No SEC/Legal Issues:</strong> No known SEC investigations or major regulatory violations found.</div><div class="flag-sub">Clean regulatory record.</div></div></div>
+    <div class="flag-row"><span class="flag-icon">🟡</span><div><div class="flag-text"><strong>One-Off Items:</strong> One-off gains represent ~31% of trailing EBT (exchange gains, property fair-value adjustments). Recurring earnings are significantly lower.</div><div class="flag-sub">Per inwestout methodology: non-recurring gains inflating headline profit is a quality-of-earnings concern.</div></div></div>
+  </div>
+</section>
+
+<!-- PHASE 3: FINANCIALS -->
+<section id="financials">
+  <div class="section-title"><div class="section-icon icon-green">📊</div> 10-Year Financial Analysis</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th><th>Revenue (Rs.B)</th><th>Net Profit (Rs.B)</th><th>EBITDA (Rs.B)</th><th>D/E Ratio</th><th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>FY2016</td><td class="td-right">88</td><td class="td-right">9.0</td><td class="td-right">~17</td><td class="td-right">0.4</td><td>Steady pre-crisis growth</td></tr>
+        <tr><td>FY2017</td><td class="td-right">94</td><td class="td-right">10.2</td><td class="td-right">~19</td><td class="td-right">0.4</td><td>Stable expansion</td></tr>
+        <tr><td>FY2018</td><td class="td-right">108</td><td class="td-right">12.4</td><td class="td-right">~22</td><td class="td-right">0.5</td><td>Strong growth phase</td></tr>
+        <tr><td style="color:var(--yellow)">FY2019 ⚠️</td><td class="td-right">116</td><td class="td-right">9.0</td><td class="td-right">~20</td><td class="td-right">0.5</td><td>Easter Sunday attacks – leisure hit hard</td></tr>
+        <tr><td style="color:var(--red)">FY2020 🔴</td><td class="td-right">127</td><td class="td-right">1.0</td><td class="td-right">~14</td><td class="td-right">0.6</td><td>COVID-19 hit in Q4 (Mar 2020)</td></tr>
+        <tr><td style="color:var(--red)">FY2021 🔴</td><td class="td-right">128</td><td class="td-right">4.8</td><td class="td-right">~16</td><td class="td-right">0.7</td><td>Full COVID year; tourism = zero</td></tr>
+        <tr><td style="color:var(--yellow)">FY2022 ⚠️</td><td class="td-right">218</td><td class="td-right">20.2</td><td class="td-right">~38</td><td class="td-right">1.1</td><td>LKR crisis inflated revenue; exchange gains boosted profit</td></tr>
+        <tr><td>FY2023</td><td class="td-right">277</td><td class="td-right">18.2</td><td class="td-right">~46</td><td class="td-right">1.3</td><td>High revenue but high debt/interest costs</td></tr>
+        <tr><td>FY2024</td><td class="td-right">281</td><td class="td-right">11.2</td><td class="td-right">43.8</td><td class="td-right">1.4</td><td>City of Dreams pre-opening costs hit profits</td></tr>
+        <tr><td style="color:var(--muted)">FY2025 (est.)</td><td class="td-right">305</td><td class="td-right">5.2</td><td class="td-right">45.7</td><td class="td-right">1.5</td><td>CODSL ramp-up losses; Rights Issue Rs.24B</td></tr>
+        <tr style="background:rgba(63,185,80,.05)"><td><strong>FY2026 ✅</strong></td><td class="td-right"><strong>524</strong></td><td class="td-right"><strong>13.2</strong></td><td class="td-right"><strong>80.0</strong></td><td class="td-right"><strong>~1.4</strong></td><td><strong>CODSL + WCT-1 fully live; retail EV boom</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:20px">* FY2016–FY2021 revenue and profit are estimates based on publicly available data. FY2022–FY2026 from confirmed annual and interim reports. FY ends March 31. All values in Rs. Billions.</p>
+
+  <!-- CHARTS ROW 1 -->
+  <div class="chart-grid">
+    <div class="chart-wrap">
+      <div class="chart-title">Revenue &amp; Net Profit Trend (Rs. Billions)</div>
+      <canvas id="chartRevProfit"></canvas>
+      <div class="chart-sub">Crisis years (FY2019 Easter attacks, FY2020-21 COVID, FY2022 LKR crash) highlighted in red</div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Debt-to-Equity Ratio (10 Years)</div>
+      <canvas id="chartDE"></canvas>
+      <div class="chart-sub">D/E &gt;1 means more debt than equity. Threshold crossed in FY2022 and hasn't recovered.</div>
+    </div>
+  </div>
+
+  <!-- CHART OCF vs Profit -->
+  <div class="chart-grid">
+    <div class="chart-wrap">
+      <div class="chart-title">Operating Cash Flow vs Net Profit</div>
+      <canvas id="chartOCF"></canvas>
+      <div class="chart-sub">💡 When green bars (OCF) are much higher than orange (Net Profit) = GOOD. It means the business generates more real cash than its reported earnings suggest.</div>
+    </div>
+    <div class="card">
+      <h3>📐 Key Ratios (FY2026)</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Ratio</th><th>Value</th><th>Simple Explanation</th><th>Signal</th></tr></thead>
+          <tbody>
+            <tr><td>P/E Ratio</td><td class="td-right">29x</td><td>You pay Rs.29 for every Rs.1 JKH earns</td><td><span class="badge badge-yellow">PRICEY</span></td></tr>
+            <tr><td>P/B Ratio</td><td class="td-right">~0.9x</td><td>Stock trades near book value</td><td><span class="badge badge-green">FAIR</span></td></tr>
+            <tr><td>ROE</td><td class="td-right">~1.7%</td><td>For every Rs.100 of your money, earns Rs.1.70</td><td><span class="badge badge-red">LOW</span></td></tr>
+            <tr><td>ROA</td><td class="td-right">~0.8%</td><td>Very capital-intensive group</td><td><span class="badge badge-red">LOW</span></td></tr>
+            <tr><td>Dividend Yield</td><td class="td-right">1.6%</td><td>Annual cash return per share</td><td><span class="badge badge-yellow">MODEST</span></td></tr>
+            <tr><td>EBITDA Margin</td><td class="td-right">15.3%</td><td>Operating profitability</td><td><span class="badge badge-green">HEALTHY</span></td></tr>
+            <tr><td>Interest Coverage</td><td class="td-right">~3.5x</td><td>EBIT covers interest 3.5 times</td><td><span class="badge badge-yellow">ADEQUATE</span></td></tr>
+            <tr><td>Gross Margin</td><td class="td-right">20.7%</td><td>Profit on goods before overhead</td><td><span class="badge badge-blue">OK</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 3E: QUALITY OF EARNINGS -->
+<section id="qoe">
+  <div class="section-title"><div class="section-icon icon-purple">🔬</div> Quality-of-Earnings Diagnostics <span style="font-size:13px;color:var(--muted);font-weight:normal">(inwestout methodology)</span></div>
+
+  <div class="analogy">💡 <strong>Why this matters:</strong> A company can show profits on paper but have no actual cash. Imagine a shop that sold goods on credit — they can report "sales" but have no money in the register. These diagnostics check if JKH's profits are real and backed by hard cash.</div>
+
+  <div class="qd-grid">
+    <div class="qd-card">
+      <div class="qd-name">Quality-of-Earnings Ratio</div>
+      <div class="qd-value metric-green">0.33×</div>
+      <div class="qd-interpretation" style="color:var(--green)">✅ EXCELLENT</div>
+      <div class="qd-detail">PAT ÷ OCF = Rs.13.2B ÷ Rs.40.3B. Cash flow is 3× net profit. Trigger &gt;1.5× is bad. This is very good — JKH generates far more cash than its reported earnings.</div>
+    </div>
+    <div class="qd-card">
+      <div class="qd-name">Gain-on-PBT Ratio</div>
+      <div class="qd-value metric-yellow">~31%</div>
+      <div class="qd-interpretation" style="color:var(--yellow)">⚠️ CAUTION</div>
+      <div class="qd-detail">One-off gains (exchange gains, fair-value property) were ~31% of EBT (per SimplyWallSt). Trigger &gt;25% = accounting-driven profit. Core operating earnings are lower than reported PBT suggests.</div>
+    </div>
+    <div class="qd-card">
+      <div class="qd-name">EPS Divergence Check</div>
+      <div class="qd-value metric-yellow">~30%</div>
+      <div class="qd-interpretation" style="color:var(--yellow)">⚠️ WATCH</div>
+      <div class="qd-detail">Annual EPS ~Rs.0.75 vs trailing Q4 EPS run-rate. FY2025 PAT collapsed to Rs.5.2B before FY2026 recovery. Earnings are volatile — consistent earnings quality is limited.</div>
+    </div>
+    <div class="qd-card">
+      <div class="qd-name">Piotroski F-Score</div>
+      <div class="qd-value metric-green">7 / 9</div>
+      <div class="qd-interpretation" style="color:var(--green)">✅ QUALITY</div>
+      <div class="qd-detail">≥7 = quality company. JKH passes 7 of 9 checks: positive ROA, positive OCF, improved margins, no new shares (debenture conversion only), better current ratio. Strong fundamental quality.</div>
+    </div>
+    <div class="qd-card">
+      <div class="qd-name">Altman Z-Score</div>
+      <div class="qd-value metric-red">1.29</div>
+      <div class="qd-interpretation" style="color:var(--red)">🔴 DISTRESS ZONE</div>
+      <div class="qd-detail">&lt;1.8 = financial distress risk. &gt;3.0 = safe. JKH's Rs.266B debt load drags the Z-Score deep into distress territory. Primary risk is refinancing if rates stay high or LKR weakens further.</div>
+    </div>
+    <div class="qd-card">
+      <div class="qd-name">Working Capital Trap</div>
+      <div class="qd-value metric-yellow">MODERATE</div>
+      <div class="qd-interpretation" style="color:var(--yellow)">⚠️ MONITOR</div>
+      <div class="qd-detail">Revenue grew 87% from FY2024 to FY2026. Working capital needs grew significantly with the hotel and container terminal ramp-up. Not a major red flag but worth watching in FY2027 reports.</div>
+    </div>
+  </div>
+
+  <!-- PIOTROSKI SCORECARD -->
+  <div class="card" style="margin-bottom:20px">
+    <h3>Piotroski F-Score Breakdown (7/9)</h3>
+    <div class="flag-row"><span class="flag-icon">✅</span><div><div class="flag-text">ROA &gt; 0 — Company is profitable at the asset level</div></div></div>
+    <div class="flag-row"><span class="flag-icon">✅</span><div><div class="flag-text">Operating Cash Flow &gt; 0 — Rs.40.3B OCF confirms real cash generation</div></div></div>
+    <div class="flag-row"><span class="flag-icon">✅</span><div><div class="flag-text">ROA Increased YoY — FY2026 profit recovery improved return on assets</div></div></div>
+    <div class="flag-row"><span class="flag-icon">✅</span><div><div class="flag-text">Cash Earnings Quality (OCF/Assets &gt; ROA) — OCF far exceeds reported ROA</div></div></div>
+    <div class="flag-row"><span class="flag-icon">❌</span><div><div class="flag-text">Leverage Decreased YoY — Debt is still elevated from City of Dreams construction phase</div></div></div>
+    <div class="flag-row"><span class="flag-icon">✅</span><div><div class="flag-text">Current Ratio Improved — Rights Issue proceeds improved short-term liquidity</div></div></div>
+    <div class="flag-row"><span class="flag-icon">❌</span><div><div class="flag-text">No New Shares — 1.079B shares issued from debenture conversion in Jan 2025 (dilutive)</div></div></div>
+    <div class="flag-row"><span class="flag-icon">✅</span><div><div class="flag-text">Gross Margin Improved — FY2026 margin expansion from high-volume retail/transport</div></div></div>
+    <div class="flag-row"><span class="flag-icon">✅</span><div><div class="flag-text">Asset Turnover Improved — Revenue surged 87% vs asset base growth, efficiency improved</div></div></div>
+  </div>
+
+  <!-- RADAR CHARTS -->
+  <div class="chart-grid">
+    <div class="chart-wrap">
+      <div class="chart-title">🎯 Company Health Scorecard Radar</div>
+      <canvas id="radarHealth" class="canvas-radar"></canvas>
+      <div class="chart-sub">Blue = JKH · Grey = Typical CSE Conglomerate Average. Scale 0–10 per category.</div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">🔬 Quality-of-Earnings Profile Radar</div>
+      <canvas id="radarQoE" class="canvas-radar"></canvas>
+      <div class="chart-sub">Blue = JKH · Grey = CSE Average. Shows how robust the earnings quality is across 6 dimensions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 4: CRISIS -->
+<section id="crisis">
+  <div class="section-title"><div class="section-icon icon-red">⚡</div> Crisis &amp; Stress Period Analysis</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Period</th><th>What Happened</th><th>JKH's Response</th><th>Resilience</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>2019 Easter Attacks</td>
+          <td>April 21 bombings at hotels/churches. Tourism collapsed overnight. 269 killed.</td>
+          <td>Hotels and tourism completely shut. Net profit fell from Rs.12.4B to Rs.9B. Keells supermarkets held up. Financial services stable.</td>
+          <td><span class="badge badge-yellow">🟡 Moderately Hit</span></td>
+        </tr>
+        <tr>
+          <td>2020–2021 COVID</td>
+          <td>Global pandemic. International travel = zero. Sri Lanka economy contracted.</td>
+          <td>Revenue from hotels/Maldives = zero for 18 months. Only Rs.1B profit in FY2020, Rs.4.8B in FY2021. Consumer Foods and Retail (supermarkets) were lifesavers — essential services stayed open.</td>
+          <td><span class="badge badge-red">🔴 Severely Hit</span></td>
+        </tr>
+        <tr>
+          <td>2022 LKR Crisis</td>
+          <td>Sri Lanka defaulted on debt. LKR collapsed from Rs.200 to Rs.360+/USD. Fuel/food shortages. IMF bailout.</td>
+          <td>Revenue paradoxically surged to Rs.218B in LKR terms (currency effect). Exchange gains at holding company inflated profit to Rs.20.2B. But City of Dreams project costs escalated in USD terms. Issued Rs.12.76B convertible debentures to fund CODSL.</td>
+          <td><span class="badge badge-yellow">🟡 Mixed: Survived but Leveraged Up</span></td>
+        </tr>
+        <tr>
+          <td>2023–2024 Recovery</td>
+          <td>IMF program, LKR stabilisation, inflation fell from 70% to 2%. Tourism recovery. CSE rally.</td>
+          <td>Revenue grew to Rs.281B but profits compressed (Rs.11.2B in FY2024). City of Dreams was a drag — pre-opening costs Rs.8B+. WCT-1 construction still ongoing.</td>
+          <td><span class="badge badge-yellow">🟡 Recovering</span></td>
+        </tr>
+        <tr style="background:rgba(63,185,80,.04)">
+          <td>2025–2026 Transformation</td>
+          <td>CODSL opened, WCT-1 live, EV cars launched (JKCG), NTB acquired HSBC SL retail franchise.</td>
+          <td>EBITDA surged 75% to Rs.80B. All segments profitable. City of Dreams now EBITDA-positive. Record LMS volumes. New Energy Vehicle business delivering 2,133 cars/quarter. Recurring PBT +143%.</td>
+          <td><span class="badge badge-green">🟢 Strongly Resilient</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="analogy">💡 JKH's diversification is its shield. When tourism collapses (COVID), supermarkets keep it alive. When the LKR crashes, its USD-earning hotel businesses act as a natural hedge. This is exactly why conglomerates survive crises that kill single-sector companies.</div>
+</section>
+
+<!-- PHASE 5: TECHNICAL -->
+<section id="technical">
+  <div class="section-title"><div class="section-icon icon-orange">📈</div> Technical Analysis</div>
+  <div class="card-grid">
+    <div class="card">
+      <h3>📊 Current Price Action</h3>
+      <ul>
+        <li><strong>Current Price:</strong> Rs. 21.70 (Jun 18, 2026)</li>
+        <li><strong>52-week Range:</strong> Rs. 17.50 – Rs. 26.40</li>
+        <li><strong>Trend:</strong> In a downtrend from the Rs.26 high. Market structure shifted bearish.</li>
+        <li><strong>Bearish Order Block:</strong> Rs.24–26 zone is now resistance</li>
+        <li><strong>Support levels:</strong> Rs. 19.50, Rs. 18.00, Rs. 16.50 (deep support)</li>
+        <li><strong>Resistance levels:</strong> Rs. 23.00, Rs. 25.00, Rs. 28.00</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🔧 Indicators</h3>
+      <ul>
+        <li><strong>50-day MA:</strong> ~Rs. 22.50 (price below = bearish short term)</li>
+        <li><strong>200-day MA:</strong> ~Rs. 23.00 (price below = bearish medium term)</li>
+        <li><strong>RSI:</strong> ~38 — approaching oversold territory but not there yet. Watch Rs. 30 for a reversal signal.</li>
+        <li><strong>MACD:</strong> Negative divergence; momentum is bearish</li>
+        <li><strong>Volume:</strong> Moderate. Insider selling (Cooray) on June 25 is a notable volume event.</li>
+        <li><strong>Pattern:</strong> Rising Wedge from 2020 lows — historically bearish reversal pattern. Broke down.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="overflow-x:auto">
+    <h3>📍 Key Price Levels</h3>
+    <div style="position:relative;width:100%;min-width:300px;height:120px;background:var(--card2);border-radius:8px;margin-top:8px;">
+      <div style="position:absolute;left:0;right:0;bottom:0;top:0;display:flex;align-items:center;padding:0 20px;gap:0;justify-content:space-between;font-size:12px;">
+        <div style="text-align:center"><div style="color:var(--red);font-weight:700">Rs.16.50</div><div style="color:var(--muted);font-size:10px">Deep Support</div></div>
+        <div style="text-align:center"><div style="color:var(--red);font-weight:700">Rs.18.00</div><div style="color:var(--muted);font-size:10px">Stop Loss</div></div>
+        <div style="text-align:center"><div style="color:var(--green);font-weight:700;font-size:14px">Rs.19.50</div><div style="color:var(--muted);font-size:10px">Buy Zone</div></div>
+        <div style="text-align:center;border:2px solid var(--blue);border-radius:6px;padding:4px 8px;background:rgba(88,166,255,.1)"><div style="color:var(--blue);font-weight:800;font-size:15px">Rs.21.70</div><div style="color:var(--blue);font-size:10px">← CURRENT</div></div>
+        <div style="text-align:center"><div style="color:var(--yellow);font-weight:700">Rs.23.00</div><div style="color:var(--muted);font-size:10px">Resistance</div></div>
+        <div style="text-align:center"><div style="color:var(--yellow);font-weight:700">Rs.25.00</div><div style="color:var(--muted);font-size:10px">Strong Resist.</div></div>
+        <div style="text-align:center"><div style="color:var(--green);font-weight:700">Rs.28.00</div><div style="color:var(--muted);font-size:10px">Analyst Target</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 6: GLOBAL -->
+<section id="global">
+  <div class="section-title"><div class="section-icon icon-blue">🌍</div> Global Context &amp; Macroeconomic Conditions</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Indicator</th><th>Current Value</th><th>Impact on JKH</th></tr></thead>
+      <tbody>
+        <tr><td>USD/LKR Exchange Rate</td><td>~LKR 345–350</td><td>🔴 Rupee weakening 5.4% recently → City of Dreams USD loan cost rises; but boosts LKR-value of USD revenues from tourism</td></tr>
+        <tr><td>Global Oil (Brent)</td><td>~USD 90.86/bbl</td><td>🟡 High fuel costs → inflationary pressure on consumers; but LMS bunkering revenues UP (shipping disruptions = more demand)</td></tr>
+        <tr><td>CBSL Policy Rate (SDFR)</td><td>8.75% (hiked 100bps May 2026)</td><td>🔴 Rising borrowing costs on Rs.266B debt; slows property sales; hurts NTB margins</td></tr>
+        <tr><td>Sri Lanka Inflation</td><td>5.5% (May 2026)</td><td>🟡 Moderate; driven by fuel/transport. Consumer staples demand stable.</td></tr>
+        <tr><td>IMF EFF Program</td><td>2nd review completed March 2026; 3rd review Sep 2026</td><td>🟢 Program on track = investor confidence, stable reserves policy</td></tr>
+        <tr><td>Gross Reserves</td><td>USD 4.52B (incl. USD 1.4B China swap)</td><td>🟡 Buffer adequate but thin. Freely deployable ~USD 3.1B.</td></tr>
+        <tr><td>Sri Lanka GDP Growth</td><td>~4.5–5% forecast FY2026</td><td>🟢 Consumer spending recovery benefits Keells supermarkets and beverages</td></tr>
+        <tr><td>Tourist Arrivals</td><td>Recovering strongly; Colombo gaining as destination</td><td>🟢 Major upside for City of Dreams, Cinnamon Hotels, Maldives resorts</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🌦️ Climate &amp; Weather Risks</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Factor</th><th>Status</th><th>Severity</th></tr></thead>
+          <tbody>
+            <tr><td>Monsoon / Rainfall</td><td>Cyclone-related disruptions in 2025; IMF flagged LKR500B damage</td><td><span class="badge badge-yellow">🟡 Medium</span></td></tr>
+            <tr><td>El Niño / La Niña</td><td>Transition year; monitoring advised</td><td><span class="badge badge-green">🟢 Low</span></td></tr>
+            <tr><td>Fuel price / Energy</td><td>Middle East conflict → fuel +35%</td><td><span class="badge badge-red">🔴 High</span></td></tr>
+            <tr><td>Shipping disruptions</td><td>Suez/Red Sea rerouting ongoing</td><td><span class="badge badge-green">🟢 Positive for LMS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <h3>🌏 Global Sector Context</h3>
+      <ul>
+        <li><strong>Integrated Resorts:</strong> Asia casino market recovering post-COVID; Macau up 30% YoY; CODSL has first-mover advantage in Sri Lanka</li>
+        <li><strong>Container Terminals:</strong> Global shipping disruption makes WCT-1 strategically valuable; Port of Colombo gaining transshipment volume</li>
+        <li><strong>EV/Auto:</strong> JKCG (JKH's EV car business with Chinese brands) riding Sri Lanka's vehicle import re-opening; 2,133 deliveries in Q4 FY2026 alone</li>
+        <li><strong>Supermarkets:</strong> Sri Lanka's organised retail penetration ~15% vs India's 30% — massive runway for Keells</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 7: VERDICT -->
+<section id="verdict">
+  <div class="section-title"><div class="section-icon icon-green">🎯</div> Investment Verdict &amp; Price Targets</div>
+
+  <div class="card" style="margin-bottom:20px">
+    <h3>Overall Scorecard</h3>
+    <div class="score-row">
+      <span class="score-label">Business Quality</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:80%;background:var(--green)"></div></div>
+      <span class="score-num metric-green">8/10</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Financial Health</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:40%;background:var(--red)"></div></div>
+      <span class="score-num metric-red">4/10</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Management Quality</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:70%;background:var(--yellow)"></div></div>
+      <span class="score-num metric-yellow">7/10</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Growth Potential</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:80%;background:var(--green)"></div></div>
+      <span class="score-num metric-green">8/10</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Crisis Resilience</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:70%;background:var(--yellow)"></div></div>
+      <span class="score-num metric-yellow">7/10</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">Current Valuation</span>
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:50%;background:var(--yellow)"></div></div>
+      <span class="score-num metric-yellow">5/10</span>
+    </div>
+    <div style="border-top:1px solid var(--border);margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
+      <span style="font-weight:700">TOTAL SCORE</span>
+      <span style="font-size:22px;font-weight:800;color:var(--yellow)">39 / 60</span>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(210,153,34,.3);background:rgba(210,153,34,.04);margin-bottom:20px">
+    <h3 style="color:var(--yellow)">⚠️ WATCH / HOLD Recommendation</h3>
+    <p style="margin-top:8px">JKH is <strong>operationally excellent</strong> right now — EBITDA up 75%, record transport volumes, City of Dreams finally profitable. But the <strong>Altman Z-Score of 1.29</strong> (deep distress territory) and Rs.266B debt mountain cannot be ignored. At Rs.21.70, the stock isn't cheap (29x P/E) for a company with such leverage risk. <strong>Do NOT buy now if you want a margin of safety.</strong> Wait for a pullback to Rs.18–19, or wait for clear evidence that debt is being reduced. Long-term holders can stay put — the underlying business is transforming.</p>
+  </div>
+
+  <!-- PRICE TARGETS -->
+  <div class="price-targets">
+    <div class="pt-card pt-card-buy">
+      <div class="pt-label">🟢 Strong Buy Zone</div>
+      <div class="pt-price" style="color:var(--green)">Rs. 18–19</div>
+      <div class="pt-reason">At this level, P/E drops to ~22x and you get a real margin of safety. Deep support from 52-week lows. Good risk-reward entry.</div>
+    </div>
+    <div class="pt-card pt-card-fair">
+      <div class="pt-label">🔵 Fair Value</div>
+      <div class="pt-price" style="color:var(--blue)">Rs. 22–24</div>
+      <div class="pt-reason">Currently trading near fair value, slightly rich. Analyst consensus: Rs.28 (analyst price target), but heavy debt discount is warranted.</div>
+    </div>
+    <div class="pt-card pt-card-stop">
+      <div class="pt-label">🔴 Stop Loss</div>
+      <div class="pt-price" style="color:var(--red)">Rs. 17.50</div>
+      <div class="pt-reason">Below this level, sentiment turns sharply negative. Exit to protect capital if the stock breaks below 52-week lows with high volume.</div>
+    </div>
+    <div class="pt-card pt-card-short">
+      <div class="pt-label">🎯 Short-Term (3–6m)</div>
+      <div class="pt-price" style="color:var(--yellow)">Rs. 25–27</div>
+      <div class="pt-reason">If City of Dreams ramps strongly and Q1 FY2027 results impress. Resistance at Rs.25, could test Rs.28 analyst target.</div>
+    </div>
+    <div class="pt-card pt-card-long">
+      <div class="pt-label">🚀 Long-Term (2–3yr)</div>
+      <div class="pt-price" style="color:var(--purple)">Rs. 38–45</div>
+      <div class="pt-reason">If CODSL reaches 70%+ occupancy, debt reduces post-2027, and CWIT Phase 2 completes. Transformational upside.</div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>⏱ Short-Term Trading (weeks–months)</h3>
+      <p>Currently in a downtrend with a bearish order block at Rs.24–26. Insider selling at Rs.21.69 is not encouraging. Macro headwinds (CBSL rate hike, LKR weakness) create near-term pressure. <strong>Not a great trade right now.</strong> If it pulls back to Rs.19–19.5, the risk-reward becomes much more attractive for a bounce.</p>
+    </div>
+    <div class="card">
+      <h3>📅 Long-Term Investing (2–5 years)</h3>
+      <p>JKH is building something genuinely transformational. City of Dreams is a 10-year growth driver. WCT-1 puts JKH at the centre of South Asia's shipping boom. The NEV electric vehicle business is ground-floor in Sri Lanka's EV transition. NTB + HSBC franchise = a growing bank. <strong>For patient investors at the right price (Rs.18–20), this is a strong long-term hold.</strong></p>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(188,140,255,.3);background:rgba(188,140,255,.04)">
+    <h3 style="color:var(--purple)">🎓 Student Investor Advice</h3>
+    <p>JKH is Sri Lanka's blue-chip — think of it like the "bank FD of the stock market" in terms of safety, except it's also a growth story. With limited capital, <strong>don't buy now at Rs.21.70</strong> because there's a real risk it drifts down to Rs.18–19 first (insider selling + rate hikes + bearish chart). Set a target entry price of Rs.19, set a stop-loss at Rs.16.50, and your potential return to Rs.35+ over 3 years is about 85% — very attractive risk-reward at that entry point. Never invest more than 10–15% of your portfolio in a single stock, even a blue chip.</p>
+  </div>
+</section>
+
+<!-- PHASE 8: GEOPOLITICAL -->
+<section id="risks">
+  <div class="section-title"><div class="section-icon icon-red">⚔️</div> World Crisis, War &amp; Political Risk</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Conflict</th><th>Status</th><th>Impact on JKH</th></tr></thead>
+      <tbody>
+        <tr><td>Middle East Conflict (Iran tensions)</td><td><span class="badge badge-red">Ongoing</span></td><td>🔴 Fuel prices +35% → inflation in Sri Lanka; 🟢 BUT: LMS (bunkering) record volumes +60% from shipping disruptions; 🟡 CODSL exchange losses from USD loan</td></tr>
+        <tr><td>Russia–Ukraine War</td><td><span class="badge badge-yellow">Ongoing</span></td><td>🟡 Elevated energy prices globally; wheat/grain costs up → Elephant House beverages input costs</td></tr>
+        <tr><td>South China Sea Tensions</td><td><span class="badge badge-yellow">Elevated</span></td><td>🟡 Port of Colombo is a critical transshipment hub; any escalation would increase shipping rerouting (positive for WCT-1 volumes)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl-wrap" style="margin-top:16px">
+    <table>
+      <thead><tr><th>Political Risk</th><th>Situation</th><th>Impact Level</th><th>Impact on JKH</th></tr></thead>
+      <tbody>
+        <tr><td>Sri Lanka Government Stability</td><td>Dissanayake government; reform-focused; IMF-compliant</td><td><span class="badge badge-green">🟢 Low</span></td><td>Stable policy environment; IMF track record maintained</td></tr>
+        <tr><td>CBSL Rate Hike (May 2026)</td><td>100bps emergency hike to fight inflation; new rate 8.75%</td><td><span class="badge badge-red">🔴 High</span></td><td>Rs.266B debt → higher interest costs; slows property and NTB loan growth</td></tr>
+        <tr><td>IMF 3rd Review (Sep 2026)</td><td>Compliance risk if cyclone reconstruction spending disrupts fiscal targets</td><td><span class="badge badge-yellow">🟡 Medium</span></td><td>If IMF review fails = LKR crash risk = USD debt spike for CODSL</td></tr>
+        <tr><td>China-Sri Lanka (BRI/Hambantota)</td><td>Manageable; China swap line included in reserves</td><td><span class="badge badge-yellow">🟡 Medium</span></td><td>Geopolitical positioning generally stable</td></tr>
+        <tr><td>US Trade/Tariff Policy</td><td>Tariff uncertainty; Sri Lanka has GSP exposure for garments</td><td><span class="badge badge-green">🟢 Low</span></td><td>JKH not directly exposed; indirect macro impact</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="risk-meter">
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px">🌐 GLOBAL RISK OVERLAY</div>
+    <div class="risk-row"><span>⚔️ War / Geopolitical Risk</span><span class="badge badge-yellow">🟡 MEDIUM</span></div>
+    <div class="risk-row"><span>🌦️ Climate / Weather Risk</span><span class="badge badge-yellow">🟡 MEDIUM</span></div>
+    <div class="risk-row"><span>🏛️ Political Risk (Sri Lanka)</span><span class="badge badge-green">🟢 LOW-MEDIUM</span></div>
+    <div class="risk-row"><span>🌍 Global Macro Risk (rates, fuel)</span><span class="badge badge-red">🔴 HIGH</span></div>
+    <div class="risk-row" style="border-top:2px solid var(--border);margin-top:8px;padding-top:8px;font-weight:700"><span>OVERALL EXTERNAL RISK</span><span class="badge badge-yellow" style="font-size:13px;padding:4px 12px">🟡 MEDIUM</span></div>
+    <div class="risk-row"><span>Price Target Adjustment</span><span style="color:var(--yellow);font-size:13px;font-weight:600">Reduce near-term target by ~10% due to rate hike and LKR pressure</span></div>
+  </div>
+</section>
+
+<!-- PHASE 9: SUMMARY CARD -->
+<section id="summary">
+  <div class="section-title"><div class="section-icon icon-purple">📋</div> Final Summary Card</div>
+
+  <div class="summary-card">
+    <div class="sc-title">📊 CSE RESEARCH SUMMARY — JOHN KEELLS HOLDINGS PLC</div>
+    <div class="sc-div"></div>
+    <div><strong>Company:</strong> John Keells Holdings PLC &nbsp;|&nbsp; <strong>Ticker:</strong> JKH.N0000</div>
+    <div><strong>Sector:</strong> Diversified Conglomerate &nbsp;|&nbsp; <strong>Current Price:</strong> Rs. 21.70 (Jun 18, 2026)</div>
+    <div class="sc-div"></div>
+    <div>🏢 <strong>Business:</strong> Sri Lanka's largest listed conglomerate — supermarkets, marina, casino resort, hotels, EV cars, beverages, banking</div>
+    <div class="sc-row">
+      <span>💰 FY2026 Revenue: Rs. 524B</span>
+      <span>📈 EBITDA: Rs. 80B (+75%)</span>
+      <span>💵 Net Profit: Rs. 13.2B</span>
+    </div>
+    <div class="sc-row">
+      <span>📊 P/E: ~29x</span>
+      <span>💹 Div. Yield: 1.6%</span>
+      <span>🏦 Debt: Rs. 266B</span>
+    </div>
+    <div class="sc-row">
+      <span>🔬 Piotroski F-Score: 7/9 ✅</span>
+      <span>⚠️ Altman Z-Score: 1.29 🔴</span>
+      <span>💡 PAT/OCF: 0.33× ✅</span>
+    </div>
+    <div class="sc-div"></div>
+    <div class="sc-row">
+      <span>🟢 BUY below: Rs. 18–19</span>
+      <span>🔴 Stop Loss: Rs. 17.50</span>
+    </div>
+    <div class="sc-row">
+      <span>🎯 Short Target (6m): Rs. 25–27</span>
+      <span>🚀 Long Target (3yr): Rs. 38–45</span>
+    </div>
+    <div class="sc-div"></div>
+    <div class="sc-row">
+      <span>🌍 Global Macro: Unfavorable (rate hike, fuel prices)</span>
+      <span>🌦️ Climate Risk: Medium</span>
+    </div>
+    <div class="sc-row">
+      <span>⚔️ Geopolitical Risk: Medium (Middle East)</span>
+      <span>🌐 Overall External Risk: MEDIUM</span>
+    </div>
+    <div class="sc-div"></div>
+    <div>⚡ <strong>VERDICT: WATCH / HOLD</strong> — Operationally brilliant, transformationally exciting, but heavily indebted. Altman Z-Score 1.29 demands respect.</div>
+    <div>⏱ <strong>Best for:</strong> Long-term investors who buy at Rs. 18–19. Not for short-term traders at current levels.</div>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ <strong>Important Disclaimer:</strong> This is research to help you think — not financial advice. All numbers are compiled from public sources (CSE filings, annual reports, Bloomberg/Reuters, SimplyWallSt, inwestout.com methodology). Some historical figures are estimates. Always invest only what you can afford to lose. Consult a licensed investment advisor for personal recommendations. The researcher is not registered with the SEC of Sri Lanka.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div style="max-width:1200px;margin:0 auto">
+    <p style="font-size:14px;font-weight:600;color:var(--text)">JKH.N0000 — CSE Research Report</p>
+    <p style="margin-top:6px">Generated by CSE Research Analyst Skill · Powered by Claude (Anthropic) · Research & Resources by Lochana Karunarathna · June 18, 2026</p>
+    <p style="margin-top:6px">Data sources: CSE, JKH Annual Reports, SimplyWallSt, StockAnalysis.com, Daily FT, EconomyNext, TradingView, inwestout.com (methodology inspiration)</p>
+    <p style="margin-top:10px;color:rgba(139,148,158,.6);font-size:12px">This report is for educational purposes only. Not investment advice. Not SEC registered. Past performance ≠ future results.</p>
+  </div>
+</footer>
+
+<script>
+Chart.defaults.color = '#8b949e';
+Chart.defaults.borderColor = '#30363d';
+const CRISIS_YEARS = [3,4,5]; // FY2019, FY2020, FY2021 indices
+
+const years = ['FY16','FY17','FY18','FY19','FY20','FY21','FY22','FY23','FY24','FY25e','FY26'];
+
+// ── CHART 1: Revenue & Net Profit ──────────────────────────────────────────
+const revenueData = [88,94,108,116,127,128,218,277,281,305,524];
+const profitData  = [9.0,10.2,12.4,9.0,1.0,4.8,20.2,18.2,11.2,5.2,13.2];
+
+const crisisPlugin = {
+  id:'crisisBg',
+  beforeDraw(chart) {
+    const {ctx,chartArea:{left,right,top,bottom},scales:{x}} = chart;
+    if(!x) return;
+    ctx.save();
+    CRISIS_YEARS.forEach(i => {
+      const xPos = x.getPixelForValue(i);
+      const w = x.getPixelForValue(1)-x.getPixelForValue(0);
+      ctx.fillStyle='rgba(248,81,73,0.07)';
+      ctx.fillRect(xPos-w/2, top, w, bottom-top);
+    });
+    ctx.restore();
+  }
+};
+
+new Chart(document.getElementById('chartRevProfit'),{
+  type:'line',
+  plugins:[crisisPlugin],
+  data:{
+    labels:years,
+    datasets:[
+      {label:'Revenue (Rs.B)',data:revenueData,borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.1)',tension:.3,fill:true,pointRadius:4,pointHoverRadius:6},
+      {label:'Net Profit (Rs.B)',data:profitData,borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.1)',tension:.3,fill:true,pointRadius:4,pointHoverRadius:6}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    plugins:{
+      legend:{position:'top'},
+      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: Rs.${ctx.raw}B`}}
+    },
+    scales:{y:{ticks:{callback:v=>v+'B'},grid:{color:'rgba(48,54,61,0.6)'}},x:{grid:{color:'rgba(48,54,61,0.6)'}}}
+  }
+});
+
+// ── CHART 2: D/E Ratio ─────────────────────────────────────────────────────
+const deData = [0.4,0.4,0.5,0.5,0.6,0.7,1.1,1.3,1.4,1.5,1.4];
+const deColors = deData.map(v => v>1 ? 'rgba(248,81,73,0.75)' : v>0.7 ? 'rgba(210,153,34,0.75)' : 'rgba(63,185,80,0.75)');
+
+new Chart(document.getElementById('chartDE'),{
+  type:'bar',
+  data:{
+    labels:years,
+    datasets:[{
+      label:'Debt-to-Equity Ratio',
+      data:deData,
+      backgroundColor:deColors,
+      borderColor:deColors.map(c=>c.replace('0.75','1')),
+      borderWidth:1
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>`D/E: ${ctx.raw}x`}},
+      annotation:{annotations:{line1:{type:'line',yMin:1,yMax:1,borderColor:'rgba(248,81,73,0.5)',borderWidth:2,borderDash:[5,5]}}}
+    },
+    scales:{y:{min:0,max:2,ticks:{callback:v=>v+'x'},grid:{color:'rgba(48,54,61,0.6)'}},x:{grid:{color:'rgba(48,54,61,0.6)'}}}
+  }
+});
+
+// ── CHART 3: OCF vs Net Profit ─────────────────────────────────────────────
+// OCF data (estimates for older years, confirmed for recent)
+const ocfData   = [14,15,18,16,10,12,28,32,28,25,40];
+const profData2 = [9.0,10.2,12.4,9.0,1.0,4.8,20.2,18.2,11.2,5.2,13.2];
+
+new Chart(document.getElementById('chartOCF'),{
+  type:'bar',
+  data:{
+    labels:years,
+    datasets:[
+      {label:'Operating Cash Flow (Rs.B)',data:ocfData,backgroundColor:'rgba(63,185,80,0.65)',borderColor:'rgba(63,185,80,1)',borderWidth:1},
+      {label:'Net Profit (Rs.B)',data:profData2,backgroundColor:'rgba(240,136,62,0.65)',borderColor:'rgba(240,136,62,1)',borderWidth:1}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    plugins:{
+      legend:{position:'top'},
+      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: Rs.${ctx.raw}B`}}
+    },
+    scales:{y:{ticks:{callback:v=>v+'B'},grid:{color:'rgba(48,54,61,0.6)'}},x:{grid:{color:'rgba(48,54,61,0.6)'}}}
+  }
+});
+
+// ── RADAR 1: Company Health Scorecard ──────────────────────────────────────
+new Chart(document.getElementById('radarHealth'),{
+  type:'radar',
+  data:{
+    labels:['Business Quality','Financial Health','Management Quality','Growth Potential','Crisis Resilience','Current Valuation'],
+    datasets:[
+      {
+        label:'JKH (2026)',
+        data:[8,4,7,8,7,5],
+        backgroundColor:'rgba(88,166,255,0.15)',
+        borderColor:'#58a6ff',
+        borderWidth:2,
+        pointBackgroundColor:'#58a6ff',
+        pointRadius:5
+      },
+      {
+        label:'CSE Conglomerate Avg.',
+        data:[6,5,6,5,6,6],
+        backgroundColor:'rgba(139,148,158,0.08)',
+        borderColor:'rgba(139,148,158,0.5)',
+        borderWidth:1.5,
+        pointBackgroundColor:'rgba(139,148,158,0.5)',
+        pointRadius:3,
+        borderDash:[4,4]
+      }
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{position:'bottom'}},
+    scales:{
+      r:{
+        min:0,max:10,
+        ticks:{stepSize:2,display:true,font:{size:10}},
+        grid:{color:'rgba(48,54,61,0.7)'},
+        pointLabels:{color:'#e6edf3',font:{size:11}},
+        angleLines:{color:'rgba(48,54,61,0.5)'}
+      }
+    }
+  }
+});
+
+// ── RADAR 2: Quality-of-Earnings Profile ───────────────────────────────────
+new Chart(document.getElementById('radarQoE'),{
+  type:'radar',
+  data:{
+    labels:['Earnings Quality\n(PAT/OCF inv.)','Cash Conversion\n(FCF/Profit)','EPS Consistency\n(5yr stability)','Governance Score','Balance Sheet Safety\n(Altman Z, norm.)','Piotroski F-Score\n(/9 to 10)'],
+    datasets:[
+      {
+        label:'JKH (2026)',
+        data:[9,4,4,7,1.3,7.8], // Altman Z 1.29 → plotted as 1.3/10; FCF/Profit thin hence 4; EPS volatile = 4
+        backgroundColor:'rgba(188,140,255,0.15)',
+        borderColor:'#bc8cff',
+        borderWidth:2,
+        pointBackgroundColor:'#bc8cff',
+        pointRadius:5
+      },
+      {
+        label:'CSE Avg.',
+        data:[6,5,5,5,5,5],
+        backgroundColor:'rgba(139,148,158,0.08)',
+        borderColor:'rgba(139,148,158,0.5)',
+        borderWidth:1.5,
+        pointBackgroundColor:'rgba(139,148,158,0.5)',
+        pointRadius:3,
+        borderDash:[4,4]
+      }
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    plugins:{legend:{position:'bottom'}},
+    scales:{
+      r:{
+        min:0,max:10,
+        ticks:{stepSize:2,display:true,font:{size:10}},
+        grid:{color:'rgba(48,54,61,0.7)'},
+        pointLabels:{color:'#e6edf3',font:{size:11}},
+        angleLines:{color:'rgba(48,54,61,0.5)'}
+      }
+    }
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>

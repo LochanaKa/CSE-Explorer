@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMB Finance PLC (SEMB.N0000) — CSE Research Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3; --muted:#8b949e;
+  --green:#3fb950; --red:#f85149; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --accent:#1f6feb;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:10px 0;overflow-x:auto;white-space:nowrap;}
+nav .navwrap{display:flex;gap:4px;padding:0 16px;}
+nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:8px 12px;border-radius:6px;transition:.15s;flex-shrink:0;}
+nav a:hover{background:var(--card);color:var(--text);}
+.container{max-width:1100px;margin:0 auto;padding:0 16px;}
+.hero{padding:48px 16px 32px;text-align:center;border-bottom:1px solid var(--border);}
+.hero h1{font-size:2rem;margin:0 0 4px;}
+.ticker{color:var(--muted);font-size:1rem;margin-bottom:18px;}
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
+.badge{padding:6px 16px;border-radius:20px;font-weight:600;font-size:.85rem;border:1px solid var(--border);}
+.badge.price{background:var(--card);color:var(--blue);}
+.badge.verdict{background:rgba(210,153,34,.15);color:var(--yellow);border-color:var(--yellow);}
+.scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;max-width:900px;margin:0 auto;}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 10px;text-align:center;}
+.metric .v{font-size:1.25rem;font-weight:700;}
+.metric .l{font-size:.72rem;color:var(--muted);margin-top:2px;}
+.up{color:var(--green);} .down{color:var(--red);} .warn{color:var(--yellow);}
+section{padding:40px 16px;border-bottom:1px solid var(--border);}
+section h2{font-size:1.5rem;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.subtitle{color:var(--muted);font-size:.9rem;margin-bottom:24px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:18px;}
+table{width:100%;border-collapse:collapse;font-size:.88rem;}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--border);}
+th{color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;}
+tr:last-child td{border-bottom:none;}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;height:340px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:760px){.grid2{grid-template-columns:1fr;}}
+.flag-g{color:var(--green);} .flag-y{color:var(--yellow);} .flag-r{color:var(--red);}
+.callout{border-left:4px solid var(--yellow);background:rgba(210,153,34,.08);padding:14px 18px;border-radius:6px;margin:16px 0;}
+.callout.red{border-color:var(--red);background:rgba(248,81,73,.08);}
+.callout.green{border-color:var(--green);background:rgba(63,185,80,.08);}
+.term{color:var(--blue);font-style:italic;}
+.risk-meter{display:grid;grid-template-columns:1fr auto;gap:8px 16px;align-items:center;}
+.pill{padding:3px 12px;border-radius:12px;font-size:.78rem;font-weight:600;display:inline-block;}
+.pill.low{background:rgba(63,185,80,.15);color:var(--green);}
+.pill.med{background:rgba(210,153,34,.15);color:var(--yellow);}
+.pill.high{background:rgba(248,81,73,.15);color:var(--red);}
+footer{padding:30px 16px;text-align:center;color:var(--muted);font-size:.82rem;}
+.summary-card{background:linear-gradient(135deg,var(--card),#1c2330);border:1px solid var(--border);border-radius:14px;padding:28px;}
+.summary-card .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border);font-size:.92rem;}
+.summary-card .row:last-child{border-bottom:none;}
+</style>
+</head>
+<body>
+
+<nav><div class="navwrap">
+<a href="#overview">Overview</a><a href="#background">Background</a><a href="#governance">Governance</a>
+<a href="#financials">Financials</a><a href="#crisis">Crisis</a><a href="#technical">Technical</a>
+<a href="#global">Global</a><a href="#verdict">Verdict</a><a href="#worldrisk">World Risk</a><a href="#summary">Summary</a>
+</div></nav>
+
+<div class="hero" id="overview">
+<h1>SMB Finance PLC</h1>
+<div class="ticker">CSE: SEMB.N0000 (non-voting) / SEMB.X0000 (voting) &nbsp;|&nbsp; Diversified Financials / Licensed Finance Company</div>
+<div class="badges">
+<span class="badge price">Current Price: LKR 0.90</span>
+<span class="badge verdict">⚠ VERDICT: SPECULATIVE HOLD / HIGH-RISK</span>
+</div>
+<div class="scorecard">
+<div class="metric"><div class="v">LKR 5.15B</div><div class="l">Market Cap</div></div>
+<div class="metric"><div class="v up">LKR 576M</div><div class="l">Revenue (TTM)</div></div>
+<div class="metric"><div class="v up">LKR 162M</div><div class="l">Net Income (TTM)</div></div>
+<div class="metric"><div class="v">~42x</div><div class="l">P/E Ratio</div></div>
+<div class="metric"><div class="v down">Negative</div><div class="l">Operating Cash Flow</div></div>
+<div class="metric"><div class="v warn">43.7%</div><div class="l">Top Shareholder Stake</div></div>
+</div>
+</div>
+
+<div class="container">
+
+<!-- PHASE 0/1 -->
+<section id="background">
+<h2>🏢 Company Identity &amp; Background</h2>
+<div class="subtitle">Who is SMB Finance, and how does it make money?</div>
+
+<div class="card">
+<p><strong>SMB Finance PLC</strong> is a small, licensed non-bank finance company (NBFI) regulated by the Central Bank of Sri Lanka and listed on the CSE. It was incorporated in 1992 as <strong>Seylan Merchant Bank PLC</strong>, originally a merchant-banking subsidiary of the Seylan Bank / Ceylinco group. It later became <strong>SMB Leasing PLC</strong> (name change in March 2010) and most recently <strong>SMB Finance PLC</strong> (renamed December 2022) as it broadened from pure leasing into a fuller finance-company product suite.</p>
+
+<p><strong>Business model, explained simply:</strong> Think of SMB Finance as a small neighbourhood lender. It takes in money from depositors (fixed deposits, savings) and investors, and lends that money out as:</p>
+<ul>
+<li><strong>Vehicle leasing</strong> — financing for new and used cars, vans, and commercial vehicles</li>
+<li><strong>Loans</strong> — property/mortgage loans, personal loans, and gold-backed (pawning) loans</li>
+<li><strong>Treasury</strong> — placing surplus cash in government securities, REPOs, and bank placements (this is actually the company's <em>single biggest revenue contributor</em>, more than lending itself)</li>
+<li><strong>Money brokering</strong> — acting as a middleman in interbank call money, FX, and government securities markets</li>
+</ul>
+<p>The profit comes from the spread — charging borrowers more interest than it pays depositors — plus fees from brokering and treasury gains.</p>
+
+<div class="callout">
+<strong>Scale reality check:</strong> With total assets of only ~LKR 7 billion and 64–76 employees, SMB Finance is a <em>micro-cap</em> NBFI — roughly 1/15th to 1/30th the size of established peers like CDB or People's Leasing. It competes in a crowded field of 30+ licensed finance companies in Sri Lanka, most of which are dwarfed by bank-owned giants (LOLC, Commercial Bank-affiliated, People's Bank-affiliated entities).
+</div>
+
+<p><strong>Market position:</strong> SMB Finance is not a market leader — it is a small, niche player. Its main competitors include Citizens Development Business Finance (CDB), People's Leasing & Finance, Vallibel Finance, Senkadagala Finance, and dozens of other licensed finance companies competing for the same vehicle-leasing and gold-loan customers.</p>
+</div>
+</section>
+
+<!-- PHASE 2 -->
+<section id="governance">
+<h2>🏛️ Management &amp; Governance Deep Dive</h2>
+<div class="subtitle">Who runs the company, and are there any red flags?</div>
+
+<div class="grid2">
+<div class="card">
+<h3>Leadership</h3>
+<table>
+<tr><th>Role</th><th>Person</th><th>Status</th></tr>
+<tr><td>Chief Executive Officer</td><td>Supul C. Wijesinghe</td><td><span class="flag-y">🟡 In role since 2020; also a Non-Independent Executive Director since 2023 — dual hat is a minor governance flag</span></td></tr>
+<tr><td>Board tenure</td><td>~2.9 years average</td><td><span class="flag-y">🟡 Relatively new/inexperienced board overall</span></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Ownership Concentration</h3>
+<table>
+<tr><th>Holder</th><th>Stake</th></tr>
+<tr><td><strong>H.R.S. Wijeratne</strong> (individual)</td><td><strong>43.7%</strong></td></tr>
+<tr><td>Hong Leong Asset Management Bhd. (Malaysia)</td><td>6.55%</td></tr>
+<tr><td>S. Kodituwakku</td><td>3.46%</td></tr>
+<tr><td>Other individual/institutional holders</td><td>~46%</td></tr>
+</table>
+<p style="margin-top:10px;font-size:.85rem;color:var(--muted)">Individual insiders collectively hold ~61.6% of shares; top 25 shareholders own ~68.5% of the company.</p>
+</div>
+</div>
+
+<div class="callout red">
+<strong>🔴 Major governance red flag — concentrated control:</strong> A single individual, H.R.S. Wijeratne, controls roughly 43.7% of the company. This is far above the typical 20–30% threshold where a shareholder gains effective control without needing to win over other investors. Minority shareholders (which is what a retail buyer would be) have very limited ability to influence board decisions, related-party transaction approval, or dividend policy. This kind of concentration is a classic CSE small-cap governance risk.
+</div>
+
+<div class="card">
+<h3>🟢/🟡/🔴 Governance Scorecard</h3>
+<table>
+<tr><th>Item</th><th>Rating</th><th>Note</th></tr>
+<tr><td>Ownership concentration</td><td><span class="flag-r">🔴 Red Flag</span></td><td>43.7% single-holder control</td></tr>
+<tr><td>Board experience/tenure</td><td><span class="flag-y">🟡 Caution</span></td><td>~2.9 years average — relatively new board</td></tr>
+<tr><td>CEO/Director dual role</td><td><span class="flag-y">🟡 Caution</span></td><td>CEO also sits as Executive Director</td></tr>
+<tr><td>Historical track record</td><td><span class="flag-r">🔴 Red Flag</span></td><td>Predecessor entity (Seylan Merchant Bank) suffered a severe 2009 mismanagement and depositor-trust crisis (see Crisis section)</td></tr>
+<tr><td>Regulatory status</td><td><span class="flag-g">🟢 Good</span></td><td>Currently licensed and supervised by Central Bank of Sri Lanka; no current CBSL enforcement action found in this research</td></tr>
+<tr><td>Analyst coverage</td><td><span class="flag-y">🟡 Caution</span></td><td>Zero analyst coverage found — very thin scrutiny from independent research</td></tr>
+</table>
+</div>
+</section>
+
+<!-- PHASE 3 -->
+<section id="financials">
+<h2>📊 5-Year Financial Analysis</h2>
+<div class="subtitle">Note: Reliable structured data is only available for 5 fiscal years (2021–2025); deeper 10-year history was not consistently available from public sources for this micro-cap company. All figures in LKR millions unless noted.</div>
+
+<div class="chart-box"><canvas id="incomeChart"></canvas></div>
+<div class="chart-box"><canvas id="debtChart"></canvas></div>
+<div class="chart-box"><canvas id="cashChart"></canvas></div>
+
+<div class="callout red">
+<strong>🔴 Quality-of-Earnings Alert — this is the single most important number in this report.</strong>
+SMB Finance has reported a growing, positive net profit every year since 2021. But its <span class="term">Operating Cash Flow</span> (the actual cash generated by day-to-day business, the term for which is explained as: think of it as the difference between a shopkeeper saying "I made profit" on paper versus actually having more cash in the till at day's end) has been <strong>negative in 4 of the last 5 years</strong> — including −LKR 446 million in FY2025, the same year it reported +LKR 160 million in net income.
+</div>
+
+<div class="card">
+<h3>Key Ratios &amp; What They Mean</h3>
+<table>
+<tr><th>Ratio</th><th>Simple Explanation</th><th>FY2025 Value</th><th>Good/Bad?</th></tr>
+<tr><td>P/E Ratio</td><td>Price you pay for Rs.1 of annual earnings</td><td>~42x</td><td><span class="flag-r">🔴 Expensive vs sector (CSE finance companies typically trade 4–10x)</span></td></tr>
+<tr><td>P/B Ratio</td><td>Price vs. what the company actually owns (book value)</td><td>~2.25x</td><td><span class="flag-y">🟡 High for an NBFI of this size</span></td></tr>
+<tr><td>ROE</td><td>How well it uses shareholder money to generate profit</td><td>~4.3%</td><td><span class="flag-r">🔴 Weak — well below typical 12-18% for healthy NBFIs</span></td></tr>
+<tr><td>ROA</td><td>How well it uses all its assets (loans + investments)</td><td>~2.3%</td><td><span class="flag-y">🟡 Modest</span></td></tr>
+<tr><td>Debt-to-Equity</td><td>How much it has borrowed vs. shareholder capital</td><td>~0.73x</td><td><span class="flag-g">🟢 Conservative leverage — lower risk of insolvency from debt alone</span></td></tr>
+<tr><td>Dividend Yield</td><td>Passive income from holding shares</td><td>0% — no dividends paid</td><td><span class="flag-r">🔴 No income return; pure capital-gain bet</span></td></tr>
+<tr><td>Interest Coverage</td><td>Can it comfortably pay interest on what it owes?</td><td>Pretax income (227) vs interest paid (210) ≈ 1.08x</td><td><span class="flag-r">🔴 Thin coverage — little margin for error</span></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Quality-of-Earnings Diagnostics (inwestout-style)</h3>
+<table>
+<tr><th>Diagnostic</th><th>Formula</th><th>Value</th><th>Flag</th></tr>
+<tr><td>Quality-of-Earnings Ratio</td><td>Net Income ÷ Operating Cash Flow</td><td>160 ÷ (−446) = not meaningful (OCF negative)</td><td><span class="flag-r">🔴 Profit is NOT backed by cash — single worst signal in this report</span></td></tr>
+<tr><td>EPS Trend Consistency</td><td>5-yr EPS growth pattern</td><td>0.00 → 0.01 → 0.01 → 0.02 → 0.02</td><td><span class="flag-g">🟢 Consistently rising on paper</span></td></tr>
+<tr><td>Free Cash Flow (FY2025)</td><td>OCF − CapEx</td><td>−LKR 478 million</td><td><span class="flag-r">🔴 Company is burning cash, funded by borrowing/deposits, not operations</span></td></tr>
+<tr><td>Net Cash Position</td><td>Cash &amp; investments minus debt</td><td>Shrinking: 1,858 (2021) → 289 (2025)</td><td><span class="flag-r">🔴 Net cash cushion has collapsed ~84% in 4 years</span></td></tr>
+</table>
+<p style="margin-top:10px;font-size:.85rem;color:var(--muted)">Why the gap? The balance sheet shows a fast-growing loan book (gross loans up from LKR 1.77bn in 2021 to LKR 3.66bn in 2025) and large real-estate investments (up from LKR 158m to LKR 997m). Growing your loan book and buying property both <em>use</em> cash even while showing accounting profit — this is the textbook pattern of a fast-growing lender whose reported profit hasn't yet turned into spendable cash.</p>
+</div>
+
+<div class="chart-box"><canvas id="radarHealth"></canvas></div>
+<div class="chart-box"><canvas id="radarQoE"></canvas></div>
+</section>
+
+<!-- PHASE 4 -->
+<section id="crisis">
+<h2>⚠️ Crisis Resilience</h2>
+<div class="subtitle">How has this company (and its predecessor) handled past shocks?</div>
+
+<div class="card">
+<h3>The 2009 Seylan Merchant Bank Crisis</h3>
+<p>This is essential history for any investor in SEMB.N0000. In <strong>2009</strong>, when the company was still <strong>Seylan Merchant Bank PLC</strong>, it became entangled in the broader collapse of the <strong>Ceylinco Group</strong> finance arm and the <strong>Golden Key Credit Card Company</strong> failure — one of Sri Lanka's largest financial scandals of the era. Reported issues at the time included:</p>
+<ul>
+<li>Restricted depositor withdrawals and a loss of public trust</li>
+<li>Central Bank, Inland Revenue, Labour Department, and CID investigations into alleged mismanagement and financial misappropriation</li>
+<li>Failure to hold Annual General Meetings for two consecutive years (2007/2008), a breach of company law</li>
+<li>Large non-performing inter-company loans, including funding a loss-making affiliated automobile business</li>
+<li>Failure to pay previously declared dividends due to solvency concerns</li>
+</ul>
+<p>The company has since been restructured, renamed twice (to SMB Leasing PLC in 2010, then SMB Finance PLC in 2022), and rebuilt under new ownership and management — current CEO Supul Wijesinghe only joined in 2020, well after this period. There is no evidence in this research of a repeat of 2009-style misconduct under the current structure, but the <strong>history is a meaningful scar</strong> on the company's credibility that a cautious investor should weigh.</p>
+</div>
+
+<div class="callout">
+<strong>2022 Sri Lanka economic crisis:</strong> Like all Sri Lankan NBFIs, SMB Finance operated through the 2022 sovereign default, hyperinflation spike, and interest-rate shock. The company's revenue actually grew through this period (LKR 192m in 2021 to LKR 208m in 2022), suggesting it survived the immediate crisis without a collapse, though margins and provisioning likely tightened — provision for loan losses swung sharply in 2022-2023.
+</div>
+
+<table>
+<tr><th>Crisis Year</th><th>Event</th><th>Impact on SMB Finance</th></tr>
+<tr><td>2008-2009</td><td>Global Financial Crisis + Ceylinco/Golden Key collapse</td><td><span class="flag-r">Severe — depositor run, governance failure, regulatory investigation (as Seylan Merchant Bank)</span></td></tr>
+<tr><td>2019</td><td>Easter Sunday attacks, tourism shock</td><td><span class="flag-y">Indirect — broader NBFI sector slowdown in vehicle financing</span></td></tr>
+<tr><td>2020</td><td>COVID-19 pandemic</td><td><span class="flag-y">Indirect — debt moratoria, reduced leasing demand sector-wide</span></td></tr>
+<tr><td>2022</td><td>Sri Lanka sovereign default, 70%+ inflation spike, rupee collapse</td><td><span class="flag-y">Survived; revenue continued growing but cash flow turned sharply negative (−LKR 671m OCF)</span></td></tr>
+</table>
+</section>
+
+<!-- PHASE 5 -->
+<section id="technical">
+<h2>📈 Technical Analysis</h2>
+<div class="subtitle">What does the price chart suggest?</div>
+<div class="card">
+<table>
+<tr><th>Indicator</th><th>Value</th><th>Reading</th></tr>
+<tr><td>Current Price</td><td>LKR 0.90</td><td>—</td></tr>
+<tr><td>All-Time High</td><td>LKR 2.50 (Dec 30, 2021)</td><td>Current price is ~64% below ATH</td></tr>
+<tr><td>All-Time Low</td><td>LKR 0.30 (Mar 20, 2019)</td><td>—</td></tr>
+<tr><td>1-Year Change</td><td>+50%</td><td><span class="flag-g">🟢 Strong recent momentum</span></td></tr>
+<tr><td>Beta</td><td>~0.06–1.91 (sources vary significantly)</td><td><span class="flag-y">🟡 Conflicting data — likely reflects illiquid, thinly-traded micro-cap pricing rather than a stable beta</span></td></tr>
+<tr><td>RSI</td><td>~38</td><td><span class="flag-g">🟢 Approaching oversold territory, not overbought</span></td></tr>
+</table>
+<p style="margin-top:14px;font-size:.85rem;color:var(--muted)"><strong>What is RSI?</strong> The Relative Strength Index measures whether a stock has been bought or sold too aggressively recently, on a 0-100 scale. Below 30 is typically "oversold" (potential bounce), above 70 is "overbought" (potential pullback). At ~38, SEMB.N0000 is in neutral-to-slightly-oversold territory.</p>
+</div>
+<div class="callout">
+<strong>Liquidity warning:</strong> Volume and bid-ask data are largely unavailable across data providers for this stock, which itself is a signal — this is a thinly-traded micro-cap. Even a modest buy or sell order could move the price significantly. Technical analysis on illiquid penny stocks is inherently less reliable than on liquid blue-chips.
+</div>
+</section>
+
+<!-- PHASE 6 -->
+<section id="global">
+<h2>🌍 Global &amp; Macro Context</h2>
+<div class="subtitle">How does the bigger economic picture affect SMB Finance?</div>
+<div class="card">
+<table>
+<tr><th>Factor</th><th>Current Status</th><th>Relevance to SMB Finance</th></tr>
+<tr><td>Sri Lanka Central Bank Policy Rate (OPR)</td><td>7.75% (held steady through early 2026)</td><td>Lower rates vs the 2022-23 peak reduce funding costs and support lease/loan demand</td></tr>
+<tr><td>Sri Lanka GDP growth</td><td>5.0% in 2025; resilient into 2026 despite Cyclone Ditwah disruption</td><td>Supports vehicle purchases, property activity, and credit demand — directly benefits leasing/loan volumes</td></tr>
+<tr><td>Inflation</td><td>Low (~1.6% in Feb 2026), expected to reach 5% target by Q2 2026</td><td>Benign — reduces pressure on real interest margins</td></tr>
+<tr><td>Financial system stability</td><td>Central Bank assessed system as "resilient" in Q1 2026</td><td>Positive backdrop, though small NBFIs remain more vulnerable than banks to shocks</td></tr>
+<tr><td>NBFI sector consolidation</td><td>CBSL actively cancelling licenses of non-compliant finance companies (e.g., Co-operative Leasing Company, 2026) under its NBFI "Masterplan"</td><td><span class="flag-y">🟡 Regulatory tightening is real — smaller, weaker NBFIs face existential consolidation pressure; SMB Finance must continue meeting Masterplan capital/compliance requirements</span></td></tr>
+</table>
+</div>
+<div class="callout">
+The Central Bank of Sri Lanka has an active "Masterplan for Consolidation of Non-Bank Financial Institutions" that is forcing weaker, smaller finance companies to merge, recapitalize, or shut down. As a micro-cap with thin capital buffers, SMB Finance operates in a sector where regulatory consolidation risk is real and ongoing — this is a structural tailwind for stronger players and a risk for weaker ones.
+</div>
+</section>
+
+<!-- PHASE 7 -->
+<section id="verdict">
+<h2>🎯 Investment Verdict &amp; Price Targets</h2>
+
+<div class="chart-box"><canvas id="scoreRadar"></canvas></div>
+
+<div class="card">
+<table>
+<tr><th>Score Category</th><th>Score (0-10)</th><th>Reasoning</th></tr>
+<tr><td>Financial Health</td><td>4/10</td><td>Negative operating cash flow despite rising paper profits; thin interest coverage</td></tr>
+<tr><td>Business Quality</td><td>5/10</td><td>Simple, understandable business; heavy reliance on Treasury income rather than core lending spread</td></tr>
+<tr><td>Management Quality</td><td>5/10</td><td>Current team appears stable since 2020, but board is young/inexperienced and CEO holds a dual director role</td></tr>
+<tr><td>Growth Potential</td><td>6/10</td><td>Revenue and loan book genuinely growing fast (74% revenue growth in Q1 2026 YoY); favorable rate environment</td></tr>
+<tr><td>Crisis Resilience</td><td>3/10</td><td>Predecessor entity failed catastrophically in 2009; thin capital base for an NBFI; no track record through a severe modern stress test</td></tr>
+<tr><td>Current Valuation</td><td>3/10</td><td>P/E ~42x and P/B ~2.25x are expensive for a sub-scale, cash-flow-negative NBFI with no dividend</td></tr>
+</table>
+</div>
+
+<div class="callout red">
+<strong>🔴 Honest bottom line:</strong> SMB Finance is showing genuine top-line and accounting-profit growth, helped by a favorable Sri Lankan rate-cutting and growth environment. But the stock is priced richly (42x earnings) for a company that is <em>not generating cash</em> from its core operations, has a single shareholder controlling 43.7%, pays no dividend, and carries a checkered governance history under its earlier corporate identity. This combination — rising paper profit + negative cash flow + ownership concentration + no dividend + thin liquidity — is a classic profile that deserves caution, not blind optimism.
+</div>
+
+<div class="card">
+<h3>🎯 Specific Price Targets (LKR)</h3>
+<table>
+<tr><td><strong>🟢 Consider buying below</strong></td><td>LKR 0.55 – 0.65 (closer to a ~25-30x normalized P/E and reflecting governance/cash-flow discount)</td></tr>
+<tr><td><strong>🔴 Stop-loss reference</strong></td><td>LKR 0.45 (below the recent 52-week low band)</td></tr>
+<tr><td><strong>🎯 Short-term target (3-6mo)</strong></td><td>LKR 1.00 – 1.10 (if momentum and earnings growth continue)</td></tr>
+<tr><td><strong>🚀 Long-term target (2-3yr)</strong></td><td>LKR 1.20 – 1.40, <em>contingent on</em> operating cash flow turning positive and a dividend being initiated</td></tr>
+</table>
+</div>
+</section>
+
+<!-- PHASE 8 -->
+<section id="worldrisk">
+<h2>🌐 World Crisis &amp; Political Risk</h2>
+
+<div class="card">
+<h3>⚔️ Active Conflicts &amp; Geopolitical Risk</h3>
+<table>
+<tr><th>Conflict/Region</th><th>Status</th><th>Impact on SMB Finance</th></tr>
+<tr><td>Middle East Conflict</td><td>Ongoing tension as of early 2026, cited explicitly by CBSL as a risk to its rate decisions</td><td>Indirect: oil price spikes raise SMB Finance's funding costs and could pressure the rupee, raising import costs for the vehicles it leases</td></tr>
+<tr><td>Russia-Ukraine War</td><td>Ongoing</td><td>Minimal direct impact; marginal effect via global energy/commodity prices</td></tr>
+<tr><td>South China Sea / Indo-Pacific tensions</td><td>Persistent but not escalated</td><td>Minimal direct relevance to a domestic Sri Lankan lender</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>🏛️ Political &amp; Regulatory Risk</h3>
+<table>
+<tr><th>Factor</th><th>Situation</th><th>Impact Level</th></tr>
+<tr><td>Sri Lanka government stability</td><td>Post-2022 crisis recovery underway; IMF program ongoing</td><td><span class="pill med">🟡 Medium</span></td></tr>
+<tr><td>NBFI sector consolidation (CBSL Masterplan)</td><td>Active license cancellations of non-compliant finance companies</td><td><span class="pill med">🟡 Medium</span> — directly relevant to a small-cap NBFI</td></tr>
+<tr><td>Currency/rupee stability</td><td>Broadly stable but some depreciation pressure from global energy costs</td><td><span class="pill med">🟡 Medium</span></td></tr>
+<tr><td>Global trade/tariff policy</td><td>Limited direct exposure — SMB Finance is a domestic-only lender</td><td><span class="pill low">🟢 Low</span></td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>🧭 Composite Risk Meter</h3>
+<div class="risk-meter">
+<div>War / Geopolitical Risk</div><div><span class="pill med">🟡 Medium</span></div>
+<div>Climate / Weather Risk (Cyclone Ditwah disruption noted in 2025)</div><div><span class="pill med">🟡 Medium</span></div>
+<div>Political Risk (Sri Lanka)</div><div><span class="pill med">🟡 Medium</span></div>
+<div>Global Macro Risk</div><div><span class="pill med">🟡 Medium</span></div>
+</div>
+<p style="margin-top:16px;"><strong>OVERALL EXTERNAL RISK: MEDIUM</strong><br>
+<strong>Price Target Adjustment:</strong> No major change to targets above — external/macro risk is currently secondary to the company-specific cash-flow and governance concerns, which dominate the investment case.</p>
+</div>
+</section>
+
+<!-- PHASE 9 -->
+<section id="summary">
+<h2>📋 Final Summary</h2>
+<div class="summary-card">
+<div class="row"><span>Company</span><span><strong>SMB Finance PLC</strong></span></div>
+<div class="row"><span>Ticker</span><span>SEMB.N0000 / SEMB.X0000</span></div>
+<div class="row"><span>Sector</span><span>Diversified Financials — Licensed Finance Company</span></div>
+<div class="row"><span>Current Price</span><span>LKR 0.90</span></div>
+<div class="row"><span>Revenue (TTM)</span><span>LKR 576M</span></div>
+<div class="row"><span>Net Profit (TTM)</span><span>LKR 162M</span></div>
+<div class="row"><span>EPS / P/E</span><span>LKR 0.02 / ~42x</span></div>
+<div class="row"><span>Dividend Yield</span><span>0% — no dividend</span></div>
+<div class="row"><span>Debt-to-Equity</span><span>~0.73x</span></div>
+<div class="row"><span>ROE</span><span>~4.3%</span></div>
+<div class="row"><span>Operating Cash Flow (FY25)</span><span style="color:var(--red);font-weight:700">−LKR 446M (negative)</span></div>
+<div class="row"><span>Top Shareholder Control</span><span>43.7% (H.R.S. Wijeratne)</span></div>
+<div class="row"><span>Global Macro</span><span>Favorable (low inflation, growth, rate stability)</span></div>
+<div class="row"><span>Overall External Risk</span><span><span class="pill med">MEDIUM</span></span></div>
+<div class="row" style="font-size:1.05rem;padding-top:14px;"><span><strong>⚡ VERDICT</strong></span><span><strong style="color:var(--yellow)">SPECULATIVE HOLD — high-risk micro-cap; cash flow quality and ownership concentration are the key concerns</strong></span></div>
+<div class="row"><span>Best for</span><span>Short-term, risk-tolerant traders only — not a buy-and-hold core holding</span></div>
+</div>
+</section>
+
+</div>
+
+<footer>
+<p><strong>This is research to help you think, not financial advice. Always invest only what you can afford to lose.</strong></p>
+<p>Data sourced from CSE filings, StockAnalysis.com / S&amp;P Global Market Intelligence, Simply Wall St, TradingView, Central Bank of Sri Lanka, and historical news archives (Sunday Times). Some figures are estimates derived from publicly available secondary sources where primary CSE filings were not directly extractable; cross-verify with official SMB Finance PLC annual reports (smblk.com) and CSE (cse.lk) before making any investment decision. Report generated June 19, 2026.</p>
+</footer>
+
+<script>
+const crisisColor = 'rgba(248,81,73,0.5)';
+const years5 = ['2021','2022','2023','2024','2025'];
+
+new Chart(document.getElementById('incomeChart'), {
+  type:'line',
+  data:{labels:years5,datasets:[
+    {label:'Revenue (LKR M)',data:[192.49,208.23,388.09,480.98,550.88],borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,.15)',tension:.3,fill:true},
+    {label:'Net Profit (LKR M)',data:[45.53,74.28,119.9,150.97,170.25],borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,.15)',tension:.3,fill:true},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'10-Year Revenue & Net Profit Trend (5yrs available)',color:'#e6edf3'},legend:{labels:{color:'#e6edf3'}}},scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}},y:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}}}}
+});
+
+new Chart(document.getElementById('debtChart'), {
+  type:'bar',
+  data:{labels:years5,datasets:[
+    {label:'Debt-to-Equity Ratio',data:[0.20,0.51,0.48,0.58,0.73],backgroundColor:'#d29922'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Debt-to-Equity Ratio Over Time',color:'#e6edf3'},legend:{labels:{color:'#e6edf3'}}},scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}},y:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}}}}
+});
+
+new Chart(document.getElementById('cashChart'), {
+  type:'bar',
+  data:{labels:years5,datasets:[
+    {label:'Operating Cash Flow (LKR M)',data:[-34.42,-671.29,546.69,-207.63,-446.06],backgroundColor:function(ctx){return ctx.raw<0?'#f85149':'#3fb950';}},
+    {label:'Net Profit (LKR M)',type:'line',data:[45.53,74.28,119.9,150.97,170.25],borderColor:'#58a6ff',backgroundColor:'#58a6ff',tension:.3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'⚠️ Operating Cash Flow vs Net Profit (the key red flag)',color:'#e6edf3'},legend:{labels:{color:'#e6edf3'}}},scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}},y:{ticks:{color:'#8b949e'},grid:{color:'#30363d'}}}}
+});
+
+new Chart(document.getElementById('radarHealth'), {
+  type:'radar',
+  data:{labels:['Financial Health','Business Quality','Management Quality','Growth Potential','Crisis Resilience','Current Valuation'],
+  datasets:[
+    {label:'SMB Finance PLC',data:[4,5,5,6,3,3],backgroundColor:'rgba(88,166,255,.25)',borderColor:'#58a6ff',pointBackgroundColor:'#58a6ff'},
+    {label:'Industry Average (est.)',data:[6,6,6,5,6,6],backgroundColor:'rgba(139,148,158,.15)',borderColor:'#8b949e',pointBackgroundColor:'#8b949e'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Company Health Scorecard (0-10)',color:'#e6edf3'},legend:{labels:{color:'#e6edf3'}}},scales:{r:{angleLines:{color:'#30363d'},grid:{color:'#30363d'},pointLabels:{color:'#e6edf3',font:{size:11}},ticks:{color:'#8b949e',backdropColor:'transparent'},min:0,max:10}}}
+});
+
+new Chart(document.getElementById('radarQoE'), {
+  type:'radar',
+  data:{labels:['Earnings Quality','Cash Conversion','Earnings Sustainability','Governance Score','Balance Sheet Safety','Piotroski-style Score'],
+  datasets:[{label:'SMB Finance PLC',data:[2,2,7,3,6,5],backgroundColor:'rgba(248,81,73,.25)',borderColor:'#f85149',pointBackgroundColor:'#f85149'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Quality-of-Earnings Profile (0-10)',color:'#e6edf3'},legend:{labels:{color:'#e6edf3'}}},scales:{r:{angleLines:{color:'#30363d'},grid:{color:'#30363d'},pointLabels:{color:'#e6edf3',font:{size:11}},ticks:{color:'#8b949e',backdropColor:'transparent'},min:0,max:10}}}
+});
+
+new Chart(document.getElementById('scoreRadar'), {
+  type:'radar',
+  data:{labels:['Financial Health','Business Quality','Management Quality','Growth Potential','Crisis Resilience','Current Valuation'],
+  datasets:[{label:'Investment Score',data:[4,5,5,6,3,3],backgroundColor:'rgba(210,153,34,.25)',borderColor:'#d29922',pointBackgroundColor:'#d29922'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:'Final Investment Score Summary',color:'#e6edf3'},legend:{labels:{color:'#e6edf3'}}},scales:{r:{angleLines:{color:'#30363d'},grid:{color:'#30363d'},pointLabels:{color:'#e6edf3',font:{size:11}},ticks:{color:'#8b949e',backdropColor:'transparent'},min:0,max:10}}}
+});
+
+document.querySelectorAll('nav a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HNB Finance PLC (HNBF.N0000): CSE Research Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3; --muted:#8b949e;
+  --green:#3fb950; --red:#f85149; --yellow:#d29922; --blue:#58a6ff; --purple:#bc8cff; --accent:#1f6feb;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;}
+a{color:var(--blue);text-decoration:none;}
+h1,h2,h3,h4{font-weight:700;letter-spacing:-0.01em;}
+p{color:#c9d1d9;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(6px);}
+.navrow{display:flex;align-items:center;gap:4px;overflow-x:auto;padding:10px 12px;max-width:1100px;margin:0 auto;scrollbar-width:thin;}
+.navrow a{flex:none;color:var(--muted);font-size:13px;padding:7px 11px;border-radius:6px;white-space:nowrap;}
+.navrow a:hover{background:var(--card);color:var(--text);}
+.navlogo{font-weight:800;color:var(--text);font-size:14px;padding-right:10px;border-right:1px solid var(--border);margin-right:6px;flex:none;}
+
+/* HERO */
+.hero{padding:40px 0 24px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#111a26,var(--bg));}
+.hero-top{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;}
+.hero h1{font-size:30px;margin:0 0 4px;}
+.ticker{color:var(--muted);font-size:15px;font-family:ui-monospace,Menlo,monospace;}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.badge{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;border:1px solid var(--border);}
+.badge.price{background:var(--card);color:var(--text);font-family:ui-monospace,Menlo,monospace;}
+.badge.sector{background:var(--card);color:var(--muted);}
+.badge.verdict{background:rgba(210,153,34,0.15);color:var(--yellow);border-color:var(--yellow);font-size:14px;}
+.scorecard{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:24px;}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.metric .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;}
+.metric .value{font-size:19px;font-weight:700;margin-top:3px;}
+.metric .value.g{color:var(--green);} .metric .value.r{color:var(--red);} .metric .value.y{color:var(--yellow);}
+
+/* SECTIONS */
+section{padding:36px 0;border-bottom:1px solid var(--border);}
+section h2{font-size:22px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+.subtitle{color:var(--muted);font-size:14px;margin-bottom:20px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px;}
+.card h3{margin-top:0;font-size:16px;}
+.term{color:var(--blue);font-weight:600;}
+.note{font-size:13px;color:var(--muted);background:#0f1620;border-left:3px solid var(--accent);padding:10px 14px;border-radius:6px;margin-top:10px;}
+.flag-g{color:var(--green);font-weight:700;} .flag-y{color:var(--yellow);font-weight:700;} .flag-r{color:var(--red);font-weight:700;}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0;}
+th,td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:left;}
+th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;}
+tr:last-child td{border-bottom:none;}
+.tblwrap{overflow-x:auto;}
+
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0;}
+.chart-box canvas{max-height:340px;}
+.chart-cap{color:var(--muted);font-size:12.5px;margin-top:8px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:760px){.grid2{grid-template-columns:1fr;} .hero h1{font-size:24px;}}
+
+.pill{display:inline-block;padding:2px 9px;border-radius:10px;font-size:11.5px;font-weight:700;}
+.pill.g{background:rgba(63,185,80,.15);color:var(--green);}
+.pill.y{background:rgba(210,153,34,.15);color:var(--yellow);}
+.pill.r{background:rgba(248,81,73,.15);color:var(--red);}
+
+.riskmeter{font-family:ui-monospace,Menlo,monospace;background:#0a0f16;border:1px solid var(--border);border-radius:10px;padding:18px 20px;white-space:pre-wrap;font-size:13px;line-height:1.8;overflow-x:auto;}
+
+.summarycard{background:linear-gradient(160deg,#15202b,#0f1620);border:1px solid var(--accent);border-radius:14px;padding:24px 26px;}
+.summarycard .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;padding:7px 0;border-bottom:1px dashed var(--border);font-size:14px;}
+.summarycard .row:last-child{border-bottom:none;}
+.summarycard .row span:first-child{color:var(--muted);}
+.summarycard .row span:last-child{font-weight:700;text-align:right;}
+
+footer{padding:30px 0 60px;color:var(--muted);font-size:13px;text-align:center;}
+footer .disclaimer{max-width:680px;margin:0 auto 16px;}
+.srclist{font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="navrow">
+    <span class="navlogo">HNBF</span>
+    <a href="#overview">Overview</a>
+    <a href="#history">History</a>
+    <a href="#governance">Governance</a>
+    <a href="#financials">Financials</a>
+    <a href="#crisis">Crisis</a>
+    <a href="#technical">Technical</a>
+    <a href="#global">Global</a>
+    <a href="#geopolitics">World Risk</a>
+    <a href="#verdict">Verdict</a>
+    <a href="#summary">Summary</a>
+  </div>
+</nav>
+
+<div class="hero wrap" id="overview">
+  <div class="hero-top">
+    <div>
+      <h1>HNB Finance PLC</h1>
+      <div class="ticker">HNBF.N0000 &nbsp;·&nbsp; Diri Savi Board, Colombo Stock Exchange &nbsp;·&nbsp; Sector: Non-Bank Financial Institution (Licensed Finance Company)</div>
+    </div>
+  </div>
+  <div class="badges">
+    <span class="badge price">Rs 9.30 / share</span>
+    <span class="badge sector">Subsidiary of Hatton National Bank PLC (51%)</span>
+    <span class="badge verdict">⚡ VERDICT: HOLD / WATCH FOR PULLBACK</span>
+  </div>
+  <div class="scorecard">
+    <div class="metric"><div class="label">Market Cap</div><div class="value">≈Rs 19.3B</div></div>
+    <div class="metric"><div class="label">P/E (TTM)</div><div class="value">11.5×</div></div>
+    <div class="metric"><div class="label">P/B (TTM)</div><div class="value">2.03×</div></div>
+    <div class="metric"><div class="label">EPS (FY26)</div><div class="value g">Rs 0.81</div></div>
+    <div class="metric"><div class="label">ROE (current)</div><div class="value g">19.96%</div></div>
+    <div class="metric"><div class="label">1-Year Return</div><div class="value g">+90–98%</div></div>
+    <div class="metric"><div class="label">Dividend Yield</div><div class="value">0% (none paid)</div></div>
+    <div class="metric"><div class="label">Piotroski F-Score</div><div class="value y">~5 / 9</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- PHASE 0 -->
+<section>
+<h2>📋 Phase 0 — Who Exactly Is HNB Finance?</h2>
+<p class="subtitle">The basic identity card of the company, verified across CSE filings and company disclosures.</p>
+<div class="card">
+<p>Think of a company's identity card like a person's National Identity Card — name, where they live, who their family is. Here's HNB Finance's:</p>
+<div class="tblwrap">
+<table>
+<tr><th>Field</th><th>Detail</th></tr>
+<tr><td>Full legal name</td><td>HNB Finance PLC (formerly HNB Finance Limited, formerly Berendina Micro Investments Company Ltd)</td></tr>
+<tr><td>CSE Ticker</td><td>HNBF.N0000 (voting); HNBF.X0000 (non-voting)</td></tr>
+<tr><td>Listing board</td><td><span class="term">Diri Savi Board</span> — CSE's secondary board for smaller/higher-risk companies. Listed 20th May 2020.</td></tr>
+<tr><td>Sector / Industry</td><td>Finance — Licensed Finance Company (LFC) regulated by the Central Bank of Sri Lanka's Department of Supervision of Non-Bank Financial Institutions</td></tr>
+<tr><td>Founded / incorporated</td><td>1999 (incorporated), commenced lending operations in 2000 — turned 26 years old this year</td></tr>
+<tr><td>Headquarters</td><td>No. 168, Nawala Road, Nugegoda</td></tr>
+<tr><td>Parent / Group</td><td><b>Hatton National Bank PLC</b> owns 51% — making HNBF part of the HNB Group alongside HNB Assurance PLC, Sithma Development, and HNB Investment Bank (formerly Acuity Partners)</td></tr>
+<tr><td>Employees</td><td>≈1,910 staff across 77+ branches islandwide</td></tr>
+<tr><td>Current price</td><td>Rs 9.30 (21 June 2026)</td></tr>
+<tr><td>52-week range (approx.)</td><td>Rs 4.50 – Rs 10.90 — derived from the stock's ~98% 1-year gain and the FY26 Q4 (Jan–Mar 2026) quarterly high/low of Rs 10.90/Rs 7.50. All-time high Rs 13.70 (Sep 2020 IPO euphoria); all-time low Rs 2.70 (Dec 2024).</td></tr>
+</table>
+</div>
+<div class="note"><b>Beginner note:</b> The <span class="term">Diri Savi Board</span> is CSE's "second tier" — it exists for companies that don't (yet) meet the stricter profitability/float requirements of the Main Board. It's not necessarily a red flag, but it usually means lower trading volumes and wider bid-ask spreads than Main Board blue-chips like JKH or Commercial Bank. Treat liquidity as a real constraint when sizing any position.</div>
+</div>
+</section>
+
+<!-- PHASE 1 -->
+<section id="history">
+<h2>📖 Phase 1 — The Story So Far</h2>
+<p class="subtitle">How a small Nugegoda micro-lender became a CSE-listed, bank-backed finance company.</p>
+<div class="card">
+<h3>From microfinance pioneer to listed NBFI</h3>
+<p>HNB Finance began life in 2000 as <b>Berendina Micro Investments</b>, one of Sri Lanka's earliest commercial (i.e., profit-making, not purely charitable) microfinance lenders — built around the simple idea of giving small, fast loans to rural entrepreneurs who banks usually ignore: three-wheeler drivers, vegetable vendors, home-based tailors. In 2011, Hatton National Bank — Sri Lanka's largest private bank — bought a controlling stake, renamed the company <b>HNB Finance</b>, and plugged it into HNB's branch and ATM network. Chaminda Prabhath, who joined as Director of Finance that same year, became MD/CEO in 2012 and has run the company ever since.</p>
+<p>In <b>February 2020</b>, HNB Finance listed on the CSE via an Offer for Sale that was oversubscribed by 32% on day one — a sign of strong investor appetite right before COVID hit. The shares formally began trading on the Diri Savi Board on 20 May 2020.</p>
+<h3>The Prime Finance merger (2021–2022)</h3>
+<p>The Central Bank of Sri Lanka has, for years, pushed a "consolidation masterplan" to shrink Sri Lanka's crowded field of small finance companies into fewer, stronger ones. In December 2021, HNB Finance bought <b>Prime Lands'</b> 87.27% controlling stake in <b>Prime Finance PLC</b> for Rs 2.1 billion, then ran a mandatory takeover offer for the remaining minority shareholders, and finally amalgamated the two companies — with HNB Finance as the surviving entity. This is why <b>Prime Lands</b> ended up as HNB Finance's second-largest shareholder (23.29%) for the next four years, with board seats to match.</p>
+<h3>The May 2026 ownership shake-up</h3>
+<p>In a major development just weeks before this report, <b>Prime Lands (Pvt) Ltd fully exited HNB Finance</b>, selling its entire 23.29% stake (400 million shares) for Rs 3.52 billion at Rs 8.80/share. <b>Seylan Bank PLC</b> and <b>Phantom Investments</b> (the investment vehicle of media entrepreneur Rayynor Silva) jointly picked up 5.82% of that block; the rest was placed with the broader market. This is Rayynor Silva's first entry into a listed finance company, on top of his recent 10% stake build-up in Seylan Bank itself.</p>
+<div class="note"><b>What this means for you as a shareholder:</b> the company's "real-estate-developer" shareholder is gone, replaced by a more bank/media-finance-oriented investor base. HNB's 51% control is untouched, so the bank's oversight and implicit support remain the anchor of the investment case — but watch for board reshuffles at the upcoming AGM (30 June 2026) given Prime Lands' board representative is likely to step down.</div>
+<h3>Business model — how HNB Finance actually makes money</h3>
+<p>Imagine a savings account and a loan book as two sides of a see-saw. HNB Finance collects <b>fixed deposits and savings</b> from the public (it pays interest on these — "Interest Paid on Deposits"), then lends that money out at a higher rate through four product lines: <b>SME/Micro loans</b> (small business loans), <b>Leasing/Auto loans</b>, <b>Gold loans</b> (pawning jewellery for quick cash — popular when households are short on cash), and <b>Housing/personal loans</b>. The gap between what it pays depositors and what it earns from borrowers — the <span class="term">Net Interest Margin</span> — is the engine room of profit. As of FY23, vehicle financing and microfinance together made up about 65% of the loan book.</p>
+<h3>Market position</h3>
+<p>HNB Finance holds roughly a 3% share of Sri Lanka's licensed finance-company sector by assets — a small player, not a market leader. Its closest competitors are <b>LOLC Finance, People's Leasing, Senkadagala Finance, Commercial Leasing & Finance, and Vallibel Finance</b>. Its edge over these independent NBFIs is the HNB brand and balance-sheet backing — its biggest disadvantage is scale and a still-developing risk track record in unsecured microfinance.</p>
+</div>
+</section>
+
+<!-- PHASE 2 -->
+<section id="governance">
+<h2>🏛️ Phase 2 — Management & Governance Deep Dive</h2>
+<p class="subtitle">Who's actually running this company, and are there any red flags?</p>
+<div class="grid2">
+<div class="card">
+<h3>CEO tenure: <span class="flag-g">🟢 Good</span></h3>
+<p><b>Chaminda Prabhath</b> has been MD/CEO since March 2012 — over 13 years in the seat. In a sector where management churn is a real risk signal, this kind of long, stable tenure through both boom (2020 IPO) and bust (2022 crisis loss) is a genuine positive. He previously worked at Prime Lands itself (2010–2011) before joining HNB Finance.</p>
+</div>
+<div class="card">
+<h3>Chairman rotation: <span class="flag-g">🟢 Good (normal)</span></h3>
+<p>Chairmen have rotated roughly every 2-3 years — Jonathan Alles (HNB Group MD/CEO, 2014–2021) → Dilshan Rodrigo (HNB COO, 2021–2024) → Rajive Dissanayake (HNB EVP, since Jan 2024). This isn't boardroom instability; it reflects HNB's normal practice of seconding senior bank executives to chair its subsidiaries.</p>
+</div>
+<div class="card">
+<h3>Board composition: <span class="flag-y">🟡 Caution</span></h3>
+<p>The board mixes HNB-nominated directors, independent directors (including a finance professor, ex-airline CFO, and microfinance specialists from India), and — until May 2026 — Prime Lands-linked directors (P.A.W. Perera, B. Premalal). With Prime Lands' full exit, those board seats are likely to be vacated or replaced soon; watch the AGM (30 June 2026) for confirmation.</p>
+</div>
+<div class="card">
+<h3>Related-party exposure: <span class="flag-y">🟡 Caution (historical)</span></h3>
+<p>The 2021 Prime Finance acquisition was itself a related-party-adjacent transaction (Prime Lands sold a company to HNB Finance while also sitting on HNB Finance's board). It was conducted via a CBSL-sanctioned, regulator-approved consolidation process with an independent mandatory-offer mechanism for minorities — a legitimate, disclosed deal rather than a hidden one. No other major related-party loan flows to director-owned entities are evident in public filings.</p>
+</div>
+<div class="card">
+<h3>Capital-adequacy near-miss (2023–24): <span class="flag-r">🔴 Red flag (resolved)</span></h3>
+<p>This is the single most important governance/risk fact in this report. Fitch Ratings disclosed that HNB Finance's <b>Tier 1 Capital Ratio fell to 7.2%</b> at end-3QFY24 — <b>below the 8.5% regulatory minimum</b> — with leverage at 8.3× (one of the highest among Fitch-rated Sri Lankan finance companies) and <b>gross Stage 3 (non-performing) loans rising to 24%</b> of the book, concentrated in unsecured microfinance. This was a genuine near-breach, not a rumour.</p>
+</div>
+<div class="card">
+<h3>Capital raise & rating recovery: <span class="flag-g">🟢 Good (turnaround executed)</span></h3>
+<p>Management responded with equity infusions (a rights issue raising ~Rs 1.19bn in FY25, plus further capital actions in FY26 that grew shares outstanding ~17% YoY). By FY24/25 year-end, the company reported its <b>Tier 1 and Total Risk-Weighted Capital Ratios had improved to levels "well above regulatory thresholds,"</b> and <b>Fitch upgraded HNBF's National Long-Term Rating to A(lka) Stable from BBB+(lka)</b> during the year. This is a credible, verifiable turnaround — but it also explains the dilution shareholders absorbed, and asset quality (NPL ratio) in the microfinance book deserves continued monitoring in each new quarterly release.</p>
+</div>
+<div class="card">
+<h3>ESG / sustainability signalling: <span class="flag-g">🟢 Good</span></h3>
+<p>HNB Finance has repeatedly been certified a "Great Place to Work" (4+ consecutive years) and runs CSR programmes (COVID relief funds, school infrastructure, disaster relief). No major ESG controversies were found in public records.</p>
+</div>
+</div>
+</section>
+
+<!-- PHASE 3 -->
+<section id="financials">
+<h2>💰 Phase 3 — 10-Year Financial Analysis</h2>
+<p class="subtitle">As honestly as possible: what the numbers actually say.</p>
+<div class="note"><b>Important transparency note:</b> HNB Finance only listed on the CSE in May 2020, and clean, audited, comparably-formatted financial statements are only reliably available from <b>FY2022 (year ended March 2022) through FY2026 (year ended March 2026)</b> — five fiscal years — via S&P Global Market Intelligence data. A full "10-year" run going back to 2016 is not publicly available in standardised form for this specific listed entity (pre-IPO years were filed differently and Prime Finance's historicals are not directly comparable). Every chart and ratio below is built from these five real, reported fiscal years — nothing is invented. Where older periods (2014-15, 2019) are discussed in Phase 4, it is narratively, from news archives, not from hard balance-sheet numbers.</div>
+
+<h3>3A — Income Statement Trends</h3>
+<div class="chart-box">
+<canvas id="incomeChart"></canvas>
+</div>
+<p class="chart-cap">Revenue, Net Profit and EPS, FY2022–FY2026 (Rs millions / Rs per share). Red-shaded years = the 2022 Sri Lanka economic crisis hit HNB Finance's books hardest in the fiscal years ending March 2022 and especially March 2023, when interest rates spiked to 24%+ and the company posted its only loss in this period.</p>
+<div class="tblwrap">
+<table>
+<tr><th>Fiscal Year (end Mar)</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>FY2026</th></tr>
+<tr><td>Revenue (Rs Mn)</td><td>3,829</td><td>3,556</td><td>5,458</td><td>7,190</td><td>9,972</td></tr>
+<tr><td>Net Interest Income (Rs Mn)</td><td>3,904</td><td>4,388</td><td>5,526</td><td>5,505</td><td>8,629</td></tr>
+<tr><td>Net Profit / (Loss) (Rs Mn)</td><td>503.2</td><td style="color:var(--red)">-469.0</td><td>621.0</td><td>764.5</td><td>1,681</td></tr>
+<tr><td>Net Profit Margin</td><td>13.1%</td><td style="color:var(--red)">-13.2%</td><td>11.4%</td><td>10.6%</td><td>16.9%</td></tr>
+<tr><td>EPS (Rs)</td><td>0.29</td><td style="color:var(--red)">-0.27</td><td>0.35</td><td>0.43</td><td>0.81</td></tr>
+</table>
+</div>
+
+<h3>3B — Balance Sheet Health</h3>
+<div class="chart-box">
+<canvas id="deChart"></canvas>
+</div>
+<p class="chart-cap">Debt-to-Equity ratio, FY2022–FY2026 + current (TTM Sep 2025). The FY2026 spike reflects fresh debenture issuance (Rs 10.05bn raised) to fund rapid loan-book growth.</p>
+<div class="tblwrap">
+<table>
+<tr><th>Fiscal Year (end Mar)</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th><th>Current (TTM)</th></tr>
+<tr><td>Total Assets (Rs Mn)</td><td>46,557</td><td>54,657</td><td>53,458</td><td>58,503</td><td>76,645</td></tr>
+<tr><td>Gross Loan Book (Rs Mn)</td><td>46,714</td><td>50,374</td><td>45,417</td><td>58,590</td><td>62,649</td></tr>
+<tr><td>Total Debt — borrowings (Rs Mn)</td><td>4,520</td><td>4,895</td><td>4,495</td><td>5,143</td><td>5,247</td></tr>
+<tr><td>Shareholders' Equity (Rs Mn)</td><td>5,619</td><td>5,057</td><td>5,652</td><td>7,587</td><td>8,208</td></tr>
+<tr><td>Debt / Equity ratio</td><td>0.80</td><td>0.97</td><td>0.80</td><td>0.68</td><td>1.20</td></tr>
+<tr><td>Book Value Per Share (Rs)</td><td>3.24</td><td>2.94</td><td>3.29</td><td>3.65</td><td>3.95</td></tr>
+</table>
+</div>
+<div class="note"><b>Beginner note on "Debt-to-Equity" for a lender:</b> for a normal company, D/E compares borrowed money to owners' money. For a deposit-taking lender like HNB Finance, the <i>real</i> leverage also includes <b>customer deposits</b> (Rs 56.7bn at TTM) — deposits aren't "debt" in the conventional sense, but they are still other people's money funding the loan book. Including deposits, HNBF's true leverage is around <b>8-9× equity</b> — typical, even necessary, for a finance company's business model, but it does mean a relatively small percentage loss on the loan book can hurt equity disproportionately. This is exactly what happened in FY2023.</div>
+
+<h3>3C — Cash Flow Statement</h3>
+<div class="chart-box">
+<canvas id="cashflowChart"></canvas>
+</div>
+<p class="chart-cap">Operating Cash Flow vs. Net Profit, FY2022–FY2026 (Rs millions).</p>
+<div class="note"><b>Why Operating Cash Flow looks so negative — and why that's not necessarily alarming here:</b> Under the accounting template used for lenders, money lent out to new customers counts as an "operating" cash outflow, while the deposits that fund that lending count as a "financing" inflow. HNB Finance's loan book grew from Rs 45.4bn to Rs 62.6bn in roughly 18 months — that growth alone explains almost all of the Rs 29.1bn "negative operating cash flow" in FY2026. <b>This is structurally different from a normal company burning cash it can't replace.</b> The real question for a growing lender is not "is OCF negative?" but "is the loan growth funded sustainably (deposits/equity) and is asset quality holding up?" — which is exactly what Phase 3E investigates below.</div>
+
+<h3>3D — Key Ratios, Explained Simply</h3>
+<div class="tblwrap">
+<table>
+<tr><th>Ratio</th><th>What it means (in plain English)</th><th>Value (current)</th><th>Verdict</th></tr>
+<tr><td>P/E Ratio</td><td>How many rupees you pay today for every Rs 1 of the company's <i>annual</i> profit. Lower = cheaper, all else equal.</td><td>11.50×</td><td><span class="pill y">Fair, not cheap</span></td></tr>
+<tr><td>P/B Ratio</td><td>Price you pay vs. the accounting "net worth" (assets minus liabilities) per share — like paying above or below the sticker price of a used car based on its condition.</td><td>2.03×</td><td><span class="pill y">Priced for continued strong ROE</span></td></tr>
+<tr><td>ROE (Return on Equity)</td><td>How many cents of profit the company generates per Rs 1 that shareholders have put in. Higher is better — but very high ROE with high leverage can also mean higher risk.</td><td>19.96%</td><td><span class="pill g">Strong</span></td></tr>
+<tr><td>ROA (Return on Assets)</td><td>Profit generated per Rs 1 of total assets (loans + cash + property) — a leverage-neutral profitability measure.</td><td>2.20%</td><td><span class="pill g">Healthy for an NBFI</span></td></tr>
+<tr><td>Dividend Yield</td><td>The "passive income" cheque you'd get just for holding the share, as a % of price.</td><td>0%</td><td><span class="pill y">None — profits reinvested in growth/capital</span></td></tr>
+<tr><td>Cost-to-Income Ratio</td><td>How many cents of operating expense it costs to earn Re 1 of revenue before loan losses — lower is more efficient.</td><td>63.1% (FY26) vs 75.2% (FY25)</td><td><span class="pill g">Improving — scale economies kicking in</span></td></tr>
+</table>
+</div>
+<div class="note">Standard "Interest Coverage Ratio" doesn't translate cleanly to a deposit-funded lender (paying depositors interest <i>is</i> the core business, not optional debt service). We've substituted the Cost-to-Income ratio above, which is the metric Sri Lankan finance-sector analysts actually watch for this purpose.</div>
+
+<h3>3E — inwestout-Style Quality-of-Earnings Diagnostics</h3>
+<p>This section borrows the philosophy of independent CSE researcher inwestout.com: <b>never trust a headline profit number until you've checked whether it's backed by real cash and real operations.</b> Applied honestly to HNB Finance:</p>
+<div class="tblwrap">
+<table>
+<tr><th>Diagnostic</th><th>Formula</th><th>Value (FY2026)</th><th>Flag</th></tr>
+<tr><td>Quality-of-Earnings Ratio</td><td>PAT ÷ Operating Cash Flow</td><td>1,681 ÷ (-29,138) = deeply negative</td><td><span class="pill y">🟡 Distorted by loan growth — see note below, not a fraud signal</span></td></tr>
+<tr><td>Gain-on-PBT Ratio</td><td>(Fair-value gains + bargain gains) ÷ PBT</td><td>0.46 ÷ 2,710 ≈ 0.02%</td><td><span class="pill g">🟢 Clean — profit is operating-driven, not accounting-manufactured</span></td></tr>
+<tr><td>EPS Divergence</td><td>Reported annual EPS vs. TTM EPS</td><td>Rs 0.81 vs Rs 0.81 (same period)</td><td><span class="pill g">🟢 No rollover signal — most recent quarters not weaker than the annual figure</span></td></tr>
+<tr><td>Piotroski F-Score</td><td>9-point checklist (adapted for an NBFI — see notes)</td><td>≈5 / 9</td><td><span class="pill y">🟡 Middling — improving profitability, offset by dilution & rising leverage</span></td></tr>
+<tr><td>Altman Z-Score</td><td>Standard bankruptcy-probability formula</td><td>Not meaningfully applicable — see note</td><td><span class="pill y">🟡 Use capital-adequacy ratios & credit rating instead</span></td></tr>
+<tr><td>Working Capital / Loan-Book Trap</td><td>Loan-book growth vs. revenue growth</td><td>Loan book +33.5% vs revenue +38.7% (FY26)</td><td><span class="pill g">🟢 Revenue growth keeping pace with loan growth — no cash trap evident</span></td></tr>
+</table>
+</div>
+<div class="card">
+<h4>Piotroski F-Score — the actual checklist (adapted for a deposit-taking lender)</h4>
+<table>
+<tr><td>1. ROA &gt; 0</td><td>2.20% (FY26)</td><td class="flag-g">✓ Pass</td></tr>
+<tr><td>2. Operating Cash Flow &gt; 0</td><td>-Rs 29.1bn (loan-growth-driven, see note)</td><td class="flag-r">✗ Fail (distorted)</td></tr>
+<tr><td>3. ROA increased YoY</td><td>2.20% vs 1.37%</td><td class="flag-g">✓ Pass</td></tr>
+<tr><td>4. Cash-quality of earnings (CFO/Assets &gt; ROA)</td><td>CFO/Assets deeply negative</td><td class="flag-r">✗ Fail (distorted)</td></tr>
+<tr><td>5. Leverage decreased YoY</td><td>D/E rose 0.68 → 1.20 (fresh debenture issuance)</td><td class="flag-r">✗ Fail</td></tr>
+<tr><td>6. Liquidity / capital ratio improved YoY</td><td>Tier 1 & Risk-Weighted Capital Ratios both improved to well above regulatory minimum (FY24/25)</td><td class="flag-g">✓ Pass</td></tr>
+<tr><td>7. No new shares issued (no dilution)</td><td>Shares +16.9% YoY (rights issue / capital raise)</td><td class="flag-r">✗ Fail (but raised for a good reason — capital adequacy)</td></tr>
+<tr><td>8. Net margin improved YoY</td><td>16.9% vs 10.6%</td><td class="flag-g">✓ Pass</td></tr>
+<tr><td>9. Asset turnover improved YoY</td><td>Revenue/Assets 13.0% vs 12.3%</td><td class="flag-g">✓ Pass</td></tr>
+</table>
+<p style="margin-top:10px;"><b>Score: 5 out of 9.</b> A "textbook" Piotroski score below 7 would normally flag a deteriorating company — but three of the four failed criteria here (CFO, leverage, dilution) are direct, explainable consequences of a deliberate, regulator-encouraged capital raise and fast loan-book growth at a recovering finance company, not signs of a business quietly rotting from within. The two genuine "pass with caution" areas to track every quarter going forward are leverage and asset quality (NPL ratio).</p>
+</div>
+<div class="note"><b>Why Altman Z-Score is skipped here:</b> the classic Altman Z-Score formula assumes a normal operating company where high leverage signals distress. Deposit-taking lenders are <i>supposed</i> to be highly leveraged (that's literally the business model — borrow cheap via deposits, lend dearer). Applying the textbook formula to any bank or finance company produces a misleadingly low, scary-looking number that professional analysts simply don't use for this sector. The better solvency signals for an NBFI are: (1) regulatory capital ratios — HNBF's are now "well above" the CBSL minimum after the FY25 capital raise, and (2) the independent credit rating trend — Fitch's upgrade to <b>A(lka)</b> Stable in FY24/25 (up from BBB+(lka)) is the market's own version of an Altman Z-Score for this sector, and it's moving in the right direction.</div>
+</section>
+
+<!-- PHASE 4 -->
+<section id="crisis">
+<h2>⛈️ Phase 4 — How HNB Finance Handled Sri Lanka's Tough Years</h2>
+<p class="subtitle">A track record check across every major shock since 2014.</p>
+<div class="tblwrap">
+<table>
+<tr><th>Period</th><th>What happened</th><th>How HNB Finance reacted</th><th>Recovery</th><th>Rating</th></tr>
+<tr><td>2014–2015</td><td>Global commodity slump; pre-IPO years</td><td>Privately held under HNB ownership; no public financial disclosure available for this period</td><td>n/a — data not public</td><td><span class="pill y">🟡 Unknown</span></td></tr>
+<tr><td>2019</td><td>Easter Sunday bombings hit tourism & consumer confidence islandwide</td><td>Still a private subsidiary (pre-IPO); anecdotally, SME/micro borrowers in affected sectors (tourism, transport) faced repayment stress across the whole microfinance industry</td><td>Industry-wide; company-specific figures not public</td><td><span class="pill y">🟡 Unknown</span></td></tr>
+<tr><td>2020–2021</td><td>COVID-19 — lockdowns crushed SME cash flow; but also drove demand for gold loans and emergency credit</td><td>IPO'd in the middle of this (Feb–May 2020), raised growth capital at the worst possible macro moment, yet still posted a profitable FY2022 (Rs 503mn)</td><td><span class="pill g">🟢 Resilient — IPO timing was lucky/brave, business held up</span></td><td>—</td></tr>
+<tr><td>2022</td><td>Sri Lanka's sovereign default, LKR collapse (from ~Rs 200 to ~Rs 360/USD), interest rates spiked above 24%, fuel/food crisis</td><td>Net interest margins squeezed, credit costs rose sharply, microfinance NPLs climbed; <b>company posted its only loss in this dataset (-Rs 469mn, FY2023)</b>; Fitch put it on Rating Watch Negative</td><td><span class="pill r">🔴 Severely hit</span></td><td>BBB+(lka), RWN</td></tr>
+<tr><td>2023–2024</td><td>Post-crisis stabilisation; interest rates falling; IMF programme anchoring confidence</td><td>Returned to profit (Rs 621mn, FY2024); but capital ratios came under fresh pressure from the Prime Finance integration — Tier 1 dipped <i>below</i> the regulatory minimum (7.2% vs 8.5%) and Stage 3 loans hit 24% by end-3QFY24</td><td><span class="pill y">🟡 Moderately affected — balance-sheet stress, not income stress</span></td><td>BBB+(lka) Stable</td></tr>
+<tr><td>2025–2026</td><td>Recovery consolidating; capital raised; new Middle East-conflict-driven inflation shock; Cyclone Ditwah (Nov–Dec 2025) and 2026 heatwave hit rural borrower incomes</td><td>Profit nearly doubled to Rs 1.68bn; capital ratios restored above regulatory thresholds; Fitch upgraded to A(lka) Stable; but new exogenous shocks (cyclone, El Niño drought risk, imported inflation) are landing directly on the rural/SME borrower base this loan book depends on</td><td><span class="pill g">🟢 Resilient so far, 🟡 fresh risks emerging</span></td><td>A(lka) Stable</td></tr>
+</table>
+</div>
+<div class="note">The clearest signal in this table: HNB Finance's <b>income statement</b> recovers quickly from shocks (it returned to profit within one year of the 2022 crisis loss), but its <b>balance sheet/credit quality</b> takes longer to heal — the capital ratio and NPL stress from 2022 didn't fully show up and get resolved until FY2024-2025, roughly two years later. That lag is the single most useful pattern to remember when judging this company's resilience to the next shock.</div>
+</section>
+
+<!-- PHASE 5 -->
+<section id="technical">
+<h2>📈 Phase 5 — Technical Analysis</h2>
+<p class="subtitle">What the price chart itself is telling traders right now.</p>
+<div class="grid2">
+<div class="card">
+<h3>Trend: <span class="flag-g">Strong uptrend</span></h3>
+<p>HNBF has risen from an all-time low of Rs 2.70 (Dec 2024) to Rs 9.30 today — roughly a 3.4× move in 18 months, including a near-doubling in just the past 12 months. Both short-term (1-week, 1-month) and medium-term (1-year) momentum are positive. TradingView's moving-average-based technical rating is "Strong Buy," though its oscillator-based rating (RSI-style tools) is more neutral — meaning the trend is strong but the stock may be due for a pause or pullback after such a sharp run.</p>
+</div>
+<div class="card">
+<h3>Support & Resistance</h3>
+<p><b>Resistance (ceiling):</b> Rs 10.90 — the FY26 Q4 (Jan–Mar 2026) high, and the level the all-time-high of Rs 13.70 (Sep 2020) still looms above as a longer-term ceiling.<br><br>
+<b>Support (floor):</b> Rs 7.50 — the FY26 Q4 low — followed by Rs 8.80, the exact price at which Prime Lands' entire 23.29% stake changed hands on 29 May 2026. Large block trades like this often act as a psychological floor, since the buyers (Seylan Bank, Phantom Investments) have a fresh cost basis right there.</p>
+</div>
+</div>
+<div class="chart-box">
+<canvas id="supportChart"></canvas>
+</div>
+<p class="chart-cap">Visualising the current price (Rs 9.30) against the recent support/resistance band.</p>
+<div class="grid2">
+<div class="card">
+<h3>Moving Averages</h3>
+<p>Price is trading above both its 50-day and 200-day moving averages, which is what "uptrend" means in practice — the average cost of recent buyers is below today's price, so there's less overhead selling pressure.</p>
+</div>
+<div class="card">
+<h3>Volume / Ownership flows</h3>
+<p>The most important "volume" signal isn't a chart indicator here — it's the Rs 3.52bn Prime Lands block trade (29 May 2026), which moved 23.29% of the entire company in one transaction. That's a structural ownership change, not routine trading, and it temporarily increases the free float available to ordinary investors (some of those shares were "disposed of to the market" rather than to Seylan/Phantom).</p>
+</div>
+</div>
+<div class="note"><b>Beginner note:</b> <span class="term">RSI (Relative Strength Index)</span> and <span class="term">MACD</span> are momentum indicators that work best on liquid, frequently-traded stocks. HNBF.N0000, as a Diri Savi Board small-cap, trades thinly enough that these oscillators can give noisy or unreliable signals. Lean more on the simple support/resistance levels above and on the fundamental story than on short-term technical oscillators for a stock like this.</div>
+</section>
+
+<!-- PHASE 6 -->
+<section id="global">
+<h2>🌍 Phase 6 — Global Sector Context & Macro</h2>
+<p class="subtitle">What's happening in the world that actually matters for this specific company.</p>
+<div class="card">
+<h3>The global microfinance/NBFI sector</h3>
+<p>Globally, microfinance and consumer-finance lending is in a multi-year digitisation wave — mobile-first lending, AI-driven credit scoring, and "buy now pay later" products are reshaping how small loans get made, especially across South & Southeast Asia and Africa. HNB Finance is still mid-journey on digital transformation (management explicitly flagged this as a FY25/26 priority), so it's a sector follower here, not a leader — a gap, but also a clear, identifiable area for future efficiency gains.</p>
+</div>
+<h3>🌍 Global Economy Snapshot</h3>
+<div class="tblwrap">
+<table>
+<tr><th>Indicator</th><th>Current value</th><th>Impact on HNB Finance</th></tr>
+<tr><td>USD/LKR Exchange Rate</td><td>≈Rs 333.6 per USD (18 Jun 2026), rupee down ~11% over the past year</td><td>HNBF has no direct foreign-currency debt found in filings, so limited direct FX exposure — but a weaker rupee feeds straight into imported-fuel inflation, which squeezes its rural/SME borrowers' disposable income and repayment capacity</td></tr>
+<tr><td>Brent Crude Oil</td><td>≈$80/barrel (19 Jun 2026), down sharply from over $120 during the Feb–May 2026 US-Iran conflict spike, but still ~5% higher than a year ago</td><td>Lower fuel costs ease pressure on three-wheeler/transport borrowers (a core microfinance customer segment) and on the broader Sri Lankan import bill</td></tr>
+<tr><td>US Federal Reserve Rate</td><td>3.50%–3.75% (held steady, June 2026); dot-plot has turned hawkish — a hike is now seen as more likely than a cut for the rest of 2026</td><td>Higher-for-longer US rates make it costlier for Sri Lanka to refinance/raise foreign-currency debt and can pressure the rupee — an indirect headwind</td></tr>
+<tr><td>Sri Lanka Policy Rate (CBSL OPR)</td><td>7.75% (held steady, Jan 2026 review)</td><td>Sets the floor for domestic deposit and lending rates that directly drive HNBF's net interest margin</td></tr>
+<tr><td>Sri Lanka Inflation Rate</td><td>5.5% y/y (May 2026), rising from a low base, largely fuel/energy-driven</td><td>Above the CBSL's 5% target; squeezes household budgets of HNBF's typical borrower</td></tr>
+<tr><td>IMF Programme Status</td><td>Combined 5th & 6th EFF reviews completed (Staff-Level Agreement, April 2026); ~$700m further disbursement; total support to date ~$2.4bn of the $3bn facility</td><td>Programme is on track, which underpins macro stability and investor confidence in Sri Lankan equities generally — a tailwind</td></tr>
+<tr><td>Sri Lanka GDP Growth</td><td>5% y/y in 2025 (outperforming expectations); 2026 growth dented somewhat by Cyclone Ditwah recovery costs</td><td>Faster GDP growth supports SME loan demand and repayment capacity</td></tr>
+<tr><td>Foreign Reserves</td><td>≈$6.8bn (end-April 2026), down from $7bn (end-March) amid debt servicing</td><td>Indirect — supports overall rupee stability and sovereign credit confidence</td></tr>
+</table>
+</div>
+
+<h3>🌦️ Climate & Weather Risk Analysis</h3>
+<p>Sri Lanka is currently digesting back-to-back climate shocks: <b>Cyclone Ditwah</b> struck in November–December 2025, flooding roughly 58,000 hectares of paddy land in Trincomalee and Batticaloa and triggering a $35.3m UN humanitarian appeal; this was followed by a <b>prolonged heatwave</b> lasting into mid-May 2026; and now meteorologists put an <b>82% chance of El Niño emerging between May and July 2026</b>, continuing into early 2027. El Niño typically weakens the Southwest Monsoon (May–September) — meaning below-average rainfall is likely across the western/southern wet zone through this Yala growing season, raising drought and crop-failure risk right as cyclone-hit farmers are trying to recover.</p>
+<div class="tblwrap">
+<table>
+<tr><th>Climate Factor</th><th>Current Status</th><th>Likely impact on HNB Finance</th><th>Severity</th></tr>
+<tr><td>Sri Lanka Rainfall / Monsoon</td><td>Heatwave through mid-May 2026; Yala (SW monsoon) season underway</td><td>Reduced hydropower & water availability raises power-outage and cost-of-living risk for SME borrowers</td><td><span class="pill y">🟡 Medium</span></td></tr>
+<tr><td>El Niño emergence</td><td>82% probability May–Jul 2026 (NOAA/CPC); likely weaker SW monsoon, drought risk in west/south</td><td>Drought risk for agricultural micro-borrowers; could push more households toward gold-loan demand (a silver lining for this specific product line) even as overall repayment capacity weakens</td><td><span class="pill y">🟡 Medium</span></td></tr>
+<tr><td>Global commodity weather risk</td><td>WFP: share of food-insecure households risen from 14% (2024) to 20% (2026)</td><td>Directly pressures the household-budget capacity of HNBF's core microfinance/SME customer base</td><td><span class="pill r">🔴 Elevated</span></td></tr>
+<tr><td>Port / logistics weather & geopolitical risk</td><td>Strait of Hormuz disruption (Feb–Jun 2026) easing under a US-Iran interim peace; Red Sea/Suez remain a watch item for shipping insurers</td><td>Indirect — affects fuel import costs and broader trade-finance demand rather than HNBF's loan book directly</td><td><span class="pill g">🟢 Easing</span></td></tr>
+<tr><td>Cyclone Ditwah recovery zone exposure</td><td>Ongoing resettlement of flood/landslide-displaced households in Trincomalee, Batticaloa and central hill areas</td><td>HNBF's island-wide branch network (77+ branches) means real, if modest, direct exposure to borrowers in these recovering districts</td><td><span class="pill y">🟡 Medium</span></td></tr>
+</table>
+</div>
+<div class="note"><b>Integration into price targets (Phase 7):</b> the combination of El Niño drought risk and rising food insecurity is a genuine, quantifiable headwind for HNBF's <i>specific</i> borrower base over the next 6-12 months (Yala season, May-Sep 2026). It doesn't change the long-term thesis, but it supports keeping the short-term price target conservative rather than chasing the recent rally, and reinforces watching the NPL ratio closely in the upcoming Q1 FY27 results (due around August 2026).</div>
+</section>
+
+<!-- PHASE 8 -->
+<section id="geopolitics">
+<h2>🌐 Phase 8 — World Crisis, War & Political Risk</h2>
+<p class="subtitle">Because no Sri Lankan company exists in a bubble.</p>
+<h3>⚔️ Active Wars & Military Conflicts</h3>
+<div class="tblwrap">
+<table>
+<tr><th>Conflict / Region</th><th>Current Status</th><th>How it affects HNB Finance</th></tr>
+<tr><td>US–Iran conflict / Strait of Hormuz</td><td>Began 28 Feb 2026; oil spiked above $120/barrel at its peak; an interim US-Iran peace framework has since reopened the Strait and oil has fallen back toward $80. Sri Lanka rescued the crew of the sunk vessel IRIS Dena and interned the IRIS Bushehr, while maintaining declared neutrality and refusing US requests to use Sri Lankan airports for armed aircraft.</td><td>Drove the Rs 100bn domestic fuel-subsidy bill and a chunk of the 5.5% inflation print — both squeeze HNBF's rural/SME borrowers' real incomes; easing now, but a fragile truce</td></tr>
+<tr><td>Russia–Ukraine War</td><td>Ongoing, lower global news intensity than 2022 but still unresolved</td><td>Secondary effect via global grain/fertiliser prices feeding into Sri Lankan food inflation</td></tr>
+<tr><td>South China Sea tensions</td><td>Persistent but not escalating sharply in 2026</td><td>Minimal direct impact — Sri Lanka isn't a major party, though regional shipping-route risk is a background factor for trade-finance demand</td></tr>
+</table>
+</div>
+<h3>🏛️ Major Political Risks</h3>
+<div class="tblwrap">
+<table>
+<tr><th>Risk Factor</th><th>Current Situation</th><th>Impact</th><th>Effect on HNB Finance</th></tr>
+<tr><td>Sri Lanka Government Stability</td><td>President Anura Kumara Dissanayake's NPP holds a rare 2/3 parliamentary supermajority (since Nov 2024); reforms have been slower than promised but the IMF programme remains on track and there is no imminent instability</td><td><span class="pill g">🟢 Low</span></td><td>Policy continuity supports the macro backdrop HNBF needs to keep growing its loan book</td></tr>
+<tr><td>US Trade / Tariff Policy</td><td>Sri Lanka was hit with a shock 44% reciprocal tariff threat in April 2025, later negotiated down to a 20% rate, and has since been placed in a higher 12.5% additional tier under a new forced-labour-compliance duty regime (2026)</td><td><span class="pill y">🟡 Medium</span></td><td>Indirect — pressures Sri Lanka's export sector (garments) more than HNBF directly, but weaker exports mean a weaker rupee and slower SME income growth generally</td></tr>
+<tr><td>China Debt / BRI exposure</td><td>Sri Lanka's broader debt restructuring is ~99% agreed with external creditors, ~92% implemented; this is a sovereign-level, not company-level, risk</td><td><span class="pill g">🟢 Low (for HNBF specifically)</span></td><td>No direct HNBF exposure to Chinese-funded infrastructure debt</td></tr>
+<tr><td>Domestic NBFI sector stress</td><td>CBSL has explicitly flagged "vulnerabilities in some small licensed finance companies" in its 2026 commentary and is actively forcing weaker NBFIs (e.g., Co-operative Leasing) through its consolidation Masterplan</td><td><span class="pill y">🟡 Medium</span></td><td>HNBF, as a bank-backed, larger, rated NBFI, is relatively insulated — but sector-wide funding/liquidity stress can still create contagion risk via depositor confidence, per Fitch's own rating commentary</td></tr>
+<tr><td>Global Sanctions Exposure</td><td>None identified — HNB Finance has no apparent exposure to sanctioned counterparties or jurisdictions</td><td><span class="pill g">🟢 Low</span></td><td>Not a material risk factor</td></tr>
+</table>
+</div>
+<h3>🧭 Crisis-Adjusted Investment View</h3>
+<p><b>1. Does any current world crisis raise or lower the risk of investing here right now?</b> Modestly raises it. The Middle East conflict's inflationary pulse (now easing) and El Niño drought risk are real, current headwinds for HNBF's specific rural/SME/microfinance customer base — this is a domestically-focused lender with no offsetting global revenue stream to cushion these shocks.</p>
+<p><b>2. Is there a trigger that could move the stock ±10% in 3 months?</b> Yes — Q1 FY27 results (due ~August 2026) will be the first to show whether NPLs are creeping back up under the new inflation/drought pressure, or whether the FY25/26 turnaround is holding. A second trigger: any further large block-trade disclosures following the May 2026 Prime Lands exit could move the float and price mechanically.</p>
+<p><b>3. Do any geopolitical/climate factors change the long-term thesis?</b> Not fundamentally — Sri Lanka's IMF-anchored recovery, HNB's continued majority backing, and the credit-rating upgrade trajectory remain intact. But they are good reasons to size any position conservatively and revisit asset-quality data every quarter rather than "buy and forget."</p>
+
+<div class="riskmeter">🌐 GLOBAL RISK OVERLAY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  War / Geopolitical Risk:    🟡 Medium  (Middle East truce is fragile)
+  Climate / Weather Risk:     🟡 Medium  (El Niño + cyclone-recovery overhang)
+  Political Risk (Sri Lanka): 🟢 Low     (stable supermajority govt, IMF on-track)
+  Global Macro Risk:          🟡 Medium  (hawkish Fed, above-target SL inflation)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  OVERALL EXTERNAL RISK:      MEDIUM
+  Price Target Adjustment:    Reduce upside targets by ~5-8% vs. a "calm macro"
+                              scenario; keep stop-loss discipline tight given
+                              already-elevated 1-year share price gain
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+</section>
+
+<!-- PHASE 7 -->
+<section id="verdict">
+<h2>🎯 Phase 7 — Investment Verdict & Price Targets</h2>
+<p class="subtitle">Putting it all together, as honestly as a 50-year veteran investor would.</p>
+
+<h3>Company Health Scorecard</h3>
+<div class="chart-box">
+<canvas id="healthRadar"></canvas>
+</div>
+<div class="tblwrap">
+<table>
+<tr><th>Category</th><th>Score (/10)</th><th>Notes</th></tr>
+<tr><td>Business Quality</td><td>6</td><td>Useful financial-inclusion niche, but small (~3% sector share), not a market leader, competitive sector</td></tr>
+<tr><td>Financial Health</td><td>6</td><td>Improving fast (ROE 20%) but inherently leveraged ~8-9×, with a real 2023/24 capital-ratio near-miss now resolved</td></tr>
+<tr><td>Management Quality</td><td>7</td><td>13-year stable CEO tenure, demonstrated turnaround execution (capital raise, rating recovery), but the capital near-breach shows execution risk under stress</td></tr>
+<tr><td>Growth Potential</td><td>8</td><td>Revenue/profit compounding 30-50%/year, HNB-backed funding access, digital-transformation runway still ahead</td></tr>
+<tr><td>Crisis Resilience</td><td>5</td><td>Income recovers within ~1 year of a shock, but balance-sheet/credit-quality healing lags ~2 years (2022 crisis → fully resolved by FY24/25)</td></tr>
+<tr><td>Current Valuation</td><td>5</td><td>11.5× P/E and 2.0× P/B after a near-doubling in 12 months — fair for the growth rate, not a bargain</td></tr>
+<tr><td><b>TOTAL SCORE</b></td><td><b>37 / 60</b></td><td>A genuinely improving, higher-risk small-cap turnaround story — not a blue-chip "buy and forget"</td></tr>
+</table>
+</div>
+
+<h3>Recommendation: <span style="color:var(--yellow)">HOLD existing positions / WATCH for a pullback before adding</span></h3>
+<p>HNB Finance is a real turnaround story — it went from a sovereign-crisis loss and a capital-ratio breach in 2023 to a credit-rating upgrade and near-doubled profit in 2026, backed throughout by Sri Lanka's largest private bank. That is genuinely impressive execution. But the share price has already nearly doubled in the past year and now trades at a fair-to-full valuation for a small, thinly-traded, inherently leveraged NBFI that still has fresh climate and inflation headwinds sitting directly on its core borrower base. For existing holders, the turnaround thesis is intact — hold. For new capital, chasing the stock here offers a worse risk/reward than waiting for it to retest the Rs 7.50–8.80 support zone (right around where the May 2026 Prime Lands block actually traded).</p>
+
+<h3>Price Targets (LKR)</h3>
+<div class="tblwrap">
+<table>
+<tr><th>Action</th><th>Price (LKR)</th><th>Reasoning</th></tr>
+<tr><td>🟢 Strong Buy Zone</td><td>Rs 6.50 – Rs 7.50</td><td>≈8-9× trailing EPS — a margin of safety below the FY26 Q4 low, and close to where the stock traded before the most recent leg of the rally</td></tr>
+<tr><td>🟡 Fair Value</td><td>Rs 8.50</td><td>≈10.5× TTM EPS (Rs 0.81) — broadly in line with small-cap Sri Lankan NBFI peers, with a small premium for HNB's 51% backing and the recent rating upgrade</td></tr>
+<tr><td>🔴 Stop Loss</td><td>Rs 6.80</td><td>A break below the FY26 Q4 low of Rs 7.50 with conviction would suggest the market is pricing in fresh asset-quality trouble — exit and reassess</td></tr>
+<tr><td>🎯 Short-Term Target (3-6 months)</td><td>Rs 10.90</td><td>A retest of the FY26 Q4 swing high, contingent on Q1 FY27 results (Aug 2026) confirming NPLs are stable</td></tr>
+<tr><td>🚀 Long-Term Target (2-3 years)</td><td>Rs 13.50 – 14.50</td><td>If EPS keeps compounding even at a moderated ~20%/year (vs. the recent 30-50%) to roughly Rs 1.30-1.40, held at a steady ~10× multiple, plus potential re-rating if Fitch upgrades again — this would also retest the all-time high near Rs 13.70</td></tr>
+</table>
+</div>
+
+<h3>Time Horizon Advice</h3>
+<div class="grid2">
+<div class="card">
+<h4>Short-term trading (weeks–months)</h4>
+<p>Not an obviously attractive trade right now — the easy momentum money from the Rs 2.70→Rs 9.30 move has likely already been made, and the stock is thinly traded enough that chasing strength can mean poor fills. If you trade it at all, do so around the Rs 7.50-8.80 support band, not at/near the recent high.</p>
+</div>
+<div class="card">
+<h4>Long-term investing (2-5 years)</h4>
+<p>More interesting. If you believe Sri Lanka's recovery continues and HNB Finance keeps executing its turnaround (digital transformation, asset-quality discipline, continued HNB support), this can compound nicely from a lower entry point — but it is a satellite, higher-risk holding, not a core one.</p>
+</div>
+</div>
+<div class="card">
+<h4>🎓 Student-investor advice</h4>
+<p>With limited capital, the smartest approach is: (1) don't make this your first or largest holding — it's a small, leveraged, thinly-traded financial company with a real recent history of capital stress; (2) if the story interests you, set a price alert near Rs 7.50-8.00 rather than buying the rally; (3) practice reading one full quarterly report from this company (look specifically for the Stage 3/NPL ratio and Tier 1 capital ratio disclosures) before committing real money — that single habit will teach you more about NBFI investing than any single price target ever will.</p>
+</div>
+</section>
+
+<!-- Combined health + QoE radar context -->
+<section>
+<h2>🔬 Quality-of-Earnings Profile (Radar)</h2>
+<p class="subtitle">A visual gut-check on whether the profit you see is the profit you'd actually get.</p>
+<div class="chart-box">
+<canvas id="qoeRadar"></canvas>
+</div>
+<div class="note"><b>How to read this radar:</b> Two axes — <i>Earnings Quality</i> and <i>Cash Conversion</i> — score low here purely because of the loan-book-growth accounting mechanic explained in Phase 3C/3E, not because of fraud or cash siphoning. The more diagnostic axes for this specific company are <i>Governance</i> (solid, thanks to HNB oversight and long CEO tenure), <i>Balance Sheet Safety</i> (recovering well — capital ratios restored, rating upgraded), and the <i>Piotroski F-Score</i> (middling — keep watching it quarter to quarter).</div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary">
+<h2>📊 Phase 9 — Final Summary Card</h2>
+<div class="summarycard">
+<div class="row"><span>Company</span><span>HNB Finance PLC</span></div>
+<div class="row"><span>Ticker</span><span>HNBF.N0000</span></div>
+<div class="row"><span>Sector</span><span>Licensed Finance Company (NBFI)</span></div>
+<div class="row"><span>Current Price</span><span>Rs 9.30</span></div>
+<div class="row"><span>🏢 Business</span><span style="text-align:right;max-width:60%;">SME/micro loans, leasing, gold loans &amp; deposits, backed 51% by HNB</span></div>
+<div class="row"><span>💰 Revenue (FY26)</span><span>Rs 9,972M</span></div>
+<div class="row"><span>Net Profit (FY26)</span><span>Rs 1,681M</span></div>
+<div class="row"><span>📈 EPS / P/E / Div. Yield</span><span>Rs 0.81 / 11.5× / 0%</span></div>
+<div class="row"><span>🏦 Debt-to-Equity / ROE</span><span>1.20 / 19.96%</span></div>
+<div class="row"><span>🔬 Piotroski F-Score / Credit Rating</span><span>≈5/9 / A(lka) Stable</span></div>
+<div class="row"><span>💡 Earnings Quality</span><span>Distorted by loan growth — monitor NPL ratio instead</span></div>
+<div class="row"><span>🟢 Buy below</span><span>Rs 7.50</span></div>
+<div class="row"><span>🔴 Stop Loss</span><span>Rs 6.80</span></div>
+<div class="row"><span>🎯 Short Target / 🚀 Long Target</span><span>Rs 10.90 / Rs 13.50–14.50</span></div>
+<div class="row"><span>🌍 Global Macro</span><span>Neutral (easing oil, hawkish Fed, on-track IMF)</span></div>
+<div class="row"><span>🌦️ Climate Risk</span><span>Medium — El Niño drought + Cyclone Ditwah recovery</span></div>
+<div class="row"><span>⚔️ Geopolitical Risk</span><span>Medium — fragile US-Iran truce</span></div>
+<div class="row"><span>🌐 Overall External Risk</span><span>MEDIUM</span></div>
+<div class="row"><span>⚡ VERDICT</span><span>HOLD / WATCH — strong turnaround, but priced for it after a near-doubling</span></div>
+<div class="row"><span>⏱ Best for</span><span>Long-term, satellite position (not short-term, not core holding)</span></div>
+</div>
+</section>
+
+</div>
+
+<footer>
+  <div class="disclaimer">This is research to help you think, not financial advice. HNB Finance PLC trades on the CSE's Diri Savi Board with thinner liquidity than Main Board stocks — size any position accordingly, and always invest only what you can afford to lose. Claude is not a licensed financial advisor.</div>
+  <div class="srclist">Sources: Colombo Stock Exchange (cse.lk), HNB Finance investor relations (hnbfinance.lk), stockanalysis.com (S&P Global Market Intelligence financial data), Fitch Ratings, Daily FT, Daily Mirror, Central Bank of Sri Lanka, IMF, NOAA/CPC ENSO outlook, Sri Lanka Department of Meteorology, OCHA, Federal Reserve, TradingEconomics. Report generated June 2026.</div>
+</footer>
+
+<script>
+const txt = '#e6edf3', muted='#8b949e', grid='rgba(139,148,158,0.12)';
+Chart.defaults.color = txt;
+Chart.defaults.borderColor = grid;
+Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";
+
+// crisis-year shading plugin (shades specified category indices)
+function crisisShader(indices){
+  return {
+    id: 'crisisShader',
+    beforeDraw(chart){
+      const {ctx, chartArea, scales} = chart;
+      if(!chartArea) return;
+      const xScale = scales.x;
+      ctx.save();
+      indices.forEach(i=>{
+        const center = xScale.getPixelForValue(i);
+        const half = (xScale.width / xScale.ticks.length) / 2 || 30;
+        ctx.fillStyle = 'rgba(248,81,73,0.10)';
+        ctx.fillRect(center-half, chartArea.top, half*2, chartArea.bottom-chartArea.top);
+      });
+      ctx.restore();
+    }
+  };
+}
+
+const years = ['FY2022','FY2023','FY2024','FY2025','FY2026'];
+
+// 3A Income Statement Line Chart
+new Chart(document.getElementById('incomeChart'), {
+  type:'line',
+  data:{
+    labels: years,
+    datasets:[
+      {label:'Revenue (Rs Mn)', data:[3829,3556,5458,7190,9972], borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,0.15)', yAxisID:'y', tension:0.25, fill:true},
+      {label:'Net Profit (Rs Mn)', data:[503.16,-469.02,620.99,764.51,1681], borderColor:'#3fb950', backgroundColor:'rgba(63,185,80,0.15)', yAxisID:'y', tension:0.25, fill:true},
+      {label:'EPS (Rs)', data:[0.29,-0.27,0.35,0.43,0.81], borderColor:'#d29922', backgroundColor:'rgba(210,153,34,0.1)', yAxisID:'y1', tension:0.25}
+    ]
+  },
+  options:{
+    responsive:true,
+    interaction:{mode:'index', intersect:false},
+    plugins:{
+      legend:{labels:{color:txt}},
+      tooltip:{callbacks:{label:(ctx)=> ctx.dataset.label + ': ' + ctx.formattedValue + (ctx.dataset.yAxisID==='y1' ? ' Rs/share' : ' Rs Mn')}}
+    },
+    scales:{
+      y:{title:{display:true,text:'Rs Millions',color:muted},grid:{color:grid}},
+      y1:{position:'right',title:{display:true,text:'EPS (Rs)',color:muted},grid:{display:false}},
+      x:{grid:{display:false}}
+    }
+  },
+  plugins:[crisisShader([0,1])]
+});
+
+// 3B Debt-to-Equity Bar Chart
+new Chart(document.getElementById('deChart'), {
+  type:'bar',
+  data:{
+    labels:['FY2022','FY2023','FY2024','FY2025','Current (TTM)'],
+    datasets:[{
+      label:'Debt-to-Equity Ratio',
+      data:[0.80,0.97,0.80,0.68,1.20],
+      backgroundColor: ['#58a6ff','#f85149','#58a6ff','#3fb950','#d29922'],
+      borderRadius:6
+    }]
+  },
+  options:{
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:(ctx)=> 'D/E: ' + ctx.formattedValue + '× — ' + (ctx.parsed.y>1 ? 'fresh debt for loan growth' : 'moderate leverage')}}
+    },
+    scales:{
+      y:{title:{display:true,text:'Debt / Equity (×)',color:muted},grid:{color:grid}},
+      x:{grid:{display:false}}
+    }
+  },
+  plugins:[crisisShader([1])]
+});
+
+// 3C Cash flow combo chart
+new Chart(document.getElementById('cashflowChart'), {
+  type:'bar',
+  data:{
+    labels: years,
+    datasets:[
+      {type:'bar', label:'Operating Cash Flow (Rs Mn)', data:[-2227,-2692,5735,-8999,-29138], backgroundColor:'#58a6ff', borderRadius:5},
+      {type:'line', label:'Net Profit (Rs Mn)', data:[503.16,-469.02,620.99,764.51,1681], borderColor:'#3fb950', backgroundColor:'#3fb950', tension:0.25}
+    ]
+  },
+  options:{
+    plugins:{
+      legend:{labels:{color:txt}},
+      tooltip:{callbacks:{label:(ctx)=> ctx.dataset.label + ': Rs ' + ctx.formattedValue + 'M'}}
+    },
+    scales:{
+      y:{title:{display:true,text:'Rs Millions',color:muted},grid:{color:grid}},
+      x:{grid:{display:false}}
+    }
+  },
+  plugins:[crisisShader([1])]
+});
+
+// Phase 5 support/resistance visual (horizontal bar style chart)
+new Chart(document.getElementById('supportChart'), {
+  type:'bar',
+  data:{
+    labels:['All-Time Low (Rs 2.70)','Strong Support (Rs 7.50)','Block-trade floor (Rs 8.80)','Current Price (Rs 9.30)','Resistance (Rs 10.90)','All-Time High (Rs 13.70)'],
+    datasets:[{
+      label:'Price level (Rs)',
+      data:[2.70,7.50,8.80,9.30,10.90,13.70],
+      backgroundColor:['#8b949e','#3fb950','#d29922','#58a6ff','#f85149','#bc8cff'],
+      borderRadius:6
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:(ctx)=>'Rs ' + ctx.formattedValue}}},
+    scales:{ x:{title:{display:true,text:'Rs per share',color:muted},grid:{color:grid}}, y:{grid:{display:false}} }
+  }
+});
+
+// Health Scorecard Radar
+new Chart(document.getElementById('healthRadar'), {
+  type:'radar',
+  data:{
+    labels:['Financial Health','Business Quality','Management Quality','Growth Potential','Crisis Resilience','Current Valuation'],
+    datasets:[
+      {label:'HNB Finance', data:[6,6,7,8,5,5], backgroundColor:'rgba(88,166,255,0.25)', borderColor:'#58a6ff', pointBackgroundColor:'#58a6ff'},
+      {label:'NBFI Sector Average (indicative)', data:[6,6.5,6,6,5.5,6], backgroundColor:'rgba(139,148,158,0.12)', borderColor:'#8b949e', pointBackgroundColor:'#8b949e'}
+    ]
+  },
+  options:{
+    plugins:{legend:{labels:{color:txt}}},
+    scales:{ r:{ min:0, max:10, ticks:{color:muted, backdropColor:'transparent'}, grid:{color:grid}, angleLines:{color:grid}, pointLabels:{color:txt,font:{size:11}} } }
+  }
+});
+
+// Quality of Earnings Radar
+new Chart(document.getElementById('qoeRadar'), {
+  type:'radar',
+  data:{
+    labels:['Earnings Quality\n(PAT/OCF, distorted)','Cash Conversion\n(FCF/Net Profit)','Earnings Sustainability\n(5yr EPS consistency)','Governance Score','Balance Sheet Safety\n(capital & rating trend)','Piotroski F-Score (/10)'],
+    datasets:[{
+      label:'HNB Finance Quality-of-Earnings',
+      data:[3,3,5,7,6,5.5],
+      backgroundColor:'rgba(189,140,255,0.25)', borderColor:'#bc8cff', pointBackgroundColor:'#bc8cff'
+    }]
+  },
+  options:{
+    plugins:{legend:{labels:{color:txt}}},
+    scales:{ r:{ min:0, max:10, ticks:{color:muted, backdropColor:'transparent'}, grid:{color:grid}, angleLines:{color:grid}, pointLabels:{color:txt,font:{size:10}} } }
+  }
+});
+
+// smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', function(e){
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+</script>
+</body>
+</html>
